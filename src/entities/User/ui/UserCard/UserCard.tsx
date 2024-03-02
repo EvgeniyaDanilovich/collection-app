@@ -17,10 +17,6 @@ export const UserCard = () => {
         }
     }, []);
 
-    useEffect(()=>{
-        console.log(user);
-    }, [user])
-
     return (
         <Card style={{ width: '250px' }}>
             <Card.Body>

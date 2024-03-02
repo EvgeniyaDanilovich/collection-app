@@ -4,16 +4,22 @@ import { Input } from '../../../shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
 import { Textarea } from '../../../shared/ui/Textarea/Textarea';
 import { Select } from '../../../shared/ui/Select/Select';
+import { Collection } from '../../../entities/Collection';
+
+interface Props {
+    userId: number;
+    onAddCollection: (value: Omit<Collection, 'id'>) => void;
+}
 
 const options = [
     { value: 'Coins', content: 'Coins' },
     { value: 'Books', content: 'Books' },
-    // { value: Country.Belarus, content: Country.Belarus },
+    { value: 'Marks', content: 'Marks' },
     // { value: Country.Kazakhstan, content: Country.Kazakhstan },
     // { value: Country.Ukraine, content: Country.Ukraine },
 ];
 
-export const AddCollectionForm = () => {
+export const AddCollectionForm = ({ userId, onAddCollection }: Props) => {
     const { t } = useTranslation();
     const [name, setName] = useState<string>('');
     const [imgUrl, setImgUrl] = useState<string>('');
@@ -22,6 +28,9 @@ export const AddCollectionForm = () => {
 
     const [stringFields, setStringFields] = useState<string[]>([]);
     const [textareaFields, setTextareaFields] = useState<string[]>([]);
+    const [checkboxFields, setCheckboxFields] = useState<string[]>([]);
+    const [dateFields, setDateFields] = useState<string[]>([]);
+    const [numberFields, setNumberFields] = useState<string[]>([]);
 
     const addStringField = () => {
         const newFields = [...stringFields, ''];
@@ -45,8 +54,59 @@ export const AddCollectionForm = () => {
         setTextareaFields(newFields);
     }, [textareaFields, setTextareaFields]);
 
+    const addCheckboxField = () => {
+        const newFields = [...checkboxFields, ''];
+        setCheckboxFields(newFields);
+    };
+
+    const handleCheckboxFields = useCallback((value: string, index: number) => {
+        const newFields = [...checkboxFields];
+        newFields[index] = value;
+        setCheckboxFields(newFields);
+    }, [checkboxFields, setCheckboxFields]);
+
+    const addDateField = () => {
+        const newFields = [...dateFields, ''];
+        setDateFields(newFields);
+    };
+
+    const handleDateFields = useCallback((value: string, index: number) => {
+        const newFields = [...dateFields];
+        newFields[index] = value;
+        setDateFields(newFields);
+    }, [dateFields, setDateFields]);
+
+    const addNumberField = () => {
+        const newFields = [...numberFields, ''];
+        setNumberFields(newFields);
+    };
+
+    const handleNumberFields = useCallback((value: string, index: number) => {
+        const newFields = [...numberFields];
+        newFields[index] = value;
+        setNumberFields(newFields);
+    }, [numberFields, setNumberFields]);
+
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const data: Omit<Collection, 'id'> = {
+            userId,
+            name: name,
+            description,
+            category,
+            imgUrl,
+            stringFields: stringFields.filter(Boolean),
+            textareaFields: textareaFields.filter(Boolean),
+            checkboxFields: checkboxFields.filter(Boolean),
+            dateFields: dateFields.filter(Boolean),
+            numberFields: numberFields.filter(Boolean),
+        };
+        console.log(data);
+        onAddCollection(data)
+    };
+
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
                 <Input value={name} label={t('Collection name')} setValue={setName} />
             </Form.Group>
@@ -80,8 +140,32 @@ export const AddCollectionForm = () => {
                 />
             ))}
 
+            <div onClick={addCheckboxField}>Add extra checkbox fields for your item</div>
+            {checkboxFields.map((field, index) => (
+                <Input
+                    key={index} type="text" value={field} placeholder={t('Enter field name')}
+                    setValue={(value) => handleCheckboxFields(value, index)}
+                />
+            ))}
+
+            <div onClick={addDateField}>Add extra date fields for your item</div>
+            {dateFields.map((field, index) => (
+                <Input
+                    key={index} type="text" value={field} placeholder={t('Enter field name')}
+                    setValue={(value) => handleDateFields(value, index)}
+                />
+            ))}
+
+            <div onClick={addNumberField}>Add extra number fields for your item</div>
+            {numberFields.map((field, index) => (
+                <Input
+                    key={index} type="text" value={field} placeholder={t('Enter field name')}
+                    setValue={(value) => handleNumberFields(value, index)}
+                />
+            ))}
+
             <Button variant="primary" type="submit">
-                Submit
+                Create
             </Button>
         </Form>
     );

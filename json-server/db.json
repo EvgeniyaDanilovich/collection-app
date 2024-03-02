@@ -1,9 +1,4 @@
 {
-  "posts": [
-    {
-      "id": 1
-    }
-  ],
   "users": [
     {
       "username": "Eva",
@@ -36,6 +31,44 @@
       "status": "Active",
       "admin": false,
       "id": 4
+    }
+  ],
+  "collections": [
+    {
+      "userId": 1,
+      "name": "Favorit",
+      "description": "Description favorit",
+      "category": "Books",
+      "imgUrl": "https://americanbookco.com/wp-content/uploads/2021/02/stacked-books.jpeg",
+      "stringFields": [
+        "Author"
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        "year"
+      ],
+      "id": 1
+    },
+    {
+      "userId": 1,
+      "name": "Books for kids",
+      "description": "Books for kids description",
+      "category": "Books",
+      "imgUrl": "https://hips.hearstapps.com/hmg-prod/images/best-childrens-kids-books-1599680383.jpg?crop=0.6236666666666667xw:1xh;center,top&resize=640:*",
+      "stringFields": [
+        "Author"
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        "New"
+      ],
+      "dateFields": [],
+      "numberFields": [
+        "Number of pages"
+      ],
+      "id": 2
     }
   ]
 }
