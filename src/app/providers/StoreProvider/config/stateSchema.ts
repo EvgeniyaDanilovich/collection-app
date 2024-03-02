@@ -4,6 +4,7 @@ import { UserSchema } from '../../../../entities/User';
 import { AdminSchema } from '../../../../pages/AdminPage';
 import { ProfileSchema } from '../../../../pages/ProfilePage';
 import { CollectionSchema } from '../../../../entities/Collection';
+import { CollectionPageSchema } from '../../../../pages/CollectionPage';
 
 export interface StateSchema {
     auth: AuthSchema;
@@ -11,6 +12,7 @@ export interface StateSchema {
     user: UserSchema;
     profile: ProfileSchema;
     collection: CollectionSchema;
+    collectionPage: CollectionPageSchema;
 }
 
 export interface ThunkConfig<T>{

@@ -88,5 +88,72 @@
       "id": 3
     }
   ],
-  "items": []
+  "items": [
+    {
+      "name": "Book 1",
+      "tags": "retro",
+      "collectionId": 1,
+      "userId": 1,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": "St. Gee"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": "1951"
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Coin old",
+      "tags": "coin",
+      "collectionId": 3,
+      "userId": 1,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": "UK"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "true",
+          "value": true
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 2
+    },
+    {
+      "name": "Book 2",
+      "tags": "old_book",
+      "collectionId": 1,
+      "userId": 1,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": "Bg. Fgh"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": "2005"
+        }
+      ],
+      "id": 3
+    }
+  ]
 }

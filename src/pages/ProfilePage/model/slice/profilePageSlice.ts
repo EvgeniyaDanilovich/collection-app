@@ -4,7 +4,7 @@ import { ProfileSchema } from '../types/profileSchema';
 import { fetchCollectionsByUserId } from '../services/fetchCollectionsByUserId';
 import { Collection } from '../../../../entities/Collection';
 
-export const initialAdminPageState: ProfileSchema = {
+export const initialState: ProfileSchema = {
     collections: [],
     isLoading: false,
     error: undefined,
@@ -12,7 +12,7 @@ export const initialAdminPageState: ProfileSchema = {
 
 const profilePageSlice = createSlice({
     name: 'profilePageSlice',
-    initialState: initialAdminPageState,
+    initialState,
     reducers: {
         setChecked(state, action) {
 

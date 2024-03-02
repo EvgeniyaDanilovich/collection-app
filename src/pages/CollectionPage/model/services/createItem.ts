@@ -1,18 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
-import { Collection } from '../../../../entities/Collection';
+import { Item } from '../../../../entities/Item';
+import { localStorageKeys } from '../../../../shared/const/localStorage';
 
-export const addCollection = createAsyncThunk<Collection, Omit<Collection, 'id'>, ThunkConfig<string>>(
-    'profile/addCollection',
-    async (collection, thunkAPI) => {
+export const createItem = createAsyncThunk<Item, Omit<Item, 'id' | 'userId'>, ThunkConfig<string>>(
+    'collectionPage/createItem',
+    async (item, thunkAPI) => {
         try {
-            const response = await fetch(`${baseUrl}collections`, {
+            const response = await fetch(`${baseUrl}items`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify(collection),
+                body: JSON.stringify(item),
             });
 
             if (!response.ok) {

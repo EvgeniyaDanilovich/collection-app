@@ -6,22 +6,22 @@ import { useSelector } from 'react-redux';
 import { selectCollection } from '../../../entities/Collection';
 import { Checkbox } from '../../../shared/ui/Checkbox/Checkbox';
 import { Textarea } from '../../../shared/ui/Textarea/Textarea';
+import { InputBooleanField, InputField, Item } from '../../../entities/Item';
+import { useParams } from 'react-router-dom';
+import { localStorageKeys } from '../../../shared/const/localStorage';
 
-interface InputField {
-    name: string,
-    value: string
+interface Props {
+    onAddItem: (data: Omit<Item, 'id'>) => void;
+    onCloseModal: () => void;
 }
 
-interface InputBooleanField {
-    name: string,
-    value: boolean
-}
-
-export const AddItemForm = () => {
+export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
     const { t } = useTranslation();
+    const { id } = useParams();
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
+    const collection = useSelector(selectCollection);
     const [name, setName] = useState<string>('');
     const [tags, setTags] = useState<string>('');
-    const collection = useSelector(selectCollection);
 
     const [stringFields, setStringFields] = useState<InputField[]>([]);
     const [textareaFields, setTextareaFields] = useState<InputField[]>([]);
@@ -95,6 +95,21 @@ export const AddItemForm = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (id && userId) {
+            const data: Omit<Item, 'id'> = {
+                name,
+                tags,
+                collectionId: Number(id),
+                userId: Number(userId),
+                stringFields,
+                textareaFields,
+                checkboxFields,
+                dateFields,
+                numberFields
+            };
+            onAddItem(data);
+        }
+        onCloseModal();
     };
 
     return (
@@ -108,7 +123,7 @@ export const AddItemForm = () => {
             </Form.Group>
 
             {stringFields && stringFields.map((field, index) => (
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" key={field.name}>
                     <Input value={field.value} label={field.name}
                            setValue={(value) => handleStringFields(value, index)}
                     />
@@ -116,7 +131,7 @@ export const AddItemForm = () => {
             )}
 
             {textareaFields && textareaFields.map((field, index) => (
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" key={field.name}>
                     <Textarea value={field.value} label={field.name}
                            setValue={(value) => handleTextareaFields(value, index)}
                     />
@@ -124,14 +139,14 @@ export const AddItemForm = () => {
             )}
 
             {checkboxFields && checkboxFields.map((field, index) => (
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" key={field.name}>
                     <Checkbox checked={field.value}
                               setChecked={(value) => handleCheckboxFields(value, index)} label={field.name} />
                 </Form.Group>)
             )}
 
             {dateFields && dateFields.map((field, index) => (
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" key={field.name}>
                     <Input value={field.value} label={field.name} type={'date'}
                            setValue={(value) => handleDateFields(value, index)}
                     />
@@ -139,7 +154,7 @@ export const AddItemForm = () => {
             )}
 
             {numberFields && numberFields.map((field, index) => (
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-3" key={field.name}>
                     <Input value={field.value} label={field.name} type={'number'} placeholder={t('Enter number')}
                            setValue={(value) => handleNumberFields(value, index)}
                     />

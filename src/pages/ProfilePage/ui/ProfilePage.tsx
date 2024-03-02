@@ -36,7 +36,7 @@ const ProfilePage = () => {
             <Button onClick={() => setModal(true)}>{t('Create new collection')}</Button>
             <CollectionList collections={collections} />
             <ModalComponent title={t('Create new collection')} status={modal} onClose={() => setModal(false)}>
-                <AddCollectionForm userId={Number(id)} onAddCollection={onAddCollection} />
+                <AddCollectionForm userId={Number(id)} onAddCollection={onAddCollection} onCloseModal={() => setModal(false)} />
             </ModalComponent>
         </div>
     );

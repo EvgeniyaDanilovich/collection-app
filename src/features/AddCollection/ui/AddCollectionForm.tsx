@@ -5,26 +5,26 @@ import { useTranslation } from 'react-i18next';
 import { Textarea } from '../../../shared/ui/Textarea/Textarea';
 import { Select } from '../../../shared/ui/Select/Select';
 import { Collection } from '../../../entities/Collection';
+import { CollectionCategories } from '../model/types/collection';
 
 interface Props {
     userId: number;
     onAddCollection: (value: Omit<Collection, 'id'>) => void;
+    onCloseModal: () => void;
 }
 
 const options = [
-    { value: 'Coins', content: 'Coins' },
-    { value: 'Books', content: 'Books' },
-    { value: 'Marks', content: 'Marks' },
-    // { value: Country.Kazakhstan, content: Country.Kazakhstan },
-    // { value: Country.Ukraine, content: Country.Ukraine },
+    { value: CollectionCategories.COINS, content: CollectionCategories.COINS },
+    { value: CollectionCategories.BOOKS, content: CollectionCategories.BOOKS },
+    { value: CollectionCategories.MARKS, content: CollectionCategories.MARKS },
 ];
 
-export const AddCollectionForm = ({ userId, onAddCollection }: Props) => {
+export const AddCollectionForm = ({ userId, onAddCollection, onCloseModal }: Props) => {
     const { t } = useTranslation();
     const [name, setName] = useState<string>('');
     const [imgUrl, setImgUrl] = useState<string>('');
     const [description, setDescription] = useState<string>('');
-    const [category, setCategory] = useState<string>('');
+    const [category, setCategory] = useState<string>(CollectionCategories.COINS);
 
     const [stringFields, setStringFields] = useState<string[]>([]);
     const [textareaFields, setTextareaFields] = useState<string[]>([]);
@@ -101,8 +101,8 @@ export const AddCollectionForm = ({ userId, onAddCollection }: Props) => {
             dateFields: dateFields.filter(Boolean),
             numberFields: numberFields.filter(Boolean),
         };
-        console.log(data);
-        onAddCollection(data)
+        onAddCollection(data);
+        onCloseModal();
     };
 
     return (
@@ -120,7 +120,7 @@ export const AddCollectionForm = ({ userId, onAddCollection }: Props) => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-                <Select value={category} onChange={setCategory} label={t('Collection category')} options={options} />
+                <Select value={category} onChange={setCategory} label={t('Collection category')} options={options}  />
             </Form.Group>
 
             <div onClick={addStringField}>Add extra string fields for your item</div>
