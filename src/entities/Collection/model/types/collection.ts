@@ -11,3 +11,10 @@ export interface Collection {
     dateFields?: string[],
     numberFields?: string[],
 }
+
+export interface CollectionSchema {
+    collection: Collection | null,
+    isLoading: boolean,
+    error?: string
+}
+

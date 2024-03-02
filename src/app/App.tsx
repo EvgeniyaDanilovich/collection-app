@@ -7,6 +7,7 @@ import { Header } from '../widgets/Header';
 import { LoginPage } from '../pages/LoginPage';
 import { AdminPage } from '../pages/AdminPage';
 import { ProfilePage } from '../pages/ProfilePage';
+import { CollectionPage } from '../pages/CollectionPage';
 import { localStorageKeys } from '../shared/const/localStorage';
 import { AppDispatch } from './providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
@@ -33,6 +34,7 @@ function App() {
                     <Route path="/signup" element={<SignupPage />} />
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/profile/:id" element={<ProfilePage />} />
+                    <Route path="/collection/:id" element={<CollectionPage />} />
                 </Routes>
             </Suspense>
         </div>

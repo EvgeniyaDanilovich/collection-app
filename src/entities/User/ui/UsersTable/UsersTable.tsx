@@ -27,7 +27,8 @@ export const UsersTable = ({ users }: Props) => {
         <Table striped bordered hover>
             <thead>
             <tr>
-                <th><Checkbox checked={mainCheckbox} setChecked={handleMainCheckbox} /></th>
+                {/* <th><Checkbox checked={mainCheckbox} setChecked={handleMainCheckbox} /></th> */}
+                <th><Checkbox checked={mainCheckbox} setChecked={setMainCheckbox} /></th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Status</th>

@@ -15,7 +15,7 @@ export const UsersList = memo(({ users }: Props) => {
     const navigate = useNavigate();
 
     const handleCheckbox = useCallback((checked: boolean, userId: number) => {
-        dispatch(adminPageActions.setChecked({ userId, checked: !checked }));
+        dispatch(adminPageActions.setChecked({ userId, checked: checked }));
     }, []);
 
     const redirectToProfile = (userId: number) => {
@@ -31,7 +31,7 @@ export const UsersList = memo(({ users }: Props) => {
                 return (
                     <tr className={`${isColored && 'bg-slate-200'} flex items-center gap-x-[5px] mb-[10px]`} key={user.id}>
                         <td>
-                            <Checkbox checked={checked} setChecked={() => handleCheckbox(checked, user.id)} />
+                            <Checkbox checked={checked} setChecked={(value) => handleCheckbox(value, user.id)} />
                         </td>
                         <td onClick={() => redirectToProfile(user.id)}>{user.username}</td>
                         <td>{user.email}</td>

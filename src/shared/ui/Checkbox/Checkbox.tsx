@@ -3,15 +3,19 @@ import { Form } from 'react-bootstrap';
 
 interface Props {
     checked: boolean,
-    setChecked: () => void
+    setChecked: (value: boolean) => void,
+    label?: string;
 }
 
-export const Checkbox = memo(({ checked, setChecked }: Props) => {
+export const Checkbox = memo(({ checked, setChecked, label }: Props) => {
     const onCheckedHandler = () => {
-        setChecked();
+        setChecked(!checked);
     };
 
     return (
-        <Form.Check type={'checkbox'} checked={checked} onChange={onCheckedHandler} />
+        <>
+            {label && <Form.Label>{label}</Form.Label>}
+            <Form.Check type={'checkbox'} checked={checked} onChange={onCheckedHandler} />
+        </>
     );
 });

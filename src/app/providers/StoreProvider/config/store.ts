@@ -4,6 +4,7 @@ import { StateSchema } from './stateSchema';
 import { adminPageReducer } from '../../../../pages/AdminPage';
 import { userReducer } from '../../../../entities/User';
 import { profilePageReducer } from '../../../../pages/ProfilePage';
+import { collectionReducer } from '../../../../entities/Collection';
 
 export const store = configureStore<StateSchema>({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore<StateSchema>({
         admin: adminPageReducer,
         user: userReducer,
         profile: profilePageReducer,
+        collection: collectionReducer,
     },
 })
 

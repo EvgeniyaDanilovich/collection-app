@@ -69,6 +69,24 @@
         "Number of pages"
       ],
       "id": 2
+    },
+    {
+      "userId": 4,
+      "name": "first",
+      "description": "first description",
+      "category": "",
+      "imgUrl": "",
+      "stringFields": [
+        "Country"
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        "true"
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 3
     }
-  ]
+  ],
+  "items": []
 }
