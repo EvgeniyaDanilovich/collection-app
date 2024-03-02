@@ -1,0 +1,41 @@
+{
+  "posts": [
+    {
+      "id": 1
+    }
+  ],
+  "users": [
+    {
+      "username": "Eva",
+      "email": "eva@gmail.com",
+      "password": "123",
+      "status": "Active",
+      "id": 1,
+      "admin": true
+    },
+    {
+      "username": "user-2",
+      "email": "user-2@gmail.com",
+      "password": "123",
+      "status": "Blocked",
+      "id": 2,
+      "admin": false
+    },
+    {
+      "username": "user-3",
+      "email": "user-3@gmail.com",
+      "password": "123",
+      "status": "Blocked",
+      "id": 3,
+      "admin": false
+    },
+    {
+      "username": "user-4",
+      "email": "user-4@gmail.com",
+      "password": "123",
+      "status": "Active",
+      "admin": false,
+      "id": 4
+    }
+  ]
+}
