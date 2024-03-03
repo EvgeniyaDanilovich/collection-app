@@ -1,5 +1,6 @@
 export type { Collection, CollectionSchema } from './model/types/collection';
 export { collectionReducer } from './model/slice/collectionSlice';
 export { selectCollection } from './model/selectors/collectionSelectors';
-export { CollectionList } from './ui/CollectionList/CollectionList';
+export { CollectionTable } from './ui/CollectionTable/CollectionTable';
 export { CollectionCard } from './ui/CollectionCard/CollectionCard';
+export { fetchCollectionById } from './model/services/fetchCollectionById';

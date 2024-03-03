@@ -3,6 +3,7 @@ import { addCollection } from '../services/addCollection';
 import { ProfileSchema } from '../types/profileSchema';
 import { fetchCollectionsByUserId } from '../services/fetchCollectionsByUserId';
 import { Collection } from '../../../../entities/Collection';
+import { updateCollection } from '../services/updateCollection';
 
 export const initialState: ProfileSchema = {
     collections: [],
@@ -14,9 +15,12 @@ const profilePageSlice = createSlice({
     name: 'profilePageSlice',
     initialState,
     reducers: {
-        setChecked(state, action) {
-
-        },
+        deleteCollection(state, action) {
+            if (action.payload) {
+                const index = state.collections.findIndex((collection) => collection.id === action.payload);
+                state.collections.splice(index, 1);
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchCollectionsByUserId.pending, (state) => {
@@ -41,6 +45,18 @@ const profilePageSlice = createSlice({
             state.isLoading = false;
         });
         builder.addCase(addCollection.rejected, (state, action: PayloadAction<any>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        });
+
+        builder.addCase(updateCollection.pending, (state) => {
+            state.error = undefined;
+        });
+        builder.addCase(updateCollection.fulfilled, (state, action: PayloadAction<Collection>) => {
+            let index = state.collections.findIndex(collection => collection.id === action.payload.id);
+            state.collections[index] = action.payload;
+        });
+        builder.addCase(updateCollection.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         });

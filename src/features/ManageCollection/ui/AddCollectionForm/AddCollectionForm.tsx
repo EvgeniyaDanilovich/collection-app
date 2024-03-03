@@ -1,26 +1,23 @@
 import React, { useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Input } from '../../../shared/ui/Input/Input';
+import { Input } from '../../../../shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
-import { Textarea } from '../../../shared/ui/Textarea/Textarea';
-import { Select } from '../../../shared/ui/Select/Select';
-import { Collection } from '../../../entities/Collection';
-import { CollectionCategories } from '../model/types/collection';
+import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
+import { Select } from '../../../../shared/ui/Select/Select';
+import { Collection } from '../../../../entities/Collection';
+import { options } from '../../model/consts/options';
+import { CollectionCategories } from '../../model/types/collection';
+import { useParams } from 'react-router-dom';
 
 interface Props {
-    userId: number;
     onAddCollection: (value: Omit<Collection, 'id'>) => void;
     onCloseModal: () => void;
 }
 
-const options = [
-    { value: CollectionCategories.COINS, content: CollectionCategories.COINS },
-    { value: CollectionCategories.BOOKS, content: CollectionCategories.BOOKS },
-    { value: CollectionCategories.MARKS, content: CollectionCategories.MARKS },
-];
-
-export const AddCollectionForm = ({ userId, onAddCollection, onCloseModal }: Props) => {
+export const AddCollectionForm = ({ onAddCollection, onCloseModal }: Props) => {
     const { t } = useTranslation();
+    const { id } = useParams();
+
     const [name, setName] = useState<string>('');
     const [imgUrl, setImgUrl] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -90,7 +87,7 @@ export const AddCollectionForm = ({ userId, onAddCollection, onCloseModal }: Pro
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const data: Omit<Collection, 'id'> = {
-            userId,
+            userId: Number(id),
             name: name,
             description,
             category,

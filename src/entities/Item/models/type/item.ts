@@ -20,3 +20,9 @@ export interface Item {
     dateFields: InputField[],
     numberFields: InputField[],
 }
+
+export interface ItemSchema {
+    item: Item | null;
+    isLoading: boolean;
+    error?: string;
+}

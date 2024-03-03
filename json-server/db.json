@@ -36,8 +36,8 @@
   "collections": [
     {
       "userId": 1,
-      "name": "Favorit",
-      "description": "Description favorit",
+      "name": "Favorite new",
+      "description": "Description favorite",
       "category": "Books",
       "imgUrl": "https://americanbookco.com/wp-content/uploads/2021/02/stacked-books.jpeg",
       "stringFields": [
@@ -71,21 +71,21 @@
       "id": 2
     },
     {
-      "userId": 4,
-      "name": "first",
-      "description": "first description",
-      "category": "",
+      "userId": 1,
+      "name": "Fashion books",
+      "description": "Fashion books description ",
+      "category": "Books",
       "imgUrl": "",
       "stringFields": [
-        "Country"
+        "Author"
       ],
       "textareaFields": [],
-      "checkboxFields": [
-        "true"
+      "checkboxFields": [],
+      "dateFields": [
+        "Created"
       ],
-      "dateFields": [],
       "numberFields": [],
-      "id": 3
+      "id": 4
     }
   ],
   "items": [
@@ -112,48 +112,31 @@
       "id": 1
     },
     {
-      "name": "Coin old",
-      "tags": "coin",
-      "collectionId": 3,
+      "name": "For kids",
+      "tags": "books_for_kids",
+      "collectionId": 2,
       "userId": 1,
       "stringFields": [
         {
-          "name": "Country",
-          "value": "UK"
+          "name": "Author",
+          "value": "Dc. Rewq"
         }
       ],
       "textareaFields": [],
       "checkboxFields": [
         {
-          "name": "true",
+          "name": "New",
           "value": true
         }
       ],
       "dateFields": [],
-      "numberFields": [],
-      "id": 2
-    },
-    {
-      "name": "Book 2",
-      "tags": "old_book",
-      "collectionId": 1,
-      "userId": 1,
-      "stringFields": [
-        {
-          "name": "Author",
-          "value": "Bg. Fgh"
-        }
-      ],
-      "textareaFields": [],
-      "checkboxFields": [],
-      "dateFields": [],
       "numberFields": [
         {
-          "name": "year",
-          "value": "2005"
+          "name": "Number of pages",
+          "value": "30"
         }
       ],
-      "id": 3
+      "id": 2
     }
   ]
 }

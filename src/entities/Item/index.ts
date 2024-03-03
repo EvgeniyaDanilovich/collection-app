@@ -1,2 +1,5 @@
-export type { Item, InputBooleanField, InputField } from './models/type/item';
-export { ItemList } from './ui/ItemList/ItemList';
+export type { Item, InputBooleanField, InputField, ItemSchema } from './models/type/item';
+export { ItemsTable } from './ui/ItemsTable/ItemsTable';
+export { itemReducer } from './models/slice/ItemSlice';
+export { ItemInfo } from './ui/ItemInfo/ItemInfo';
+export { fetchItemById } from './models/services/fetchItemById';

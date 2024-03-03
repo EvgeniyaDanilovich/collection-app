@@ -51,12 +51,15 @@ const adminPageSlice = createSlice({
 
         builder.addCase(updateUser.pending, (state) => {
             state.error = undefined;
+            state.isLoading = true;
         });
         builder.addCase(updateUser.fulfilled, (state, action: PayloadAction<User>) => {
+            state.isLoading = false;
            let index = state.users.findIndex(user => user.id === action.payload.id);
             state.users[index] = { ...action.payload, checked: true };
         });
         builder.addCase(updateUser.rejected, (state, action) => {
+            state.isLoading = false;
             state.error = action.payload;
         });
     },

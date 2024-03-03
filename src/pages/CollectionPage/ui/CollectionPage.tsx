@@ -8,20 +8,21 @@ import { Button } from 'react-bootstrap';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { createItem } from '../model/services/createItem';
-import { Item, ItemList } from '../../../entities/Item';
+import { Item, ItemsTable } from '../../../entities/Item';
 import { fetchItems } from '../model/services/fetchItems';
 import { selectItems } from '../model/selectors/collectionPageSelectors';
+import { deleteItem } from '../model/services/deleteItem';
+import { updateItem } from '../model/services/updateItem';
+import { UpdateItemForm } from '../../../features/UpdateItem';
 
 const CollectionPage = () => {
+    const dispatch: AppDispatch = useDispatch();
+    const items = useSelector(selectItems);
     const { id } = useParams();
     const { t } = useTranslation();
     const [modal, setModal] = useState<boolean>(false);
-    const dispatch: AppDispatch = useDispatch();
-    const items = useSelector(selectItems);
-
-    const handleCreateItem = useCallback((data: Omit<Item, 'id'>) => {
-        dispatch(createItem(data));
-    }, [dispatch]);
+    const [updateModal, setUpdateModal] = useState<boolean>(false);
+    const [currentItemId, setCurrentItemId] = useState<number | null>(null)
 
     useEffect(() => {
         if (id) {
@@ -29,14 +30,36 @@ const CollectionPage = () => {
         }
     }, []);
 
+    const handleCreateItem = useCallback((data: Omit<Item, 'id'>) => {
+        dispatch(createItem(data));
+    }, [dispatch]);
+
+    const handleUpdateItem = useCallback((data: Item) => {
+        dispatch(updateItem(data));
+    }, [dispatch]);
+
+    const handleDeleteItem = useCallback((itemId: number) => {
+        dispatch(deleteItem(itemId));
+    }, [dispatch]);
+
+    const handleEdit = useCallback((itemId: number) => {
+        setUpdateModal(true);
+        setCurrentItemId(itemId);
+    }, []);
+
     return (
         <div>
             <CollectionCard />
             <div>All items in collection</div>
             <Button onClick={() => setModal(true)}>{t('Create new item')}</Button>
-            <ItemList items={items} />
+            <ItemsTable items={items} onDeleteItem={handleDeleteItem} onEdit={handleEdit} />
+
             <ModalComponent title={t('Create new item')} status={modal} onClose={() => setModal(false)}>
                 <AddItemForm onAddItem={handleCreateItem} onCloseModal={() => setModal(false)} />
+            </ModalComponent>
+
+            <ModalComponent title={t('Update item')} status={updateModal} onClose={() => setUpdateModal(false)}>
+                <UpdateItemForm itemId={currentItemId} onUpdateItem={handleUpdateItem} onCloseModal={() => setUpdateModal(false)} />
             </ModalComponent>
         </div>
     );

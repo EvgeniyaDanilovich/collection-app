@@ -3,6 +3,9 @@ import { createItem } from '../services/createItem';
 import { Item } from '../../../../entities/Item';
 import { CollectionPageSchema } from '../types/collectionPageSchema';
 import { fetchItems } from '../services/fetchItems';
+import { updateCollection } from '../../../ProfilePage/model/services/updateCollection';
+import { Collection } from '../../../../entities/Collection';
+import { updateItem } from '../services/updateItem';
 
 const initialState: CollectionPageSchema = {
     items: [],
@@ -13,7 +16,14 @@ const initialState: CollectionPageSchema = {
 export const collectionPageSlice = createSlice({
     name: 'collectionPageSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        deleteItem(state, action) {
+            if (action.payload) {
+                const index = state.items.findIndex((item) => item.id === action.payload);
+                state.items.splice(index, 1);
+            }
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchItems.pending, (state) => {
             state.error = undefined;
@@ -37,6 +47,18 @@ export const collectionPageSlice = createSlice({
             state.isLoading = false;
         });
         builder.addCase(createItem.rejected, (state, action: PayloadAction<any>) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        });
+
+        builder.addCase(updateItem.pending, (state) => {
+            state.error = undefined;
+        });
+        builder.addCase(updateItem.fulfilled, (state, action: PayloadAction<Item>) => {
+            let index = state.items.findIndex(item => item.id === action.payload.id);
+            state.items[index] = action.payload;
+        });
+        builder.addCase(updateItem.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         });

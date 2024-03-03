@@ -2,25 +2,29 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Input } from '../../../shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectCollection } from '../../../entities/Collection';
 import { Checkbox } from '../../../shared/ui/Checkbox/Checkbox';
 import { Textarea } from '../../../shared/ui/Textarea/Textarea';
-import { InputBooleanField, InputField, Item } from '../../../entities/Item';
+import { fetchItemById, InputBooleanField, InputField, Item } from '../../../entities/Item';
 import { useParams } from 'react-router-dom';
 import { localStorageKeys } from '../../../shared/const/localStorage';
+import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
+import { selectItem } from '../../../entities/Item/models/selectors/itemSelectors';
 
 interface Props {
     onAddItem?: (data: Omit<Item, 'id'>) => void;
     onUpdateItem?: (data: Item) => void;
     onCloseModal: () => void;
+    itemId: number | null;
 }
 
-export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
+export const UpdateItemForm = ({ onAddItem, onCloseModal, itemId, onUpdateItem }: Props) => {
     const { t } = useTranslation();
     const { id } = useParams();
+    const dispatch: AppDispatch = useDispatch();
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
-    const collection = useSelector(selectCollection);
+    const item = useSelector(selectItem);
     const [name, setName] = useState<string>('');
     const [tags, setTags] = useState<string>('');
 
@@ -31,38 +35,47 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
     const [numberFields, setNumberFields] = useState<InputField[]>([]);
 
     useEffect(() => {
-        if (collection) {
-            collection.stringFields?.map((field, index) => {
+        if (itemId) {
+            dispatch(fetchItemById(String(itemId)));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (item) {
+            setName(item.name);
+            setTags(item.tags);
+
+            item.stringFields?.map((field, index) => {
                 const newFields = [...stringFields];
-                newFields[index] = { name: field, value: '' };
+                newFields[index] = { name: field.name, value: field.value };
                 setStringFields(newFields);
             });
 
-            collection.textareaFields?.map((field, index) => {
+            item.textareaFields?.map((field, index) => {
                 const newFields = [...textareaFields];
-                newFields[index] = { name: field, value: '' };
+                newFields[index] = { name: field.name, value: field.value };
                 setTextareaFields(newFields);
             });
 
-            collection.checkboxFields?.map((field, index) => {
+            item.checkboxFields?.map((field, index) => {
                 const newFields = [...checkboxFields];
-                newFields[index] = { name: field, value: false };
+                newFields[index] = { name: field.name, value: field.value };
                 setCheckboxFields(newFields);
             });
 
-            collection.dateFields?.map((field, index) => {
+            item.dateFields?.map((field, index) => {
                 const newFields = [...dateFields];
-                newFields[index] = { name: field, value: '' };
+                newFields[index] = { name: field.name, value: field.value };
                 setDateFields(newFields);
             });
 
-            collection.numberFields?.map((field, index) => {
+            item.numberFields?.map((field, index) => {
                 const newFields = [...dateFields];
-                newFields[index] = { name: field, value: '' };
+                newFields[index] = { name: field.name, value: field.value };
                 setNumberFields(newFields);
             });
         }
-    }, [collection]);
+    }, [item]);
 
     const handleStringFields = useCallback((value: string, index: number) => {
         const newFields = [...stringFields];
@@ -96,8 +109,9 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (id && userId && onAddItem) {
-            const data: Omit<Item, 'id'> = {
+        if (id && userId && itemId && onUpdateItem) {
+            const data: Item = {
+                id: itemId,
                 name,
                 tags,
                 collectionId: Number(id),
@@ -108,7 +122,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
                 dateFields,
                 numberFields
             };
-            onAddItem(data);
+            onUpdateItem(data);
         }
         onCloseModal();
     };
@@ -134,7 +148,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
             {textareaFields && textareaFields.map((field, index) => (
                 <Form.Group className="mb-3" key={field.name}>
                     <Textarea value={field.value} label={field.name}
-                           setValue={(value) => handleTextareaFields(value, index)}
+                              setValue={(value) => handleTextareaFields(value, index)}
                     />
                 </Form.Group>)
             )}
@@ -163,7 +177,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
             )}
 
             <Button variant="primary" type="submit">
-                Submit
+                Update
             </Button>
         </Form>
     );

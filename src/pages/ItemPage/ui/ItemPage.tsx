@@ -1,9 +1,10 @@
 import React from 'react';
+import { ItemInfo } from '../../../entities/Item';
 
 const ItemPage = () => {
     return (
         <div>
-            Item page
+            <ItemInfo />
         </div>
     );
 };

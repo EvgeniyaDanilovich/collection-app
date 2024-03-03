@@ -12,6 +12,7 @@ import { localStorageKeys } from '../shared/const/localStorage';
 import { AppDispatch } from './providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../features/AuthByUserName';
+import { ItemPage } from '../pages/ItemPage';
 
 function App() {
     const dispatch: AppDispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
                     <Route path="/admin" element={<AdminPage />} />
                     <Route path="/profile/:id" element={<ProfilePage />} />
                     <Route path="/collection/:id" element={<CollectionPage />} />
+                    <Route path="/item/:id" element={<ItemPage />} />
                 </Routes>
             </Suspense>
         </div>
