@@ -7,6 +7,7 @@ import { CollectionPage } from '../../../pages/CollectionPage';
 import { NotFoundPage } from '../../../pages/NotFoundPage';
 import { ItemPage } from '../../../pages/ItemPage';
 import { AdminPage } from '../../../pages/AdminPage';
+import { CollectionsPage } from '../../../pages/CollectionsPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -19,6 +20,7 @@ export enum AppRoutes {
     ADMIN = 'admin',
     PROFILE = 'profile',
     COLLECTION = 'collection',
+    COLLECTIONS = 'collections',
     ITEM = 'item',
 
     // last
@@ -31,7 +33,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.SIGNUP]: '/signup',
     [AppRoutes.ADMIN]: '/admin',
     [AppRoutes.PROFILE]: '/profile/', // + :id
-    // [AppRoutes.ARTICLES]: '/articles',
+    [AppRoutes.COLLECTIONS]: '/collections',
     [AppRoutes.COLLECTION]: '/collection/', // + :id
     [AppRoutes.ITEM]: '/articles/', // + :id
     // последний
@@ -58,6 +60,10 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.PROFILE]: {
         path: `${RoutePath.profile}:id`,
         element: <ProfilePage />,
+    },
+    [AppRoutes.COLLECTIONS]: {
+        path: `${RoutePath.collections}`,
+        element: <CollectionsPage />,
     },
     [AppRoutes.COLLECTION]: {
         path: `${RoutePath.collection}:id`,

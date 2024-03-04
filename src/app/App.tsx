@@ -1,31 +1,28 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './styles/App.scss';
-import { Route, Routes } from 'react-router-dom';
-import { MainPage } from '../pages/MainPage';
-import { SignupPage } from '../pages/SignupPage';
 import { Header } from '../widgets/Header';
-import { LoginPage } from '../pages/LoginPage';
-import { AdminPage } from '../pages/AdminPage';
-import { ProfilePage } from '../pages/ProfilePage';
-import { CollectionPage } from '../pages/CollectionPage';
 import { localStorageKeys } from '../shared/const/localStorage';
 import { AppDispatch } from './providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../features/AuthByUserName';
-import { ItemPage } from '../pages/ItemPage';
-import { NotFoundPage } from '../pages/NotFoundPage';
 import { AppRouter } from './providers/router';
-import { Loader } from '../shared/ui/Loader/Loader';
+import { useTranslation } from 'react-i18next';
 
 function App() {
     const dispatch: AppDispatch = useDispatch();
+    const { i18n } = useTranslation();
 
     useEffect(() => {
         const isAuth = localStorage.getItem(`${localStorageKeys.USER_ID}`);
         const isAdmin = localStorage.getItem(`${localStorageKeys.ADMIN}`);
+        const lang = localStorage.getItem(`${localStorageKeys.LANG}`);
 
         isAuth && dispatch(authActions.setIsAuth(true));
         isAdmin && dispatch(authActions.setIsAdmin(Boolean(isAdmin)));
+
+        if (lang) {
+            i18n.changeLanguage(lang);
+        }
     }, []);
 
     return (

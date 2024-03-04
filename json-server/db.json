@@ -31,6 +31,14 @@
       "status": "Active",
       "admin": false,
       "id": 4
+    },
+    {
+      "username": "Kate",
+      "email": "Kate@gmail.com",
+      "password": "123",
+      "status": "Active",
+      "admin": false,
+      "id": 5
     }
   ],
   "collections": [

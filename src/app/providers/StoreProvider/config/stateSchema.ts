@@ -7,6 +7,7 @@ import { CollectionSchema } from '../../../../entities/Collection';
 import { CollectionPageSchema } from '../../../../pages/CollectionPage';
 import { ItemSchema } from '../../../../entities/Item';
 import { ItemPageSchema } from '../../../../pages/ItemPage';
+import { CollectionsPageSchema } from '../../../../pages/CollectionsPage';
 
 export interface StateSchema {
     auth: AuthSchema;
@@ -15,6 +16,7 @@ export interface StateSchema {
     profile: ProfileSchema;
     collection: CollectionSchema;
     collectionPage: CollectionPageSchema;
+    collectionsPage: CollectionsPageSchema;
     item: ItemSchema;
     itemPage: ItemPageSchema;
 }

@@ -1,5 +1,5 @@
 export const localStorageKeys = {
-    LANG: 'Lang',
-    USER_ID: 'UserId',
-    ADMIN: 'Admin',
+    LANG: 'lang',
+    USER_ID: 'userId',
+    ADMIN: 'admin',
 }

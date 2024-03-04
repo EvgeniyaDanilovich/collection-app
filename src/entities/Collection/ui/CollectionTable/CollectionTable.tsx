@@ -3,6 +3,8 @@ import { Collection } from '../../model/types/collection';
 import { Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
+import { useTranslation } from 'react-i18next';
+import cls from './CollectionTable.module.scss';
 
 interface Props {
     collections: Collection[];
@@ -12,6 +14,7 @@ interface Props {
 
 export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }: Props) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const redirectToCollection = (collectionId: number) => {
         navigate(`${RoutePath.collection}${collectionId}`);
@@ -28,7 +31,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
     };
 
     return (
-        <Table hover>
+        <Table>
             <thead>
             <tr>
                 <th>Name</th>
@@ -39,15 +42,20 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
             </tr>
             </thead>
             <tbody>
-            {collections && collections.map(collection => (
-                <tr key={collection.id} onClick={() => redirectToCollection(collection.id)}>
-                    <td>{collection.name}</td>
-                    <td>{collection.category}</td>
-                    {/* <td>{collection.description}</td> */}
-                    <td onClick={(e)=> handleEdit(e, collection.id)}>edit</td>
-                    <td onClick={(e) => handleDelete(e, collection.id)}>delete</td>
-                </tr>
-            ))}
+            {collections.length ? collections.map(collection => (
+                    <tr key={collection.id} onClick={() => redirectToCollection(collection.id)}>
+                        <td>{collection.name}</td>
+                        <td>{collection.category}</td>
+                        {/* <td>{collection.description}</td> */}
+                        <td onClick={(e) => handleEdit(e, collection.id)}>edit</td>
+                        <td onClick={(e) => handleDelete(e, collection.id)}>delete</td>
+                    </tr>
+                ))
+                : (<tr>
+                    <td className={cls.fullWidthCell} colSpan={4}>
+                        {t('No collections found')}
+                    </td>
+                </tr>)}
             </tbody>
         </Table>
     );

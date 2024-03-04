@@ -15,6 +15,7 @@ export const Header = () => {
     const isAdmin = useSelector(selectIsAdmin);
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     const logoutUser = () => {
         dispatch(authActions.setIsAuth(false));
@@ -25,7 +26,10 @@ export const Header = () => {
     return (
         <header>
             {isAuth ?
-                <Button onClick={logoutUser}>{t('Log out')}</Button>
+                (<>
+                    <Button onClick={logoutUser}>{t('Log out')}</Button>
+                    {userId && <NavLink to={`${RoutePath.profile}${userId}`}>{t('My profile')}</NavLink>}
+                </>)
                 : (<>
                         <NavLink to={`${RoutePath.login}`}>{t('Log in')}</NavLink>
                         <NavLink to={`${RoutePath.signup}`}>{t('Sign up')}</NavLink>
@@ -34,6 +38,7 @@ export const Header = () => {
             }
 
             <NavLink to={`${RoutePath.main}`}>{t('Main page')}</NavLink>
+            <NavLink to={`${RoutePath.collections}`}>{t('Collections')}</NavLink>
             {isAdmin && <NavLink to={`${RoutePath.admin}`}>{t('Admin page')}</NavLink>}
         </header>
     );

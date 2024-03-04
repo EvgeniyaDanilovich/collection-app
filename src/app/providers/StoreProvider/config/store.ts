@@ -8,6 +8,7 @@ import { collectionReducer } from '../../../../entities/Collection';
 import { collectionPageReducer } from '../../../../pages/CollectionPage';
 import { itemReducer } from '../../../../entities/Item';
 import { itemPageReducer } from '../../../../pages/ItemPage';
+import { collectionsPageReducer } from '../../../../pages/CollectionsPage';
 
 export const store = configureStore<StateSchema>({
     reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore<StateSchema>({
         profile: profilePageReducer,
         collection: collectionReducer,
         collectionPage: collectionPageReducer,
+        collectionsPage: collectionsPageReducer,
         item: itemReducer,
         itemPage: itemPageReducer,
     },

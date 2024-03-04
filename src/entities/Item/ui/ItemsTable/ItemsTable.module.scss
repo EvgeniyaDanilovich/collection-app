@@ -1,0 +1,7 @@
+.fullWidthCell {
+    text-align: center;
+    border-bottom: none;
+    &:hover{
+        cursor: context-menu;
+    }
+}
