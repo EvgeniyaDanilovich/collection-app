@@ -3,6 +3,7 @@ import cls from './CommentCard.module.scss';
 import { Comment } from '../../model/types/comment';
 import { Placeholder } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 
 interface CommentCardProps {
     comment?: Comment;
@@ -34,7 +35,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
     }
 
     const redirectToUser = () => {
-        navigate(`/profile/${comment.userId}`);
+        navigate(`${RoutePath.profile}${comment.userId}`);
     }
 
     return (

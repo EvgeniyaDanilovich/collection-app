@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Collection } from '../../model/types/collection';
 import { Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 
 interface Props {
     collections: Collection[];
@@ -13,7 +14,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
     const navigate = useNavigate();
 
     const redirectToCollection = (collectionId: number) => {
-        navigate(`/collection/${collectionId}`);
+        navigate(`${RoutePath.collection}${collectionId}`);
     };
 
     const handleDelete = (e: React.MouseEvent<HTMLTableDataCellElement>, collectionId: number) => {

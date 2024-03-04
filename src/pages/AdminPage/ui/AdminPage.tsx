@@ -9,6 +9,7 @@ import { deleteUser } from '../model/services/deleteUser';
 import { updateUser } from '../model/services/updateUser';
 import { selectIsAdmin } from '../../../features/AuthByUserName';
 import { Navigate } from 'react-router-dom';
+import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
 
 const AdminPage = () => {
     const users = useSelector(selectUsers);
@@ -28,7 +29,7 @@ const AdminPage = () => {
     }, [dispatch]);
 
     if (!isAdmin) {
-        return <Navigate to={'/'} />
+        return <Navigate to={RoutePath.main} />
     }
 
     return (

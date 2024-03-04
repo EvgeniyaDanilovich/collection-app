@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Table } from 'react-bootstrap';
 import { Item } from '../../models/type/item';
 import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 
 interface Props {
     items: Item[];
@@ -13,7 +14,7 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
     const navigate = useNavigate();
 
     const redirectToItem = (itemId: number) => {
-        navigate(`/item/${itemId}`);
+        navigate(`${RoutePath.item}${itemId}`);
     };
 
     const handleDelete = (e: React.MouseEvent<HTMLTableDataCellElement>, itemId: number) => {

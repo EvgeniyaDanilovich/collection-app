@@ -5,6 +5,7 @@ import { AppDispatch } from '../../../../app/providers/StoreProvider/config/stor
 import { useDispatch } from 'react-redux';
 import { adminPageActions } from '../../../../pages/AdminPage';
 import { useNavigate } from 'react-router-dom';
+import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 
 interface Props {
     users: User[];
@@ -19,7 +20,7 @@ export const UsersList = memo(({ users }: Props) => {
     }, []);
 
     const redirectToProfile = (userId: number) => {
-        navigate(`/profile/${userId}`);
+        navigate(`${RoutePath.profile}${userId}`);
     };
 
     return (

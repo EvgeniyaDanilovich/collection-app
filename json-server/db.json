@@ -12,7 +12,7 @@
       "username": "user-2",
       "email": "user-2@gmail.com",
       "password": "123",
-      "status": "Blocked",
+      "status": "Active",
       "id": 2,
       "admin": false
     },

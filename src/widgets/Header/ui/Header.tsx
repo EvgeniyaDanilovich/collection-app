@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import { localStorageKeys } from '../../../shared/const/localStorage';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { selectIsAdmin } from '../../../features/AuthByUserName/model/selectors/authSelectors';
+import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
 
 export const Header = () => {
     const { t } = useTranslation();
@@ -18,7 +19,7 @@ export const Header = () => {
     const logoutUser = () => {
         dispatch(authActions.setIsAuth(false));
         localStorage.removeItem(`${localStorageKeys.USER_ID}`);
-        navigate('/login');
+        navigate(`${RoutePath.login}`);
     };
 
     return (
@@ -26,14 +27,14 @@ export const Header = () => {
             {isAuth ?
                 <Button onClick={logoutUser}>{t('Log out')}</Button>
                 : (<>
-                        <NavLink to={'/login'}>{t('Log in')}</NavLink>
-                        <NavLink to={'/signup'}>{t('Sign up')}</NavLink>
+                        <NavLink to={`${RoutePath.login}`}>{t('Log in')}</NavLink>
+                        <NavLink to={`${RoutePath.signup}`}>{t('Sign up')}</NavLink>
                     </>
                 )
             }
 
-            <NavLink to={'/'}>{t('Main page')}</NavLink>
-            {isAdmin && <NavLink to={'/admin'}>{t('Admin page')}</NavLink>}
+            <NavLink to={`${RoutePath.main}`}>{t('Main page')}</NavLink>
+            {isAdmin && <NavLink to={`${RoutePath.admin}`}>{t('Admin page')}</NavLink>}
         </header>
     );
 };

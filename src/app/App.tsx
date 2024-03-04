@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../features/AuthByUserName';
 import { ItemPage } from '../pages/ItemPage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { AppRouter } from './providers/router';
+import { Loader } from '../shared/ui/Loader/Loader';
 
 function App() {
     const dispatch: AppDispatch = useDispatch();
@@ -29,18 +31,19 @@ function App() {
     return (
         <div>
             <Header />
-            <Suspense fallback="">
-                <Routes>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/signup" element={<SignupPage />} />
-                    <Route path="/admin" element={<AdminPage />} />
-                    <Route path="/profile/:id" element={<ProfilePage />} />
-                    <Route path="/collection/:id" element={<CollectionPage />} />
-                    <Route path="/item/:id" element={<ItemPage />} />
-                    <Route path="*" element={<NotFoundPage />} />
-                </Routes>
-            </Suspense>
+            {/* <Suspense fallback={<Loader />}> */}
+                {/* <Routes> */}
+                {/*     <Route path="/" element={<MainPage />} /> */}
+                {/*     <Route path="/login" element={<LoginPage />} /> */}
+                {/*     <Route path="/signup" element={<SignupPage />} /> */}
+                {/*     <Route path="/admin" element={<AdminPage />} /> */}
+                {/*     <Route path="/profile/:id" element={<ProfilePage />} /> */}
+                {/*     <Route path="/collection/:id" element={<CollectionPage />} /> */}
+                {/*     <Route path="/item/:id" element={<ItemPage />} /> */}
+                {/*     <Route path="*" element={<NotFoundPage />} /> */}
+                {/* </Routes> */}
+                <AppRouter />
+            {/* </Suspense> */}
         </div>
     );
 }

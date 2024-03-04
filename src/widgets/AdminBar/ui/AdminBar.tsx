@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { localStorageKeys } from '../../../shared/const/localStorage';
 import { authActions } from '../../../features/AuthByUserName';
+import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
 
 interface Props {
     users: User[];
@@ -21,7 +22,7 @@ export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
     const logoutUser = () => {
         dispatch(authActions.setIsAuth(false));
         localStorage.removeItem(`${localStorageKeys.USER_ID}`);
-        navigate('/login');
+        navigate(`${RoutePath.login}`);
     };
 
     const onDeleteUser = () => {
