@@ -1,4 +1,4 @@
-import { CollectionCategories } from '../types/collection';
+import { CollectionCategories } from '../../../../entities/Collection';
 
 export const options = [
     { value: CollectionCategories.COINS, content: CollectionCategories.COINS },

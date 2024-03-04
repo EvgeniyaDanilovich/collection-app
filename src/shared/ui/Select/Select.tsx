@@ -1,16 +1,17 @@
 import React, { ChangeEvent, memo, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
+import { CollectionCategories } from '../../../entities/Collection';
 
 export interface SelectOption {
     value: string,
     content: string,
 }
 
-interface SelectProps {
+interface SelectProps<T = any> {
     label?: string;
     options?: SelectOption[];
-    value?: string;
-    onChange?: (value: string) => void;
+    value?: T;
+    onChange?: (value: T) => void;
 }
 
 export const Select = memo((props: SelectProps) => {

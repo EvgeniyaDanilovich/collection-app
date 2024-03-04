@@ -1,9 +1,15 @@
+export enum CollectionCategories {
+    COINS= 'Coins',
+    BOOKS = 'Books',
+    MARKS = 'Marks'
+}
+
 export interface Collection {
     id: number,
     userId: number,
     name: string,
     description: string,
-    category: string,
+    category: CollectionCategories,
     imgUrl?: string,
     stringFields?: string[],
     textareaFields?: string[],

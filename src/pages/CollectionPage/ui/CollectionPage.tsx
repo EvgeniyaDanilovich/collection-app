@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { CollectionCard } from '../../../entities/Collection';
 import { ModalComponent } from '../../../shared/ui/Modal/Modal';
 import { useTranslation } from 'react-i18next';
-import { AddItemForm } from '../../../features/AddItem';
 import { Button } from 'react-bootstrap';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +12,7 @@ import { fetchItems } from '../model/services/fetchItems';
 import { selectItems } from '../model/selectors/collectionPageSelectors';
 import { deleteItem } from '../model/services/deleteItem';
 import { updateItem } from '../model/services/updateItem';
-import { UpdateItemForm } from '../../../features/UpdateItem';
+import { AddItemForm, UpdateItemForm } from '../../../features/ManageItem';
 
 const CollectionPage = () => {
     const dispatch: AppDispatch = useDispatch();

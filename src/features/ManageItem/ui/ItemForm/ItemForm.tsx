@@ -1,68 +1,38 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Input } from '../../../shared/ui/Input/Input';
+import { Input } from '../../../../shared/ui/Input/Input';
+import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
+import { Checkbox } from '../../../../shared/ui/Checkbox/Checkbox';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
-import { selectCollection } from '../../../entities/Collection';
-import { Checkbox } from '../../../shared/ui/Checkbox/Checkbox';
-import { Textarea } from '../../../shared/ui/Textarea/Textarea';
-import { InputBooleanField, InputField, Item } from '../../../entities/Item';
-import { useParams } from 'react-router-dom';
-import { localStorageKeys } from '../../../shared/const/localStorage';
+import { InputBooleanField, InputField } from '../../../../entities/Item';
 
 interface Props {
-    onAddItem?: (data: Omit<Item, 'id'>) => void;
-    onUpdateItem?: (data: Item) => void;
-    onCloseModal: () => void;
+    name: string;
+    setName: (value: string) => void;
+    tags: string;
+    setTags: (value: string) => void;
+    stringFields: InputField[];
+    setStringFields: (value: InputField[]) => void;
+    textareaFields: InputField[];
+    setTextareaFields: (value: InputField[]) => void;
+    checkboxFields: InputBooleanField[];
+    setCheckboxFields: (value: InputBooleanField[]) => void;
+    dateFields: InputField[];
+    setDateFields: (value: InputField[]) => void;
+    numberFields: InputField[];
+    setNumberFields: (value: InputField[]) => void;
+    action: string;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
+export const ItemForm = (props: Props) => {
+    const {
+        handleSubmit, name, setName, action, tags, setTags,
+        setNumberFields, numberFields, setCheckboxFields, setStringFields,
+        dateFields, setTextareaFields, stringFields, textareaFields, setDateFields, checkboxFields
+    } = props;
+
     const { t } = useTranslation();
-    const { id } = useParams();
-    const userId = localStorage.getItem(localStorageKeys.USER_ID);
-    const collection = useSelector(selectCollection);
-    const [name, setName] = useState<string>('');
-    const [tags, setTags] = useState<string>('');
-
-    const [stringFields, setStringFields] = useState<InputField[]>([]);
-    const [textareaFields, setTextareaFields] = useState<InputField[]>([]);
-    const [checkboxFields, setCheckboxFields] = useState<InputBooleanField[]>([]);
-    const [dateFields, setDateFields] = useState<InputField[]>([]);
-    const [numberFields, setNumberFields] = useState<InputField[]>([]);
-
-    useEffect(() => {
-        if (collection) {
-            collection.stringFields?.map((field, index) => {
-                const newFields = [...stringFields];
-                newFields[index] = { name: field, value: '' };
-                setStringFields(newFields);
-            });
-
-            collection.textareaFields?.map((field, index) => {
-                const newFields = [...textareaFields];
-                newFields[index] = { name: field, value: '' };
-                setTextareaFields(newFields);
-            });
-
-            collection.checkboxFields?.map((field, index) => {
-                const newFields = [...checkboxFields];
-                newFields[index] = { name: field, value: false };
-                setCheckboxFields(newFields);
-            });
-
-            collection.dateFields?.map((field, index) => {
-                const newFields = [...dateFields];
-                newFields[index] = { name: field, value: '' };
-                setDateFields(newFields);
-            });
-
-            collection.numberFields?.map((field, index) => {
-                const newFields = [...dateFields];
-                newFields[index] = { name: field, value: '' };
-                setNumberFields(newFields);
-            });
-        }
-    }, [collection]);
 
     const handleStringFields = useCallback((value: string, index: number) => {
         const newFields = [...stringFields];
@@ -94,25 +64,6 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
         setNumberFields(newFields);
     }, [numberFields, setNumberFields]);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (id && userId && onAddItem) {
-            const data: Omit<Item, 'id'> = {
-                name,
-                tags,
-                collectionId: Number(id),
-                userId: Number(userId),
-                stringFields,
-                textareaFields,
-                checkboxFields,
-                dateFields,
-                numberFields
-            };
-            onAddItem(data);
-        }
-        onCloseModal();
-    };
-
     return (
         <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
@@ -134,7 +85,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
             {textareaFields && textareaFields.map((field, index) => (
                 <Form.Group className="mb-3" key={field.name}>
                     <Textarea value={field.value} label={field.name}
-                           setValue={(value) => handleTextareaFields(value, index)}
+                              setValue={(value) => handleTextareaFields(value, index)}
                     />
                 </Form.Group>)
             )}
@@ -163,7 +114,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
             )}
 
             <Button variant="primary" type="submit">
-                Submit
+                {action}
             </Button>
         </Form>
     );
