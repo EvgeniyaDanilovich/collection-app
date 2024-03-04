@@ -23,5 +23,7 @@
   "Enter comment text": "Enter comment text",
   "Submit": "Submit",
   "No comments": "No comments",
-  "Page not found": "Page not found"
+  "Page not found": "Page not found",
+  "An unexpected error occurred": "An unexpected error occurred",
+  "Refresh the page": "Refresh the page"
 }
