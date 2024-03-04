@@ -86,11 +86,56 @@
       ],
       "numberFields": [],
       "id": 4
+    },
+    {
+      "userId": 1,
+      "name": "Old coins new",
+      "description": "Old coins description",
+      "category": "Coins",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [
+        "year"
+      ],
+      "numberFields": [],
+      "id": 5
+    },
+    {
+      "userId": 4,
+      "name": "Marks",
+      "description": "Marks description",
+      "category": "Marks",
+      "imgUrl": "",
+      "stringFields": [
+        "Country"
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        "Super old"
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 6
+    },
+    {
+      "userId": 1,
+      "name": "Many marks",
+      "description": "# A demo of `react-markdown`\n\n`react-markdown` is a markdown component for React.\n* Follows\n* Optionally follows",
+      "category": "Marks",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 7
     }
   ],
   "items": [
     {
-      "name": "Book 1",
+      "name": "Book 12",
       "tags": "retro",
       "collectionId": 1,
       "userId": 1,
@@ -101,7 +146,12 @@
         }
       ],
       "textareaFields": [],
-      "checkboxFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": true
+        }
+      ],
       "dateFields": [],
       "numberFields": [
         {
@@ -136,6 +186,42 @@
           "value": "30"
         }
       ],
+      "id": 2
+    },
+    {
+      "name": "Mark very new",
+      "tags": "super_old_marks",
+      "collectionId": 6,
+      "userId": 1,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": "Egypt"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": true
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "text": "Wonderful collection",
+      "itemId": 1,
+      "userId": 1,
+      "id": 1
+    },
+    {
+      "text": "Second comment",
+      "itemId": 1,
+      "userId": 1,
       "id": 2
     }
   ]

@@ -13,6 +13,7 @@ import { AppDispatch } from './providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../features/AuthByUserName';
 import { ItemPage } from '../pages/ItemPage';
+import { NotFoundPage } from '../pages/NotFoundPage';
 
 function App() {
     const dispatch: AppDispatch = useDispatch();
@@ -37,6 +38,7 @@ function App() {
                     <Route path="/profile/:id" element={<ProfilePage />} />
                     <Route path="/collection/:id" element={<CollectionPage />} />
                     <Route path="/item/:id" element={<ItemPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Routes>
             </Suspense>
         </div>

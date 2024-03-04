@@ -4,6 +4,9 @@ import { selectCollection } from '../../model/selectors/collectionSelectors';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { fetchCollectionById } from '../../model/services/fetchCollectionById';
 import { useParams } from 'react-router-dom';
+import Markdown from 'react-markdown';
+import gfm from 'remark-gfm';
+import ReactMarkdown from 'react-markdown';
 
 interface Props {
     collectionId: string;
@@ -23,6 +26,11 @@ export const CollectionCard = () => {
     return (
         <div>
             <div>{collection?.name}</div>
+            <div>
+                {collection?.description &&
+                    <ReactMarkdown>{collection?.description}</ReactMarkdown>
+                }
+            </div>
         </div>
     );
 };

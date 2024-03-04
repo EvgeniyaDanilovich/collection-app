@@ -32,7 +32,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
             <tr>
                 <th>Name</th>
                 <th>Category</th>
-                <th>Description</th>
+                {/* <th>Description</th> */}
                 <th></th>
                 <th></th>
             </tr>
@@ -42,7 +42,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
                 <tr key={collection.id} onClick={() => redirectToCollection(collection.id)}>
                     <td>{collection.name}</td>
                     <td>{collection.category}</td>
-                    <td>{collection.description}</td>
+                    {/* <td>{collection.description}</td> */}
                     <td onClick={(e)=> handleEdit(e, collection.id)}>edit</td>
                     <td onClick={(e) => handleDelete(e, collection.id)}>delete</td>
                 </tr>

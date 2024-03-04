@@ -1,19 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
-import { Item } from '../../../../entities/Item';
+import { Comment } from '../../../../entities/Comment';
 
-export const createItem = createAsyncThunk<Item, Omit<Item, 'id'>, ThunkConfig<string>>(
-    'collectionPage/createItem',
-    async (item, thunkAPI) => {
+export const fetchComments = createAsyncThunk<Comment[], string, ThunkConfig<string>>(
+    'itemPage/fetchComments',
+    async (itemId, thunkAPI) => {
         try {
-            const response = await fetch(`${baseUrl}items`, {
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                method: 'POST',
-                body: JSON.stringify(item),
-            });
+            const response = await fetch(   `${baseUrl}comments?itemId=${itemId}`);
 
             if (!response.ok) {
                 throw new Error();
