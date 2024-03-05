@@ -1,18 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
-import { Item } from '../../../../entities/Item';
+import { Item, Like } from '../type/item';
 
-export const updateItem = createAsyncThunk<Item, Omit<Item, 'like'>, ThunkConfig<string>>(
-    'collectionPage/updateItem',
-    async (item, thunkAPI) => {
+interface Props {
+    id: number;
+    like: Like;
+}
+
+export const addLike = createAsyncThunk<Item, Props, ThunkConfig<string>>(
+    'item/addLike',
+    async (data, thunkAPI) => {
         try {
-            const response = await fetch(`${baseUrl}items/${item.id}`, {
+            const response = await fetch(`${baseUrl}items/${data.id}`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'PATCH',
-                body: JSON.stringify(item),
+                body: JSON.stringify({ like: data.like }),
             });
 
             if (!response.ok) {

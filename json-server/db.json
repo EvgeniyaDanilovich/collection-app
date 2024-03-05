@@ -217,6 +217,35 @@
       "dateFields": [],
       "numberFields": [],
       "id": 3
+    },
+    {
+      "name": "Fantasy",
+      "tags": "fantasy_books",
+      "collectionId": 1,
+      "userId": 1,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": "Gt. Ghop"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": "2015"
+        }
+      ],
+      "like": {
+        "count": 2,
+        "usersId": [
+          1,
+          5
+        ]
+      },
+      "id": 4
     }
   ],
   "comments": [

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchItemById } from '../services/fetchItemById';
 import { Item, ItemSchema } from '../type/item';
+import { addLike } from '../services/addLike';
 
 export const initialState: ItemSchema = {
     item: null,
@@ -27,6 +28,16 @@ const itemSlice = createSlice({
         });
         builder.addCase(fetchItemById.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false;
+            state.error = action.payload;
+        });
+
+        builder.addCase(addLike.pending, (state) => {
+            state.error = undefined;
+        });
+        builder.addCase(addLike.fulfilled, (state, action: PayloadAction<Item>) => {
+            state.item = action.payload;
+        });
+        builder.addCase(addLike.rejected, (state, action: PayloadAction<any>) => {
             state.error = action.payload;
         });
     },

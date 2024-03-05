@@ -39,7 +39,6 @@ const ItemPage = () => {
     return (
         <div>
             <ItemInfo />
-            <Loader />
             <div>Comments</div>
             <AddCommentForm onSendComment={handleSendComment} />
             <CommentList comments={comments} isLoading={isLoading} />

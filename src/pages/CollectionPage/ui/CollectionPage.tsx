@@ -29,11 +29,11 @@ const CollectionPage = () => {
         }
     }, []);
 
-    const handleCreateItem = useCallback((data: Omit<Item, 'id'>) => {
+    const handleCreateItem = useCallback((data: Omit<Item, 'id' | 'like'>) => {
         dispatch(createItem(data));
     }, [dispatch]);
 
-    const handleUpdateItem = useCallback((data: Item) => {
+    const handleUpdateItem = useCallback((data: Omit<Item, 'like'>) => {
         dispatch(updateItem(data));
     }, [dispatch]);
 

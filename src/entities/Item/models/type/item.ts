@@ -8,12 +8,18 @@ export interface InputBooleanField {
     value: boolean
 }
 
+export interface Like {
+    count: number,
+    usersId: number[]
+}
+
 export interface Item {
     id: number,
     userId: number,
     collectionId: number,
     name: string,
     tags: string,
+    like: Like,
     stringFields: InputField[],
     textareaFields: InputField[],
     checkboxFields: InputBooleanField[],

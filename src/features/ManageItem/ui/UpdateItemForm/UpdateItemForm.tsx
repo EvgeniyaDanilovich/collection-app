@@ -8,7 +8,7 @@ import { selectItem } from '../../../../entities/Item/models/selectors/itemSelec
 import { ItemForm } from '../ItemForm/ItemForm';
 
 interface Props {
-    onUpdateItem: (data: Item) => void;
+    onUpdateItem: (data: Omit<Item, 'like'>) => void;
     onCloseModal: () => void;
     itemId: number | null;
 }
@@ -73,7 +73,7 @@ export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) =>
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (id && userId && itemId && onUpdateItem) {
-            const data: Item = {
+            const data: Omit<Item, 'like'> = {
                 id: itemId,
                 name,
                 tags,
