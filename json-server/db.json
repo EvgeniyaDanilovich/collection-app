@@ -139,6 +139,21 @@
       "dateFields": [],
       "numberFields": [],
       "id": 7
+    },
+    {
+      "userId": 2,
+      "name": "Coins red",
+      "description": "Coins red description",
+      "category": "Coins",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [
+        "Available"
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 8
     }
   ],
   "items": [
@@ -246,6 +261,80 @@
         ]
       },
       "id": 4
+    },
+    {
+      "name": "Root",
+      "tags": "date cherry",
+      "collectionId": 8,
+      "userId": 5,
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Available",
+          "value": true
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "id": 5
+    },
+    {
+      "name": "Cherry",
+      "tags": [
+        "cherry",
+        "banana",
+        "fsss"
+      ],
+      "collectionId": 8,
+      "userId": 5,
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Available",
+          "value": true
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "id": 6
+    },
+    {
+      "name": "Science",
+      "tags": [
+        "science_fiction"
+      ],
+      "collectionId": 1,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": "Dv. Hypo"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": "1867"
+        }
+      ],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "id": 7
     }
   ],
   "comments": [

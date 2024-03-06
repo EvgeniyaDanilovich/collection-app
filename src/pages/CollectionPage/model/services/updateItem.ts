@@ -1,9 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
-import { Item } from '../../../../entities/Item';
+import { Item, PartialItem } from '../../../../entities/Item';
 
-export const updateItem = createAsyncThunk<Item, Omit<Item, 'like'>, ThunkConfig<string>>(
+export const updateItem = createAsyncThunk<Item, PartialItem, ThunkConfig<string>>(
     'collectionPage/updateItem',
     async (item, thunkAPI) => {
         try {

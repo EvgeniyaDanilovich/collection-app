@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItemById, InputBooleanField, InputField, Item } from '../../../../entities/Item';
+import { fetchItemById, InputBooleanField, InputField, Item, PartialItem } from '../../../../entities/Item';
 import { useParams } from 'react-router-dom';
 import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
@@ -8,7 +8,7 @@ import { selectItem } from '../../../../entities/Item/models/selectors/itemSelec
 import { ItemForm } from '../ItemForm/ItemForm';
 
 interface Props {
-    onUpdateItem: (data: Omit<Item, 'like'>) => void;
+    onUpdateItem: (data: PartialItem) => void;
     onCloseModal: () => void;
     itemId: number | null;
 }
@@ -19,7 +19,8 @@ export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) =>
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const item = useSelector(selectItem);
     const [name, setName] = useState<string>('');
-    const [tags, setTags] = useState<string>('');
+    const [tags, setTags] = useState<string[]>([]);
+    const [tagsInput, setTagsInput] = useState<string>('');
 
     const [stringFields, setStringFields] = useState<InputField[]>([]);
     const [textareaFields, setTextareaFields] = useState<InputField[]>([]);
@@ -93,7 +94,7 @@ export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) =>
     return (
         <ItemForm
             name={name} setName={setName} tags={tags} setTags={setTags} stringFields={stringFields}
-            setStringFields={setStringFields} textareaFields={textareaFields}
+            setStringFields={setStringFields} textareaFields={textareaFields} tagsInput={tagsInput} setTagsInput={setTagsInput}
             setTextareaFields={setTextareaFields} checkboxFields={checkboxFields}
             setCheckboxFields={setCheckboxFields} dateFields={dateFields} setDateFields={setDateFields}
             numberFields={numberFields} setNumberFields={setNumberFields} action={'Update'}

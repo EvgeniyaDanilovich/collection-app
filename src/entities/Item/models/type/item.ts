@@ -18,7 +18,7 @@ export interface Item {
     userId: number,
     collectionId: number,
     name: string,
-    tags: string,
+    tags: string[],
     like: Like,
     stringFields: InputField[],
     textareaFields: InputField[],
@@ -26,6 +26,8 @@ export interface Item {
     dateFields: InputField[],
     numberFields: InputField[],
 }
+
+export type PartialItem = {id: number} & Partial<Omit<Item, 'id'>>
 
 export interface ItemSchema {
     item: Item | null;

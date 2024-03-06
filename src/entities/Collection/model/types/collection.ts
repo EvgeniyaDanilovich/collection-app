@@ -1,7 +1,9 @@
 export enum CollectionCategories {
     COINS= 'Coins',
     BOOKS = 'Books',
-    MARKS = 'Marks'
+    STAMPS = 'Stamps',
+    POSTCARDS = 'Postcards',
+    DOLLS = 'Dolls'
 }
 
 export interface Collection {

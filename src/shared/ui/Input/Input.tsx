@@ -1,8 +1,10 @@
-import { ChangeEvent, memo } from 'react';
+import { ChangeEvent, InputHTMLAttributes, memo } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useTranslation } from 'react-i18next';
+import { FormControlProps } from 'react-bootstrap';
 
-interface Props {
+type HTMLInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, 'value' | 'onChange'>
+interface Props extends HTMLInputProps {
     value: string;
     label?: string;
     setValue: (value: string) => void;
@@ -12,7 +14,7 @@ interface Props {
 
 export const Input = memo((props: Props) => {
     const { t } = useTranslation();
-    const { value, label, setValue, type = 'text', placeholder = t('Enter text') } = props;
+    const { value, label, setValue, type = 'text', placeholder = t('Enter text'), ...otherProps } = props;
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -20,16 +22,12 @@ export const Input = memo((props: Props) => {
 
     return (
         <>
-            <Form.Label>{label}</Form.Label>
+            {label && <Form.Label>{label}</Form.Label>}
             <Form.Control
                 placeholder={placeholder}
                 onChange={onChangeHandler} value={value} type={type}
+                {...otherProps as FormControlProps}
             />
         </>
     );
 });
-
-// <label className="form-label">{label}<br/>
-//     <input className={'form-control'}
-//            onChange={onChangeHandler} type="text" placeholder="Type here" value={value} />
-// </label>

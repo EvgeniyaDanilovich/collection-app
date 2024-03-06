@@ -5,12 +5,15 @@ import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
 import { Checkbox } from '../../../../shared/ui/Checkbox/Checkbox';
 import { useTranslation } from 'react-i18next';
 import { InputBooleanField, InputField } from '../../../../entities/Item';
+import { TagInput } from '../TagInput/TagInput';
 
 interface Props {
     name: string;
     setName: (value: string) => void;
-    tags: string;
-    setTags: (value: string) => void;
+    tagsInput: string;
+    setTagsInput: (value: string) => void;
+    tags: string[];
+    setTags: (value: string[]) => void;
     stringFields: InputField[];
     setStringFields: (value: InputField[]) => void;
     textareaFields: InputField[];
@@ -27,7 +30,7 @@ interface Props {
 
 export const ItemForm = (props: Props) => {
     const {
-        handleSubmit, name, setName, action, tags, setTags,
+        handleSubmit, name, setName, action, tagsInput, setTagsInput, setTags, tags,
         setNumberFields, numberFields, setCheckboxFields, setStringFields,
         dateFields, setTextareaFields, stringFields, textareaFields, setDateFields, checkboxFields
     } = props;
@@ -70,9 +73,7 @@ export const ItemForm = (props: Props) => {
                 <Input value={name} label={t('Item name')} setValue={setName} />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-                <Input value={tags} label={t('Tags')} setValue={setTags} />
-            </Form.Group>
+            <TagInput tagsInput={tagsInput} setTagsInput={setTagsInput} setTags={setTags} tags={tags} />
 
             {stringFields && stringFields.map((field, index) => (
                 <Form.Group className="mb-3" key={field.name}>

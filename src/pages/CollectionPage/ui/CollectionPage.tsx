@@ -7,7 +7,7 @@ import { Button } from 'react-bootstrap';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { createItem } from '../model/services/createItem';
-import { Item, ItemsTable } from '../../../entities/Item';
+import { Item, ItemsTable, PartialItem } from '../../../entities/Item';
 import { fetchItems } from '../model/services/fetchItems';
 import { selectItems } from '../model/selectors/collectionPageSelectors';
 import { deleteItem } from '../model/services/deleteItem';
@@ -33,7 +33,8 @@ const CollectionPage = () => {
         dispatch(createItem(data));
     }, [dispatch]);
 
-    const handleUpdateItem = useCallback((data: Omit<Item, 'like'>) => {
+    const handleUpdateItem = useCallback((data: PartialItem) => {
+        // Omit<Item, 'like'>
         dispatch(updateItem(data));
     }, [dispatch]);
 

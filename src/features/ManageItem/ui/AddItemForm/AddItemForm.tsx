@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCollection } from '../../../../entities/Collection';
-import { InputBooleanField, InputField, Item } from '../../../../entities/Item';
+import { InputBooleanField, InputField, Item, PartialItem } from '../../../../entities/Item';
 import { useParams } from 'react-router-dom';
 import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ItemForm } from '../ItemForm/ItemForm';
@@ -16,7 +16,8 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const collection = useSelector(selectCollection);
     const [name, setName] = useState<string>('');
-    const [tags, setTags] = useState<string>('');
+    const [tags, setTags] = useState<string[]>([]);
+    const [tagsInput, setTagsInput] = useState<string>('');
 
     const [stringFields, setStringFields] = useState<InputField[]>([]);
     const [textareaFields, setTextareaFields] = useState<InputField[]>([]);
@@ -79,8 +80,8 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
 
     return (
        <ItemForm
-           name={name} setName={setName} tags={tags} setTags={setTags} stringFields={stringFields}
-           setStringFields={setStringFields} textareaFields={textareaFields}
+           name={name} setName={setName} tagsInput={tagsInput} setTagsInput={setTagsInput} setTags={setTags} tags={tags}
+           stringFields={stringFields} setStringFields={setStringFields} textareaFields={textareaFields}
            setTextareaFields={setTextareaFields} checkboxFields={checkboxFields}
            setCheckboxFields={setCheckboxFields} dateFields={dateFields} setDateFields={setDateFields}
            numberFields={numberFields} setNumberFields={setNumberFields} action={'Create'}
