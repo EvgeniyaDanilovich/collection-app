@@ -29,5 +29,12 @@
   "No collections found": "No collections found",
   "No items found": "No items found",
   "Collections": "Collections",
-  "My profile": "My profile"
+  "My profile": "My profile",
+  "creation date": "creation date",
+  "name": "name",
+  "likes": "likes",
+  "increasing": "increasing",
+  "descending": "descending",
+  "Sort by": "Sort by",
+  "not selected": "not selected"
 }

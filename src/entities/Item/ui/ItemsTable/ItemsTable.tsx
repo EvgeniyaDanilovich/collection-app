@@ -37,6 +37,8 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                 <tr>
                     <th>Name</th>
                     <th>Tags</th>
+                    <th>Likes</th>
+                    <th>Created</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -46,6 +48,8 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                         <tr key={item.id} onClick={() => redirectToItem(item.id)}>
                             <td>{item.name}</td>
                             <td>{item.tags}</td>
+                            <td>{item.like.count}</td>
+                            <td>{item.createdDate}</td>
                             <td onClick={(e) => handleEdit(e, item.id)}>edit</td>
                             <td onClick={(e) => handleDelete(e, item.id)}>delete</td>
                         </tr>

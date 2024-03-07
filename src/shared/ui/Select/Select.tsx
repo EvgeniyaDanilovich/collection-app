@@ -1,20 +1,19 @@
 import React, { ChangeEvent, memo, useMemo } from 'react';
 import { Form } from 'react-bootstrap';
-import { CollectionCategories } from '../../../entities/Collection';
 
-export interface SelectOption {
-    value: string,
+export interface SelectOption<T extends string> {
+    value: T,
     content: string,
 }
 
-interface SelectProps<T = any> {
+interface SelectProps<T extends string> {
     label?: string;
-    options?: SelectOption[];
+    options?: SelectOption<T>[];
     value?: T;
     onChange?: (value: T) => void;
 }
 
-export const Select = memo((props: SelectProps) => {
+export const Select = memo(<T extends string>(props: SelectProps<T>) => {
     const { options, label, value, onChange } = props;
 
     const optionsList = useMemo(() => {
@@ -24,7 +23,7 @@ export const Select = memo((props: SelectProps) => {
     }, [options]);
 
     const onChangeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-        onChange?.(e.target.value);
+        onChange?.(e.target.value as T);
     };
 
     return (

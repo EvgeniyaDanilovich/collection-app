@@ -159,7 +159,9 @@
   "items": [
     {
       "name": "Book 12",
-      "tags": "retro",
+      "tags": [
+        "retro"
+      ],
       "collectionId": 1,
       "userId": 1,
       "stringFields": [
@@ -182,10 +184,17 @@
           "value": "1951"
         }
       ],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "06.03.2019 15:19:24",
       "id": 1
     },
     {
-      "name": "For kids",
+      "name": [
+        "For kids"
+      ],
       "tags": "books_for_kids",
       "collectionId": 2,
       "userId": 1,
@@ -209,11 +218,18 @@
           "value": "30"
         }
       ],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "21.09.2020 15:19:24",
       "id": 2
     },
     {
       "name": "Mark very new",
-      "tags": "super_old_marks",
+      "tags": [
+        "super_old_marks"
+      ],
       "collectionId": 6,
       "userId": 1,
       "stringFields": [
@@ -231,11 +247,18 @@
       ],
       "dateFields": [],
       "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "06.03.2024 20:10:12",
       "id": 3
     },
     {
       "name": "Fantasy",
-      "tags": "fantasy_books",
+      "tags": [
+        "fantasy_books"
+      ],
       "collectionId": 1,
       "userId": 1,
       "stringFields": [
@@ -260,11 +283,14 @@
           5
         ]
       },
+      "createdDate": "06.08.2021 10:19:24",
       "id": 4
     },
     {
       "name": "Root",
-      "tags": "date cherry",
+      "tags": [
+        "date cherry"
+      ],
       "collectionId": 8,
       "userId": 5,
       "stringFields": [],
@@ -281,6 +307,7 @@
         "count": 0,
         "usersId": []
       },
+      "createdDate": "01.12.2023 15:19:24",
       "id": 5
     },
     {
@@ -306,6 +333,7 @@
         "count": 0,
         "usersId": []
       },
+      "createdDate": "04.02.2024 15:19:24",
       "id": 6
     },
     {
@@ -331,10 +359,101 @@
         }
       ],
       "like": {
+        "count": 1,
+        "usersId": [
+          5
+        ]
+      },
+      "createdDate": "05.03.2024 15:00:24",
+      "id": 7
+    },
+    {
+      "name": "Italy fashion",
+      "tags": [
+        "books",
+        "fashion"
+      ],
+      "collectionId": 4,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": "Hy. Hiop"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [
+        {
+          "name": "Created",
+          "value": "2023-07-15"
+        }
+      ],
+      "numberFields": [],
+      "like": {
         "count": 0,
         "usersId": []
       },
-      "id": 7
+      "createdDate": "06.03.2024 15:19:24",
+      "id": 8
+    },
+    {
+      "name": "A",
+      "tags": [
+        "retro"
+      ],
+      "collectionId": 1,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": ""
+        }
+      ],
+      "like": {
+        "count": 1,
+        "usersId": [
+          5
+        ]
+      },
+      "createdDate": "06.03.2024 17:18:52",
+      "id": 9
+    },
+    {
+      "name": "Z",
+      "tags": [],
+      "collectionId": 1,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": ""
+        }
+      ],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "06.03.2024 17:18:59",
+      "id": 10
     }
   ],
   "comments": [

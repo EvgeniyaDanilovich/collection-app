@@ -20,6 +20,7 @@ export interface Item {
     name: string,
     tags: string[],
     like: Like,
+    createdDate: string,
     stringFields: InputField[],
     textareaFields: InputField[],
     checkboxFields: InputBooleanField[],

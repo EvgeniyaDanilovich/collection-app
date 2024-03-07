@@ -108,7 +108,8 @@ export const FormCollection = (props: Props) => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-                <Select value={category} onChange={setCategory} label={t('Collection category')} options={options} />
+                <Select value={category} onChange={(value: string) => setCategory(value as CollectionCategories)}
+                        label={t('Collection category')} options={options} />
             </Form.Group>
 
             <div onClick={addStringField}>Add extra string fields for your item</div>

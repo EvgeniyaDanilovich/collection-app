@@ -3,11 +3,10 @@ import { createItem } from '../services/createItem';
 import { Item } from '../../../../entities/Item';
 import { CollectionPageSchema } from '../types/collectionPageSchema';
 import { fetchItems } from '../services/fetchItems';
-import { updateCollection } from '../../../ProfilePage/model/services/updateCollection';
-import { Collection } from '../../../../entities/Collection';
 import { updateItem } from '../services/updateItem';
 
 const initialState: CollectionPageSchema = {
+    tags: [],
     items: [],
     isLoading: false,
     error: undefined
@@ -31,6 +30,16 @@ export const collectionPageSlice = createSlice({
         });
         builder.addCase(fetchItems.fulfilled, (state, action: PayloadAction<Item[]>) => {
             state.items = action.payload;
+            if (!state.tags.length) {
+                action.payload.map(item => {
+                    item.tags.forEach(tag => {
+                        if (!state.tags.includes(tag)) {
+                            state.tags = [...state.tags, tag];
+                        }
+                    });
+                });
+                console.log(state.tags);
+            }
             state.isLoading = false;
         });
         builder.addCase(fetchItems.rejected, (state, action: PayloadAction<any>) => {

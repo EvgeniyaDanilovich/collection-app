@@ -7,7 +7,7 @@ import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ItemForm } from '../ItemForm/ItemForm';
 
 interface Props {
-    onAddItem: (data: Omit<Item, 'id' | 'like'>) => void;
+    onAddItem: (data: Omit<Item, 'id' | 'like' | 'createdDate'>) => void;
     onCloseModal: () => void;
 }
 
@@ -62,7 +62,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (id && userId && onAddItem) {
-            const data: Omit<Item, 'id' | 'like'> = {
+            const data: Omit<Item, 'id' | 'like' | 'createdDate'> = {
                 name,
                 tags,
                 collectionId: Number(id),
