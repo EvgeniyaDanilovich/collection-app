@@ -54,19 +54,18 @@ const CollectionPage = () => {
         setCurrentItemId(itemId);
     }, []);
 
-    const handleFilterByTag = useCallback((tag: string) => {
-        if (id) {
-            dispatch(fetchItems({ id, tag }));
-        }
-    }, []);
+    // const handleFilterByTag = useCallback((tag: string) => {
+    //     if (id) {
+    //         dispatch(fetchItems({ id, tag }));
+    //     }
+    // }, []);
 
     return (
         <div>
-            <CollectionCard />
-            <div>All items in collection</div>
-            <Button onClick={() => setModal(true)}>{t('Create new item')}</Button>
+            <CollectionCard openModal={()=> setModal(true)} />
 
             <ItemSortBar onSort={handleSort} tags={tags} />
+            {/* <div>All items in collection</div> */}
             <ItemsTable items={items} onDeleteItem={handleDeleteItem} onEdit={handleEdit} />
 
             <ModalComponent title={t('Create new item')} status={modal} onClose={() => setModal(false)}>

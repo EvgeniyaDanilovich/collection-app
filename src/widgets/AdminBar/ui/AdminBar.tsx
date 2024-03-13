@@ -22,6 +22,7 @@ export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
     const logoutUser = () => {
         dispatch(authActions.setIsAuth(false));
         localStorage.removeItem(`${localStorageKeys.USER_ID}`);
+        localStorage.removeItem(`${localStorageKeys.ADMIN}`);
         navigate(`${RoutePath.login}`);
     };
 

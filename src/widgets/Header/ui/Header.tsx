@@ -19,6 +19,7 @@ export const Header = () => {
     const logoutUser = () => {
         dispatch(authActions.setIsAuth(false));
         localStorage.removeItem(`${localStorageKeys.USER_ID}`);
+        localStorage.removeItem(`${localStorageKeys.ADMIN}`);
         navigate(`${RoutePath.login}`);
     };
 
@@ -38,6 +39,7 @@ export const Header = () => {
 
             <NavLink to={`${RoutePath.main}`}>{t('Main page')}</NavLink>
             <NavLink to={`${RoutePath.collections}`}>{t('Collections')}</NavLink>
+            <NavLink to={`${RoutePath.search}`}>{t('Search')}</NavLink>
             {isAdmin && <NavLink to={`${RoutePath.admin}`}>{t('Admin page')}</NavLink>}
         </header>
     );

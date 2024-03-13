@@ -1,36 +1,25 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
-import { Item } from '../../../../entities/Item';
+import { Comment } from '../../../../entities/Comment';
 
-interface Props {
-    id: string;
-    sort?: string;
-    order?: string;
-    q?: string;
-    tag?: string
-}
-
-export const fetchItems = createAsyncThunk<Item[], Props, ThunkConfig<string>>(
-    'collectionPage/fetchItems',
-    async (data, thunkAPI) => {
-        const { id: collectionId, sort, order, q, tag } = data;
+export const searchByComments = createAsyncThunk<Comment[], string, ThunkConfig<string>>(
+    'searchPage/searchByComments',
+    async (q, thunkAPI) => {
 
         const queryParams = new URLSearchParams({
-            collectionId,
-            ...(sort && { _sort: sort }),
-            ...(order && { _order: order }),
             ...(q && { q }),
-            ...(tag && { tags: tag }),
+            _expand: 'item'
         }).toString();
 
         try {
-            const response = await fetch(`${baseUrl}items?${queryParams}`);
+            const response = await fetch(`${baseUrl}comments?${queryParams}`);
 
             if (!response.ok) {
                 throw new Error();
             } else {
                 const newData = await response.json();
+                console.log(newData);
                 return newData;
             }
         } catch (e) {

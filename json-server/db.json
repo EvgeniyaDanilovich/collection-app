@@ -37,7 +37,7 @@
       "email": "Kate@gmail.com",
       "password": "123",
       "status": "Active",
-      "admin": false,
+      "admin": true,
       "id": 5
     }
   ],
@@ -154,6 +154,21 @@
       "dateFields": [],
       "numberFields": [],
       "id": 8
+    },
+    {
+      "userId": 5,
+      "name": "Trt coins",
+      "description": "Trt coins description",
+      "category": "Coins",
+      "imgUrl": "https://www.marketplace.org/wp-content/uploads/2022/01/us-coins.jpg?fit=2800%2C1866&w=1200",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        "Count"
+      ],
+      "id": 9
     }
   ],
   "items": [
@@ -192,10 +207,10 @@
       "id": 1
     },
     {
-      "name": [
-        "For kids"
+      "name": "For kids",
+      "tags": [
+        "books_for_kids"
       ],
-      "tags": "books_for_kids",
       "collectionId": 2,
       "userId": 1,
       "stringFields": [
@@ -337,37 +352,6 @@
       "id": 6
     },
     {
-      "name": "Science",
-      "tags": [
-        "science_fiction"
-      ],
-      "collectionId": 1,
-      "userId": 5,
-      "stringFields": [
-        {
-          "name": "Author",
-          "value": "Dv. Hypo"
-        }
-      ],
-      "textareaFields": [],
-      "checkboxFields": [],
-      "dateFields": [],
-      "numberFields": [
-        {
-          "name": "year",
-          "value": "1867"
-        }
-      ],
-      "like": {
-        "count": 1,
-        "usersId": [
-          5
-        ]
-      },
-      "createdDate": "05.03.2024 15:00:24",
-      "id": 7
-    },
-    {
       "name": "Italy fashion",
       "tags": [
         "books",
@@ -398,25 +382,216 @@
       "id": 8
     },
     {
-      "name": "A",
-      "tags": [
-        "retro"
+      "name": "Stamps 1",
+      "tags": [],
+      "collectionId": 6,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": ""
+        }
       ],
-      "collectionId": 1,
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "08.03.2024 14:00:49",
+      "id": 11
+    },
+    {
+      "name": "Stamps 2",
+      "tags": [],
+      "collectionId": 6,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 2,
+        "usersId": [
+          5,
+          2
+        ]
+      },
+      "createdDate": "08.03.2024 14:00:55",
+      "id": 12
+    },
+    {
+      "name": "Stamps 3",
+      "tags": [],
+      "collectionId": 6,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "08.03.2024 14:01:00",
+      "id": 13
+    },
+    {
+      "name": "Stamps 4",
+      "tags": [],
+      "collectionId": 6,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "08.03.2024 14:01:05",
+      "id": 14
+    },
+    {
+      "name": "Stamps 5",
+      "tags": [],
+      "collectionId": 6,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 1,
+        "usersId": [
+          2
+        ]
+      },
+      "createdDate": "08.03.2024 14:01:11",
+      "id": 15
+    },
+    {
+      "name": "Stamps 6",
+      "tags": [],
+      "collectionId": 6,
+      "userId": 5,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "08.03.2024 14:01:17",
+      "id": 16
+    },
+    {
+      "name": "Old fashion",
+      "tags": [
+        "books"
+      ],
+      "collectionId": 4,
       "userId": 5,
       "stringFields": [
         {
           "name": "Author",
-          "value": ""
+          "value": "Rt. Gytu"
         }
       ],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [
+        {
+          "name": "Created",
+          "value": "2018-06-07"
+        }
+      ],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "08.03.2024 15:24:02",
+      "id": 17
+    },
+    {
+      "name": "Coin trt 1",
+      "tags": [
+        "coins"
+      ],
+      "collectionId": 9,
+      "userId": 5,
+      "stringFields": [],
       "textareaFields": [],
       "checkboxFields": [],
       "dateFields": [],
       "numberFields": [
         {
-          "name": "year",
-          "value": ""
+          "name": "Count",
+          "value": "2"
         }
       ],
       "like": {
@@ -425,35 +600,32 @@
           5
         ]
       },
-      "createdDate": "06.03.2024 17:18:52",
-      "id": 9
+      "createdDate": "13.03.2024 17:00:07",
+      "id": 18
     },
     {
-      "name": "Z",
-      "tags": [],
-      "collectionId": 1,
-      "userId": 5,
-      "stringFields": [
-        {
-          "name": "Author",
-          "value": ""
-        }
+      "name": "Coin trt 2",
+      "tags": [
+        "coins"
       ],
+      "collectionId": 9,
+      "userId": 5,
+      "stringFields": [],
       "textareaFields": [],
       "checkboxFields": [],
       "dateFields": [],
       "numberFields": [
         {
-          "name": "year",
-          "value": ""
+          "name": "Count",
+          "value": "3"
         }
       ],
       "like": {
         "count": 0,
         "usersId": []
       },
-      "createdDate": "06.03.2024 17:18:59",
-      "id": 10
+      "createdDate": "13.03.2024 17:00:31",
+      "id": 19
     }
   ],
   "comments": [
@@ -468,6 +640,12 @@
       "itemId": 1,
       "userId": 1,
       "id": 2
+    },
+    {
+      "text": "ask",
+      "itemId": 4,
+      "userId": 5,
+      "id": 3
     }
   ]
 }

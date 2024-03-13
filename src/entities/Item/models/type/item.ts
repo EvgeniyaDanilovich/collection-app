@@ -1,3 +1,6 @@
+import { Collection } from '../../../Collection';
+import { User } from '../../../User';
+
 export interface InputField {
     name: string,
     value: string
@@ -29,6 +32,11 @@ export interface Item {
 }
 
 export type PartialItem = {id: number} & Partial<Omit<Item, 'id'>>
+
+export type ItemWithDetails = Item & {
+    collection: Collection,
+    user: User
+}
 
 export interface ItemSchema {
     item: Item | null;

@@ -38,7 +38,6 @@ export const collectionPageSlice = createSlice({
                         }
                     });
                 });
-                console.log(state.tags);
             }
             state.isLoading = false;
         });

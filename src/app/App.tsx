@@ -18,7 +18,7 @@ function App() {
         const lang = localStorage.getItem(`${localStorageKeys.LANG}`);
 
         isAuth && dispatch(authActions.setIsAuth(true));
-        isAdmin && dispatch(authActions.setIsAdmin(Boolean(isAdmin)));
+        isAdmin && dispatch(authActions.setIsAdmin(isAdmin !== 'false'));
 
         if (lang) {
             i18n.changeLanguage(lang);

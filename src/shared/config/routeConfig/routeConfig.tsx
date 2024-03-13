@@ -8,6 +8,7 @@ import { NotFoundPage } from '../../../pages/NotFoundPage';
 import { ItemPage } from '../../../pages/ItemPage';
 import { AdminPage } from '../../../pages/AdminPage';
 import { CollectionsPage } from '../../../pages/CollectionsPage';
+import { SearchPage } from '../../../pages/SearchPage';
 
 export type AppRoutesProps = RouteProps & {
     authOnly?: boolean;
@@ -22,6 +23,7 @@ export enum AppRoutes {
     COLLECTION = 'collection',
     COLLECTIONS = 'collections',
     ITEM = 'item',
+    SEARCH = 'search',
 
     // last
     NOT_FOUND = 'not_found',
@@ -36,6 +38,7 @@ export const RoutePath: Record<AppRoutes, string> = {
     [AppRoutes.COLLECTIONS]: '/collections',
     [AppRoutes.COLLECTION]: '/collection/', // + :id
     [AppRoutes.ITEM]: '/articles/', // + :id
+    [AppRoutes.SEARCH]: '/search',
     // последний
     [AppRoutes.NOT_FOUND]: '*',
 };
@@ -73,6 +76,11 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: `${RoutePath.item}:id`,
         element: <ItemPage />,
     },
+    [AppRoutes.SEARCH]: {
+        path: `${RoutePath.search}`,
+        element: <SearchPage />,
+    },
+
     // last
     [AppRoutes.NOT_FOUND]: {
         path: RoutePath.not_found,

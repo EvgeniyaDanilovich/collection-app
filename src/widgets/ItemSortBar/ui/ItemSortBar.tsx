@@ -3,6 +3,7 @@ import { Select, SelectOption } from '../../../shared/ui/Select/Select';
 import { useTranslation } from 'react-i18next';
 import { SortOrder } from '../../../shared/types/sort';
 import { ItemSortField } from '../../../entities/Item/models/const/itemConsts';
+import { TagsList } from '../../../entities/Tag/ui/TagsList';
 
 interface Props {
     onSort: (sort: string, order: string, tag: string) => void;
@@ -68,9 +69,10 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
             <Select value={order} onChange={handleOnChangeOrder} options={orderOptions} />
             <div>
                 <span onClick={() => handleFilter('')}>#All </span>
-                {tags && tags.map(tag => {
-                    return <span key={tag} onClick={() => handleFilter(tag)}>#{tag} </span>;
-                })}
+                <TagsList tags={tags} handleClick={handleFilter} />
+                {/* {tags && tags.map(tag => { */}
+                {/*     return <span key={tag} onClick={() => handleFilter(tag)}>#{tag} </span>; */}
+                {/* })} */}
             </div>
         </div>
     );

@@ -8,6 +8,8 @@ import { CollectionPageSchema } from '../../../../pages/CollectionPage';
 import { ItemSchema } from '../../../../entities/Item';
 import { ItemPageSchema } from '../../../../pages/ItemPage';
 import { CollectionsPageSchema } from '../../../../pages/CollectionsPage';
+import { SearchPageSchema } from '../../../../pages/SearchPage';
+import { MainPageSchema } from '../../../../pages/MainPage';
 
 export interface StateSchema {
     auth: AuthSchema;
@@ -19,6 +21,8 @@ export interface StateSchema {
     collectionsPage: CollectionsPageSchema;
     item: ItemSchema;
     itemPage: ItemPageSchema;
+    searchPage: SearchPageSchema;
+    mainPage: MainPageSchema;
 }
 
 export interface ThunkConfig<T>{

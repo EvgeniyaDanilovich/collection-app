@@ -3,25 +3,12 @@ import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
 import { Item } from '../../../../entities/Item';
 
-interface Props {
-    id: string;
-    sort?: string;
-    order?: string;
-    q?: string;
-    tag?: string
-}
-
-export const fetchItems = createAsyncThunk<Item[], Props, ThunkConfig<string>>(
-    'collectionPage/fetchItems',
-    async (data, thunkAPI) => {
-        const { id: collectionId, sort, order, q, tag } = data;
+export const searchByItems = createAsyncThunk<Item[], string, ThunkConfig<string>>(
+    'searchPage/searchByItems',
+    async (q, thunkAPI) => {
 
         const queryParams = new URLSearchParams({
-            collectionId,
-            ...(sort && { _sort: sort }),
-            ...(order && { _order: order }),
-            ...(q && { q }),
-            ...(tag && { tags: tag }),
+            ...(q && { q })
         }).toString();
 
         try {
@@ -31,6 +18,7 @@ export const fetchItems = createAsyncThunk<Item[], Props, ThunkConfig<string>>(
                 throw new Error();
             } else {
                 const newData = await response.json();
+                console.log(newData);
                 return newData;
             }
         } catch (e) {

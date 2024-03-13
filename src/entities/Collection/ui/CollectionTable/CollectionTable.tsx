@@ -5,16 +5,22 @@ import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 import { useTranslation } from 'react-i18next';
 import cls from './CollectionTable.module.scss';
+import { useSelector } from 'react-redux';
+import { selectIsAdmin, selectIsAuth } from '../../../../features/AuthByUserName';
+import { localStorageKeys } from '../../../../shared/const/localStorage';
 
 interface Props {
     collections: Collection[];
-    onDeleteCollection: (id: number) => void;
-    onEdit: (id: number) => void;
+    onDeleteCollection?: (id: number) => void;
+    onEdit?: (id: number) => void;
 }
 
 export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }: Props) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const isAdmin = useSelector(selectIsAdmin);
+    const isAuth = useSelector(selectIsAuth);
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     const redirectToCollection = (collectionId: number) => {
         navigate(`${RoutePath.collection}${collectionId}`);
@@ -22,12 +28,16 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
 
     const handleDelete = (e: React.MouseEvent<HTMLTableDataCellElement>, collectionId: number) => {
         e.stopPropagation();
-        onDeleteCollection(collectionId);
+        if (onDeleteCollection) {
+            onDeleteCollection(collectionId);
+        }
     };
 
     const handleEdit = (e: React.MouseEvent<HTMLTableDataCellElement>, collectionId: number) => {
         e.stopPropagation();
-        onEdit(collectionId);
+        if (onEdit) {
+            onEdit(collectionId);
+        }
     };
 
     return (
@@ -36,7 +46,6 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
             <tr>
                 <th>Name</th>
                 <th>Category</th>
-                {/* <th>Description</th> */}
                 <th></th>
                 <th></th>
             </tr>
@@ -46,9 +55,18 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
                     <tr key={collection.id} onClick={() => redirectToCollection(collection.id)}>
                         <td>{collection.name}</td>
                         <td>{collection.category}</td>
-                        {/* <td>{collection.description}</td> */}
-                        <td onClick={(e) => handleEdit(e, collection.id)}>edit</td>
-                        <td onClick={(e) => handleDelete(e, collection.id)}>delete</td>
+                        {isAdmin || isAuth && Number(userId) === collection.userId ? (
+                                <>
+                                    <td onClick={(e) => handleEdit(e, collection.id)}>edit</td>
+                                    <td onClick={(e) => handleDelete(e, collection.id)}>delete</td>
+                                </>
+                            ) :
+                            (
+                                <>
+                                    <td></td>
+                                    <td></td>
+                                </>
+                            )}
                     </tr>
                 ))
                 : (<tr>

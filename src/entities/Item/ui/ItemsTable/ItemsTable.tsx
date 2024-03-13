@@ -5,16 +5,22 @@ import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 import { useTranslation } from 'react-i18next';
 import cls from './ItemsTable.module.scss';
+import { useSelector } from 'react-redux';
+import { selectIsAdmin, selectIsAuth } from '../../../../features/AuthByUserName';
+import { localStorageKeys } from '../../../../shared/const/localStorage';
 
 interface Props {
     items: Item[];
-    onDeleteItem: (id: number) => void;
-    onEdit: (id: number) => void;
+    onDeleteItem?: (id: number) => void;
+    onEdit?: (id: number) => void;
 }
 
 export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
+    const isAdmin = useSelector(selectIsAdmin);
+    const isAuth = useSelector(selectIsAuth);
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     const redirectToItem = (itemId: number) => {
         navigate(`${RoutePath.item}${itemId}`);
@@ -22,12 +28,16 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
 
     const handleDelete = (e: React.MouseEvent<HTMLTableDataCellElement>, itemId: number) => {
         e.stopPropagation();
-        onDeleteItem(itemId);
+        if (onDeleteItem) {
+            onDeleteItem(itemId);
+        }
     };
 
     const handleEdit = (e: React.MouseEvent<HTMLTableDataCellElement>, itemId: number) => {
         e.stopPropagation();
-        onEdit(itemId);
+        if (onEdit) {
+            onEdit(itemId);
+        }
     };
 
     return (
@@ -50,8 +60,17 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                             <td>{item.tags}</td>
                             <td>{item.like.count}</td>
                             <td>{item.createdDate}</td>
-                            <td onClick={(e) => handleEdit(e, item.id)}>edit</td>
-                            <td onClick={(e) => handleDelete(e, item.id)}>delete</td>
+                            {isAdmin || isAuth && Number(userId) === item.userId ? (
+                                    <>
+                                        <td onClick={(e) => handleEdit(e, item.id)}>edit</td>
+                                        <td onClick={(e) => handleDelete(e, item.id)}>delete</td>
+                                    </>)
+                                : (
+                                    <>
+                                        <td></td>
+                                        <td></td>
+                                    </>)
+                            }
                         </tr>
                     ))
                     : (<tr>

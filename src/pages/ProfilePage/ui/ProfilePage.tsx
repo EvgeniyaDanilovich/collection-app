@@ -13,10 +13,15 @@ import { Button } from 'react-bootstrap';
 import { deleteCollection } from '../model/services/deleteCollection';
 import { AddCollectionForm, UpdateCollectionForm } from '../../../features/ManageCollection';
 import { updateCollection } from '../model/services/updateCollection';
+import { selectIsAdmin, selectIsAuth } from '../../../features/AuthByUserName';
+import { localStorageKeys } from '../../../shared/const/localStorage';
 
 const ProfilePage = () => {
     const { t } = useTranslation();
     const { id } = useParams();
+    const isAdmin = useSelector(selectIsAdmin);
+    const isAuth = useSelector(selectIsAuth);
+    const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     const dispatch: AppDispatch = useDispatch();
     const collections = useSelector(selectCollections);
@@ -47,11 +52,17 @@ const ProfilePage = () => {
         dispatch(updateCollection(collection));
     };
 
+    // if (!isAuth) {
+    //     return <Navigate to={RoutePath.main} />
+    // }
+
     return (
         <div>
             <UserCard />
             <div>{t('My collections')}</div>
-            <Button onClick={() => setModal(true)}>{t('Create new collection')}</Button>
+            {isAdmin || isAuth && userId === id && (
+                <Button onClick={() => setModal(true)}>{t('Create new collection')}</Button>
+            )}
 
             <CollectionTable collections={collections} onDeleteCollection={onDeleteCollection}
                              onEdit={handleEdit} />

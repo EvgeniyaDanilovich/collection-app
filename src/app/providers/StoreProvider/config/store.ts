@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import { authReducer } from '../../../../features/AuthByUserName';
 import { StateSchema } from './stateSchema';
 import { adminPageReducer } from '../../../../pages/AdminPage';
@@ -9,6 +9,8 @@ import { collectionPageReducer } from '../../../../pages/CollectionPage';
 import { itemReducer } from '../../../../entities/Item';
 import { itemPageReducer } from '../../../../pages/ItemPage';
 import { collectionsPageReducer } from '../../../../pages/CollectionsPage';
+import { searchPageReducer } from '../../../../pages/SearchPage';
+import { mainPageReducer } from '../../../../pages/MainPage';
 
 export const store = configureStore<StateSchema>({
     reducer: {
@@ -21,6 +23,8 @@ export const store = configureStore<StateSchema>({
         collectionsPage: collectionsPageReducer,
         item: itemReducer,
         itemPage: itemPageReducer,
+        searchPage: searchPageReducer,
+        mainPage: mainPageReducer,
     },
 })
 
