@@ -37,9 +37,9 @@ export const CollectionCard = ({ openModal }: Props) => {
                     <ReactMarkdown>{collection?.description}</ReactMarkdown>
                 }
             </div>
-            {isAdmin || isAuth && Number(userId) === collection?.userId && (
+            {isAdmin || (isAuth && Number(userId) === collection?.userId) ? (
                 <Button onClick={openModal}>{t('Create new item')}</Button>
-            )}
+            ) : null}
         </div>
     );
 };

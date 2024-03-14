@@ -36,7 +36,10 @@ export const TagInput = ({ tags, setTags, tagsInput, setTagsInput }: Props) => {
             <Form.Label>{t('Tags')}</Form.Label>
             <div>
                 {tags && (
-                    tags.map(tag => (<span>#{tag} <span onClick={() => onDeleteTag(tag)}>D </span></span>))
+                    tags.map(tag => (
+                        <div key={tag}>
+                            <span>#{tag} <span onClick={() => onDeleteTag(tag)}>D </span></span>
+                        </div>))
                 )}
             </div>
             <div className={cls.tagsField}>

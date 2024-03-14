@@ -6,8 +6,8 @@ import { Input } from '../../../shared/ui/Input/Input';
 import { ItemsTable } from '../../../entities/Item';
 import { selectSearchedCollections, selectSearchedItems } from '../model/selectors/searchPageSelectors';
 import { CollectionTable } from '../../../entities/Collection';
-import { searchPageActions } from '../model/slice/searchPageSlice';
 import { useTranslation } from 'react-i18next';
+import { searchPageActions } from '../model/slice/searchPageSlice';
 
 const SearchPage = () => {
     const { t } = useTranslation();
@@ -17,16 +17,11 @@ const SearchPage = () => {
     const collections = useSelector(selectSearchedCollections);
 
     useEffect(() => {
-        // dispatch(searchPageActions.cleanItems());
-        // return () => {
-        //     dispatch(searchPageActions.cleanItems());
-        // };
+        return () => {
+            dispatch(searchPageActions.cleanItems());
+            dispatch(searchPageActions.cleanCollections());
+        };
     }, []);
-
-    useEffect(()=>{
-        console.log(items);
-        console.log(collections);
-    }, [items, collections])
 
     const onSearch = () => {
         if (value) {

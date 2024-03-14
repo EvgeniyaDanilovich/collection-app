@@ -60,7 +60,7 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                             <td>{item.tags}</td>
                             <td>{item.like.count}</td>
                             <td>{item.createdDate}</td>
-                            {isAdmin || isAuth && Number(userId) === item.userId ? (
+                            {(isAdmin || (isAuth && Number(userId) === item.userId)) && onDeleteItem && onEdit ? (
                                     <>
                                         <td onClick={(e) => handleEdit(e, item.id)}>edit</td>
                                         <td onClick={(e) => handleDelete(e, item.id)}>delete</td>

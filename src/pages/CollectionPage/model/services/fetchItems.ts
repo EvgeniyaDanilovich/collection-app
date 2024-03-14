@@ -20,9 +20,11 @@ export const fetchItems = createAsyncThunk<Item[], Props, ThunkConfig<string>>(
             collectionId,
             ...(sort && { _sort: sort }),
             ...(order && { _order: order }),
-            ...(q && { q }),
-            ...(tag && { tags: tag }),
+            // ...(q && { q }),
+            ...(tag && { tags_like: tag }),
         }).toString();
+
+        console.log(queryParams);
 
         try {
             const response = await fetch(`${baseUrl}items?${queryParams}`);
@@ -31,6 +33,7 @@ export const fetchItems = createAsyncThunk<Item[], Props, ThunkConfig<string>>(
                 throw new Error();
             } else {
                 const newData = await response.json();
+                console.log(newData);
                 return newData;
             }
         } catch (e) {

@@ -21,6 +21,9 @@ export const searchPageSlice = createSlice({
     reducers: {
         cleanItems(state) {
             state.searchedItems = [];
+        },
+        cleanCollections(state) {
+            state.searchedCollections = [];
         }
     },
     extraReducers: (builder) => {

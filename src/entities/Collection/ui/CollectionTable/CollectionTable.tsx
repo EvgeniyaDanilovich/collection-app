@@ -55,7 +55,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
                     <tr key={collection.id} onClick={() => redirectToCollection(collection.id)}>
                         <td>{collection.name}</td>
                         <td>{collection.category}</td>
-                        {isAdmin || isAuth && Number(userId) === collection.userId ? (
+                        {(isAdmin || (isAuth && Number(userId) === collection.userId)) && onDeleteCollection && onEdit ? (
                                 <>
                                     <td onClick={(e) => handleEdit(e, collection.id)}>edit</td>
                                     <td onClick={(e) => handleDelete(e, collection.id)}>delete</td>

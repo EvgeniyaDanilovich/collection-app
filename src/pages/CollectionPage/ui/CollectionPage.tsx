@@ -14,6 +14,7 @@ import { deleteItem } from '../model/services/deleteItem';
 import { updateItem } from '../model/services/updateItem';
 import { AddItemForm, UpdateItemForm } from '../../../features/ManageItem';
 import { ItemSortBar } from '../../../widgets/ItemSortBar';
+import { collectionPageActions } from '../model/slice/collectionPageSlice';
 
 const CollectionPage = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -28,6 +29,9 @@ const CollectionPage = () => {
     useEffect(() => {
         if (id) {
             dispatch(fetchItems({ id }));
+        }
+        return () => {
+            dispatch(collectionPageActions.cleanTags())
         }
     }, []);
 
@@ -65,7 +69,6 @@ const CollectionPage = () => {
             <CollectionCard openModal={()=> setModal(true)} />
 
             <ItemSortBar onSort={handleSort} tags={tags} />
-            {/* <div>All items in collection</div> */}
             <ItemsTable items={items} onDeleteItem={handleDeleteItem} onEdit={handleEdit} />
 
             <ModalComponent title={t('Create new item')} status={modal} onClose={() => setModal(false)}>

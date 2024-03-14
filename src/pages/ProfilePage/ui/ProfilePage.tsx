@@ -56,13 +56,17 @@ const ProfilePage = () => {
     //     return <Navigate to={RoutePath.main} />
     // }
 
+    useEffect(() => {
+        console.log(isAdmin || isAuth && userId === id);
+    }, [isAdmin, isAuth, userId, id]);
+
     return (
         <div>
             <UserCard />
             <div>{t('My collections')}</div>
-            {isAdmin || isAuth && userId === id && (
+            {isAdmin || (isAuth && userId === id) ? (
                 <Button onClick={() => setModal(true)}>{t('Create new collection')}</Button>
-            )}
+            ) : null}
 
             <CollectionTable collections={collections} onDeleteCollection={onDeleteCollection}
                              onEdit={handleEdit} />

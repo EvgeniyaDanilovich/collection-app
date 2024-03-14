@@ -21,6 +21,9 @@ export const collectionPageSlice = createSlice({
                 const index = state.items.findIndex((item) => item.id === action.payload);
                 state.items.splice(index, 1);
             }
+        },
+        cleanTags(state) {
+            state.tags = [];
         }
     },
     extraReducers: (builder) => {
