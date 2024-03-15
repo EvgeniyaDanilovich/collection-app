@@ -7,6 +7,11 @@ import { useNavigate } from 'react-router-dom';
 import { localStorageKeys } from '../../../shared/const/localStorage';
 import { authActions } from '../../../features/AuthByUserName';
 import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
+import { ReactComponent as DeleteIcon } from '../../../shared/assets/icons/delete.svg';
+import { ReactComponent as BlockIcon } from '../../../shared/assets/icons/block.svg';
+import { ReactComponent as UnblockIcon } from '../../../shared/assets/icons/unblock.svg';
+import { Icon, IconHover, IconType } from '../../../shared/ui/Icon/Icon';
+import cls from './AdminBar.module.scss'
 
 interface Props {
     users: User[];
@@ -64,10 +69,14 @@ export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
     };
 
     return (
-        <div>
-            <Button onClick={() => handleStatus('Blocked')}>Block</Button>
-            <Button onClick={() => handleStatus('Active')}>Unblock</Button>
-            <Button onClick={onDeleteUser}>Delete</Button>
+        <div className={'d-flex gap-3 align-items-center'}>
+            <div onClick={() => handleStatus('Blocked')}><Icon Svg={BlockIcon} type={IconType.STROKE} /></div>
+            <div onClick={() => handleStatus('Active')}>
+                <Icon Svg={UnblockIcon} type={IconType.STROKE} />
+            </div>
+            <div onClick={onDeleteUser} className={cls.delete}>
+                <Icon Svg={DeleteIcon} type={IconType.STROKE} hover={IconHover.RED} />
+            </div>
             <Button onClick={() => handleAdmin(true)}>Appoint as admin</Button>
             <Button onClick={() => handleAdmin(false)}>Delete from admin</Button>
         </div>

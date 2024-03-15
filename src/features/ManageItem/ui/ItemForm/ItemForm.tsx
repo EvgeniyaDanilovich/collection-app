@@ -93,8 +93,8 @@ export const ItemForm = (props: Props) => {
 
             {checkboxFields && checkboxFields.map((field, index) => (
                 <Form.Group className="mb-3" key={field.name}>
-                    <Checkbox checked={field.value}
-                              setChecked={(value) => handleCheckboxFields(value, index)} label={field.name} />
+                    <Checkbox checked={field.value} label={field.name}
+                              setChecked={(value) => handleCheckboxFields(value, index)}  />
                 </Form.Group>)
             )}
 

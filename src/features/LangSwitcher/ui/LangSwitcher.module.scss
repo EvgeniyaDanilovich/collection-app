@@ -1,0 +1,10 @@
+.LangSwitcher {
+    &:hover {
+        cursor: pointer;
+        color: var(--hover-color);
+
+        path {
+            fill: var(--hover-color);
+        }
+    }
+}

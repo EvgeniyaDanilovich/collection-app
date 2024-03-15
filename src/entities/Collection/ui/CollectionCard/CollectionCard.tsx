@@ -9,6 +9,7 @@ import { Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { selectIsAdmin, selectIsAuth } from '../../../../features/AuthByUserName';
 import { localStorageKeys } from '../../../../shared/const/localStorage';
+import { ReactComponent as PlusIcon } from '../../../../shared/assets/icons/plus.svg';
 
 interface Props {
     openModal: () => void;
@@ -31,14 +32,16 @@ export const CollectionCard = ({ openModal }: Props) => {
 
     return (
         <div>
-            <div>{collection?.name}</div>
-            <div>
+            <h4>{collection?.name}</h4>
+            <div className={'mb-4'}>
                 {collection?.description &&
                     <ReactMarkdown>{collection?.description}</ReactMarkdown>
                 }
             </div>
             {isAdmin || (isAuth && Number(userId) === collection?.userId) ? (
-                <Button onClick={openModal}>{t('Create new item')}</Button>
+                <Button onClick={openModal} className={'d-flex align-items-center gap-1 mb-5'}>
+                    <PlusIcon /> {t('New item')}
+                </Button>
             ) : null}
         </div>
     );

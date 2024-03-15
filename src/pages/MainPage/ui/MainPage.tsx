@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LangSwitcher } from '../../../widgets/LangSwitcher';
 import { TagsList } from '../../../entities/Tag/ui/TagsList';
 import { suggestionsTags } from '../../../shared/const/tags';
 import { useNavigate } from 'react-router-dom';
@@ -12,6 +11,7 @@ import { fetchBiggestCollections } from '../model/services/fetchBiggestCollectio
 import { selectBiggestCollections, selectLastAddedItems } from '../model/selectors/mainPageSelectors';
 import { CollectionTable } from '../../../entities/Collection';
 import { ItemCardList } from '../../../entities/Item';
+import { LangSwitcher } from '../../../features/LangSwitcher';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -31,12 +31,11 @@ const MainPage = () => {
 
     return (
         <div>
-            {t('Main page')}
-            <LangSwitcher />
-            <div>Last added items</div>
+            <h3 className={'mb-3'}>Last added items</h3>
             <ItemCardList items={items} />
-            <div>The biggest collections</div>
+            <h3>The biggest collections</h3>
             <CollectionTable collections={collections} />
+            <h3 className={'mb-3'}>Tag collection</h3>
             <TagsList tags={suggestionsTags} handleClick={onSearch} />
         </div>
     );

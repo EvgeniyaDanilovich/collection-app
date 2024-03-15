@@ -2,8 +2,9 @@ import { memo } from 'react';
 import cls from './CommentCard.module.scss';
 import { Comment } from '../../model/types/comment';
 import { Placeholder } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
+import { ReactComponent as UserIcon } from '../../../../shared/assets/icons/user.svg';
 
 interface CommentCardProps {
     comment?: Comment;
@@ -40,10 +41,7 @@ export const CommentCard = memo((props: CommentCardProps) => {
 
     return (
         <div className={cls.CommentCard}>
-            <div className={cls.header} onClick={redirectToUser}>
-                {/* {comment.user.avatar ? <Avatar size={30} src={comment.user.avatar} /> : null} */}
-                <p className={cls.username}>{comment.userId}</p>
-            </div>
+            <UserIcon className={cls.user} onClick={redirectToUser} />
             <p className={cls.text}>{comment.text}</p>
         </div>
     );

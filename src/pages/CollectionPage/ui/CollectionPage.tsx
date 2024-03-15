@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { CollectionCard } from '../../../entities/Collection';
 import { ModalComponent } from '../../../shared/ui/Modal/Modal';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'react-bootstrap';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { createItem } from '../model/services/createItem';
@@ -15,6 +14,10 @@ import { updateItem } from '../model/services/updateItem';
 import { AddItemForm, UpdateItemForm } from '../../../features/ManageItem';
 import { ItemSortBar } from '../../../widgets/ItemSortBar';
 import { collectionPageActions } from '../model/slice/collectionPageSlice';
+import { ReactComponent as ArrowIcon } from '../../../shared/assets/icons/arrow.svg';
+import cls from './CollectionPage.module.scss';
+import { Icon, IconType } from '../../../shared/ui/Icon/Icon';
+import { BackButton } from '../../../shared/ui/BackButton/BackButton';
 
 const CollectionPage = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -58,14 +61,13 @@ const CollectionPage = () => {
         setCurrentItemId(itemId);
     }, []);
 
-    // const handleFilterByTag = useCallback((tag: string) => {
-    //     if (id) {
-    //         dispatch(fetchItems({ id, tag }));
-    //     }
-    // }, []);
-
     return (
         <div>
+            {/* <div className={cls.backBtn} onClick={navigateBack}> */}
+            {/*     <Icon Svg={ArrowIcon} type={IconType.FILL} /> {t('Back')} */}
+            {/* </div> */}
+
+            <BackButton />
             <CollectionCard openModal={()=> setModal(true)} />
 
             <ItemSortBar onSort={handleSort} tags={tags} />

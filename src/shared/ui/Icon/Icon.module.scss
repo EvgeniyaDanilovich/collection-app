@@ -1,0 +1,72 @@
+.stroke {
+    &.primaryColor {
+        path {
+            stroke: var(--color);
+        }
+    }
+
+    &.standardColor {
+        path {
+            stroke: var(--standard-color);
+        }
+    }
+
+    &.redColor {
+        path {
+            stroke: var(--error-color);
+        }
+    }
+
+    &.svg {
+        &:hover {
+            cursor: pointer;
+
+
+            path {
+                stroke: var(--hover-color);
+            }
+
+            &.red {
+                path {
+                    stroke: var(--error-color);
+                }
+            }
+        }
+    }
+}
+
+.fill {
+    &.primaryColor {
+        path {
+            fill: var(--color);
+        }
+    }
+
+    &.standardColor {
+        path {
+            fill: var(--standard-color);
+        }
+    }
+
+    &.redColor {
+        path {
+            fill: var(--error-color);
+        }
+    }
+
+    &.svg {
+        &:hover {
+            cursor: pointer;
+
+            path {
+                fill: var(--hover-color);
+            }
+
+            &.red {
+                path {
+                    fill: var(--error-color);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,26 @@
+.link {
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--color);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.linkSecond {
+    @extend .link;
+    text-transform: none;
+}
+
+.searchInput {
+    position: relative;
+    max-width: 400px;
+    width: 100%;
+}
+
+.searchIcon {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}

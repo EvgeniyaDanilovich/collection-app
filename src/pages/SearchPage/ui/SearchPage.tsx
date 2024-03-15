@@ -12,7 +12,6 @@ import { searchPageActions } from '../model/slice/searchPageSlice';
 const SearchPage = () => {
     const { t } = useTranslation();
     const dispatch: AppDispatch = useDispatch();
-    const [value, setValue] = useState('');
     const items = useSelector(selectSearchedItems);
     const collections = useSelector(selectSearchedCollections);
 
@@ -23,17 +22,8 @@ const SearchPage = () => {
         };
     }, []);
 
-    const onSearch = () => {
-        if (value) {
-            dispatch(fetchSearchData(value));
-        }
-    };
-
     return (
         <div>
-            <Input value={value} setValue={setValue} />
-            <div onClick={onSearch}>Search</div>
-
             {!!items.length &&
                 <>
                     <div>ITEMS</div>

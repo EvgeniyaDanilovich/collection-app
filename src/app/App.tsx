@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import './styles/App.scss';
 import { Header } from '../widgets/Header';
 import { localStorageKeys } from '../shared/const/localStorage';
 import { AppDispatch } from './providers/StoreProvider/config/store';
@@ -7,10 +6,13 @@ import { useDispatch } from 'react-redux';
 import { authActions } from '../features/AuthByUserName';
 import { AppRouter } from './providers/router';
 import { useTranslation } from 'react-i18next';
+import { Container } from 'react-bootstrap';
+import { useTheme } from './providers/ThemeProvider';
 
 function App() {
     const dispatch: AppDispatch = useDispatch();
     const { i18n } = useTranslation();
+    const { theme } = useTheme();
 
     useEffect(() => {
         const isAuth = localStorage.getItem(`${localStorageKeys.USER_ID}`);
@@ -25,22 +27,16 @@ function App() {
         }
     }, []);
 
+    useEffect(() => {
+        document.body.className = theme || 'app_light_theme';
+    }, [theme]);
+
     return (
-        <div>
+        <div className={'app'}>
             <Header />
-            {/* <Suspense fallback={<Loader />}> */}
-                {/* <Routes> */}
-                {/*     <Route path="/" element={<MainPage />} /> */}
-                {/*     <Route path="/login" element={<LoginPage />} /> */}
-                {/*     <Route path="/signup" element={<SignupPage />} /> */}
-                {/*     <Route path="/admin" element={<AdminPage />} /> */}
-                {/*     <Route path="/profile/:id" element={<ProfilePage />} /> */}
-                {/*     <Route path="/collection/:id" element={<CollectionPage />} /> */}
-                {/*     <Route path="/item/:id" element={<ItemPage />} /> */}
-                {/*     <Route path="*" element={<NotFoundPage />} /> */}
-                {/* </Routes> */}
+            <Container>
                 <AppRouter />
-            {/* </Suspense> */}
+            </Container>
         </div>
     );
 }

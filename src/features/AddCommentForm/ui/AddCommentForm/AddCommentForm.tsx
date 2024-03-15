@@ -2,6 +2,7 @@ import React, { memo, useCallback, useState } from 'react';
 import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
 import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
+import cls from './AddCommentForm.module.scss'
 
 interface Props {
     onSendComment: (value: string) => void;
@@ -19,9 +20,9 @@ export const AddCommentForm = memo(({ onSendComment }: Props) => {
     }, [onSendComment, text]);
 
     return (
-        <div>
+        <div className={cls.form}>
             <Textarea value={text} setValue={setText} placeholder={t('Enter comment text')} />
-            <Button onClick={onSendHandler}>{t('Submit')}</Button>
+            <Button onClick={onSendHandler} className={cls.submitBtn}>{t('Submit')}</Button>
         </div>
     );
 });

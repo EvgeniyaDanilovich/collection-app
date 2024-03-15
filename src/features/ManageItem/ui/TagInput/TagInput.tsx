@@ -4,6 +4,8 @@ import cls from './TagInput.module.scss';
 import { Input } from '../../../../shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
 import { suggestionsTags } from '../../../../shared/const/tags';
+import { Icon, IconHover, IconType } from '../../../../shared/ui/Icon/Icon';
+import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/delete.svg';
 
 interface Props {
     tagsInput: string;
@@ -34,11 +36,14 @@ export const TagInput = ({ tags, setTags, tagsInput, setTagsInput }: Props) => {
     return (
         <Form.Group className="mb-3">
             <Form.Label>{t('Tags')}</Form.Label>
-            <div>
+            <div className={'d-flex flex-wrap mb-2 gap-2'}>
                 {tags && (
                     tags.map(tag => (
-                        <div key={tag}>
-                            <span>#{tag} <span onClick={() => onDeleteTag(tag)}>D </span></span>
+                        <div className={'tag hover d-flex align-items-center gap-1'} key={tag}>
+                            <span>#{tag}</span>
+                            <span onClick={() => onDeleteTag(tag)}>
+                                    <Icon Svg={DeleteIcon} type={IconType.STROKE} hover={IconHover.RED} />
+                            </span>
                         </div>))
                 )}
             </div>

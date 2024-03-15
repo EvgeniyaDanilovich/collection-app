@@ -18,10 +18,12 @@ export const UserCard = () => {
     }, []);
 
     return (
-        <Card style={{ width: '250px' }}>
+        <Card className={'mb-5 w-50'}>
             <Card.Body>
-                <Card.Title>Profile info</Card.Title>
-                {user?.admin && <Badge bg="secondary">Admin</Badge>}
+                <div className={'d-flex align-items-center justify-content-between mb-3'}>
+                    <Card.Title>Profile info</Card.Title>
+                    {user?.admin && <Badge bg="secondary">Admin</Badge>}
+                </div>
                 {user && (
                     <>
                         <Card.Text>

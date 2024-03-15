@@ -7,6 +7,7 @@ import { Button } from 'react-bootstrap';
 import { signupUser } from '../../model/services/signupUser';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
+import cls from './SignupForm.module.scss'
 
 export const SignupForm = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -29,11 +30,11 @@ export const SignupForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className={'flex flex-col'}>
+        <form onSubmit={handleSubmit} className={cls.form}>
             <Input value={username} label={t('Name')} setValue={setUsername} />
             <Input value={email} label={t('Email')} setValue={setEmail} />
-            <Input type={'password'} value={password} label={t('Password')} setValue={setPassword} />
-            <Button variant="primary" type={'submit'}>{t('Sign up')}</Button>
+            <Input type={'password'} value={password} label={t('Password')} setValue={setPassword}  />
+            <Button variant="primary" type={'submit'} className={'mt-3 align-self-end w-50'}>{t('Sign up')}</Button>
         </form>
     );
 };

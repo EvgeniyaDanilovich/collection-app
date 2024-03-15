@@ -15,6 +15,7 @@ import { AddCollectionForm, UpdateCollectionForm } from '../../../features/Manag
 import { updateCollection } from '../model/services/updateCollection';
 import { selectIsAdmin, selectIsAuth } from '../../../features/AuthByUserName';
 import { localStorageKeys } from '../../../shared/const/localStorage';
+import {ReactComponent as PlusIcon} from '../../../shared/assets/icons/plus.svg';
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -52,10 +53,6 @@ const ProfilePage = () => {
         dispatch(updateCollection(collection));
     };
 
-    // if (!isAuth) {
-    //     return <Navigate to={RoutePath.main} />
-    // }
-
     useEffect(() => {
         console.log(isAdmin || isAuth && userId === id);
     }, [isAdmin, isAuth, userId, id]);
@@ -63,10 +60,15 @@ const ProfilePage = () => {
     return (
         <div>
             <UserCard />
-            <div>{t('My collections')}</div>
-            {isAdmin || (isAuth && userId === id) ? (
-                <Button onClick={() => setModal(true)}>{t('Create new collection')}</Button>
-            ) : null}
+
+            <div className={'d-flex justify-content-between'}>
+                <h3>{t('My collections')}</h3>
+                {isAdmin || (isAuth && userId === id) ? (
+                    <Button onClick={() => setModal(true)} className={'d-flex align-items-center gap-1'}>
+                        <PlusIcon /> {t('New collection')}
+                    </Button>
+                ) : null}
+            </div>
 
             <CollectionTable collections={collections} onDeleteCollection={onDeleteCollection}
                              onEdit={handleEdit} />

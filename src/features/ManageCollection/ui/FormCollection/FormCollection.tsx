@@ -112,48 +112,62 @@ export const FormCollection = (props: Props) => {
                         label={t('Collection category')} options={options} />
             </Form.Group>
 
-            <div onClick={addStringField}>Add extra string fields for your item</div>
+            <p>Add extra fields for your item:</p>
+
+            <div className={'d-flex flex-wrap gap-2 mb-3 mt-1'}>
+                <Button variant="light" onClick={addStringField}>{t('String')}</Button>
+                <Button variant="light" onClick={addTextareaField}>{t('Textarea')}</Button>
+                <Button variant="light" onClick={addCheckboxField}>{t('Checkbox')}</Button>
+                <Button variant="light" onClick={addDateField}>{t('Date')}</Button>
+                <Button variant="light" onClick={addNumberField}>{t('Number')}</Button>
+            </div>
 
             {stringFields.map((field, index) => (
-                <Input
-                    key={index} type="text" value={field} placeholder={t('Enter field name')}
-                    setValue={(value) => handleStringFields(value, index)}
-                />
+                <div className={'mb-3'}>
+                    <Input
+                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                        setValue={(value) => handleStringFields(value, index)} label={t('String')}
+                    />
+                </div>
             ))}
 
-            <div onClick={addTextareaField}>Add extra textarea fields for your item</div>
             {textareaFields.map((field, index) => (
-                <Input
-                    key={index} type="text" value={field} placeholder={t('Enter field name')}
-                    setValue={(value) => handleTextareaFields(value, index)}
-                />
+                <div className={'mb-3'}>
+                    <Input
+                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                        setValue={(value) => handleTextareaFields(value, index)} label={t('Textarea')}
+                    />
+                </div>
             ))}
 
-            <div onClick={addCheckboxField}>Add extra checkbox fields for your item</div>
             {checkboxFields.map((field, index) => (
-                <Input
-                    key={index} type="text" value={field} placeholder={t('Enter field name')}
-                    setValue={(value) => handleCheckboxFields(value, index)}
-                />
+                <div className={'mb-3'}>
+                    <Input
+                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                        setValue={(value) => handleCheckboxFields(value, index)} label={t('Checkbox')}
+                    />
+                </div>
             ))}
 
-            <div onClick={addDateField}>Add extra date fields for your item</div>
             {dateFields.map((field, index) => (
-                <Input
-                    key={index} type="text" value={field} placeholder={t('Enter field name')}
-                    setValue={(value) => handleDateFields(value, index)}
-                />
+                <div className={'mb-3'}>
+                    <Input
+                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                        setValue={(value) => handleDateFields(value, index)} label={t('Date')}
+                    />
+                </div>
             ))}
 
-            <div onClick={addNumberField}>Add extra number fields for your item</div>
             {numberFields.map((field, index) => (
-                <Input
-                    key={index} type="text" value={field} placeholder={t('Enter field name')}
-                    setValue={(value) => handleNumberFields(value, index)}
-                />
+                <div className={'mb-3'}>
+                    <Input
+                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                        setValue={(value) => handleNumberFields(value, index)} label={t('Number')}
+                    />
+                </div>
             ))}
 
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" className={'bt-3'}>
                 {action}
             </Button>
         </Form>

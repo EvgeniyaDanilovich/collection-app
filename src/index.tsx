@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import './shared/config/i18n/i18n';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ErrorBoundary } from './app/providers/ErrorBoundary';
+import { ThemeProvider } from './app/providers/ThemeProvider';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -18,7 +19,9 @@ root.render(
     <BrowserRouter>
         <Provider store={store}>
             <ErrorBoundary>
-                <App />
+                <ThemeProvider>
+                    <App />
+                </ThemeProvider>
             </ErrorBoundary>
         </Provider>
     </BrowserRouter>

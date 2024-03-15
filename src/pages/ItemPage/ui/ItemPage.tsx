@@ -9,8 +9,10 @@ import { selectComments, selectIsLoading } from '../model/selectors/itemPageSele
 import { addComment } from '../model/services/addComment';
 import { Comment } from '../../../entities/Comment';
 import { localStorageKeys } from '../../../shared/const/localStorage';
-import { Loader } from '../../../shared/ui/Loader/Loader';
 import { CommentList } from '../../../entities/Comment/ui/CommentList/CommentsList';
+import { BackButton } from '../../../shared/ui/BackButton/BackButton';
+import { AddLike } from '../../../features/AddLike';
+import { selectIsAuth } from '../../../features/AuthByUserName';
 
 const ItemPage = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -18,6 +20,7 @@ const ItemPage = () => {
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const comments = useSelector(selectComments);
     const isLoading = useSelector(selectIsLoading);
+    const isAuth = useSelector(selectIsAuth);
 
     useEffect(() => {
         if (id) {
@@ -38,9 +41,11 @@ const ItemPage = () => {
 
     return (
         <div>
+            <BackButton />
             <ItemInfo />
-            <div>Comments</div>
-            <AddCommentForm onSendComment={handleSendComment} />
+            <AddLike />
+            <h5>Comments</h5>
+            {isAuth && <AddCommentForm onSendComment={handleSendComment} />}
             <CommentList comments={comments} isLoading={isLoading} />
         </div>
     );

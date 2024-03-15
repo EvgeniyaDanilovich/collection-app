@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import { useTranslation } from 'react-i18next';
-import cls from './CommentList.module.scss';
 import { Comment } from '../../model/types/comment';
 import { CommentCard } from '../CommentCard/CommentCard';
 
@@ -15,7 +14,7 @@ export const CommentList = memo((props: CommentListProps) => {
 
     if (isLoading) {
         return (
-            <div className={cls.CommentList}>
+            <div>
                 <CommentCard isLoading />
                 <CommentCard isLoading />
                 <CommentCard isLoading />
@@ -24,7 +23,7 @@ export const CommentList = memo((props: CommentListProps) => {
     }
 
     return (
-        <div className={cls.CommentList}>
+        <div>
             {comments?.length
                 ? comments.map((comment) => (
                     <CommentCard

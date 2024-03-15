@@ -38,5 +38,18 @@
   "Sort by": "Sort by",
   "not selected": "not selected",
   "Search": "Search",
-  "Nothing was found for your request": "Nothing was found for your request"
+  "Nothing was found for your request": "Nothing was found for your request",
+  "Switch theme": "Switch theme",
+  "ru": "ру",
+  "en": "англ",
+  "New collection": "New collection",
+  "New item": "New item",
+  "Back": "Back",
+  "Yes": "Yes",
+  "No": "No",
+  "String": "String",
+  "Textarea": "Textarea",
+  "Checkbox": "Checkbox",
+  "Date": "Date",
+  "Number": "Number"
 }

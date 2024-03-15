@@ -1,0 +1,11 @@
+.backBtn {
+    margin-bottom: 10px;
+    &:hover {
+        cursor: pointer;
+        color: var(--hover-color);
+
+        path {
+            fill: var(--hover-color)
+        }
+    }
+}

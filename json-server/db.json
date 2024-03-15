@@ -45,7 +45,7 @@
     {
       "userId": 1,
       "name": "Favorite new",
-      "description": "Description favorite",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "category": "Books",
       "imgUrl": "https://americanbookco.com/wp-content/uploads/2021/02/stacked-books.jpeg",
       "stringFields": [
@@ -62,7 +62,7 @@
     {
       "userId": 1,
       "name": "Books for kids",
-      "description": "Books for kids description",
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "category": "Books",
       "imgUrl": "https://hips.hearstapps.com/hmg-prod/images/best-childrens-kids-books-1599680383.jpg?crop=0.6236666666666667xw:1xh;center,top&resize=640:*",
       "stringFields": [
@@ -81,7 +81,7 @@
     {
       "userId": 1,
       "name": "Fashion books",
-      "description": "Fashion books description ",
+      "description": "Fashion books description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "category": "Books",
       "imgUrl": "",
       "stringFields": [
@@ -98,7 +98,7 @@
     {
       "userId": 1,
       "name": "Old coins new",
-      "description": "Old coins description",
+      "description": "Old coins description. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "category": "Coins",
       "imgUrl": "",
       "stringFields": [],
@@ -114,7 +114,7 @@
       "userId": 4,
       "name": "Marks",
       "description": "Marks description",
-      "category": "Marks",
+      "category": "Stamps",
       "imgUrl": "",
       "stringFields": [
         "Country"
@@ -131,7 +131,7 @@
       "userId": 1,
       "name": "Many marks",
       "description": "# A demo of `react-markdown`\n\n`react-markdown` is a markdown component for React.\n* Follows\n* Optionally follows",
-      "category": "Marks",
+      "category": "Stamps",
       "imgUrl": "",
       "stringFields": [],
       "textareaFields": [],
@@ -190,7 +190,10 @@
     {
       "name": "Book 12",
       "tags": [
-        "retro"
+        "retro",
+        "rare_books",
+        "postal_history",
+        "bookworm"
       ],
       "collectionId": 1,
       "userId": 1,
@@ -215,8 +218,10 @@
         }
       ],
       "like": {
-        "count": 0,
-        "usersId": []
+        "count": 1,
+        "usersId": [
+          1
+        ]
       },
       "createdDate": "06.03.2019 15:19:24",
       "id": 1
@@ -249,8 +254,10 @@
         }
       ],
       "like": {
-        "count": 0,
-        "usersId": []
+        "count": 1,
+        "usersId": [
+          1
+        ]
       },
       "createdDate": "21.09.2020 15:19:24",
       "id": 2
@@ -764,6 +771,18 @@
       "itemId": 4,
       "userId": 5,
       "id": 3
+    },
+    {
+      "text": "Great idea",
+      "itemId": 2,
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "text": "some comment",
+      "itemId": 1,
+      "userId": 1,
+      "id": 5
     }
   ]
 }

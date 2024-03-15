@@ -8,6 +8,9 @@ import cls from './ItemsTable.module.scss';
 import { useSelector } from 'react-redux';
 import { selectIsAdmin, selectIsAuth } from '../../../../features/AuthByUserName';
 import { localStorageKeys } from '../../../../shared/const/localStorage';
+import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/edit.svg';
+import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/delete.svg';
+import { Icon, IconColor, IconHover, IconType } from '../../../../shared/ui/Icon/Icon';
 
 interface Props {
     items: Item[];
@@ -41,7 +44,7 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
     };
 
     return (
-        <>
+        <div className={'Table'}>
             <Table hover>
                 <thead>
                 <tr>
@@ -57,13 +60,17 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                 {items.length ? items.map(item => (
                         <tr key={item.id} onClick={() => redirectToItem(item.id)}>
                             <td>{item.name}</td>
-                            <td>{item.tags}</td>
+                            <td>{item.tags.map((tag, i) => (<span key={tag + i}>#{tag} </span>))}</td>
                             <td>{item.like.count}</td>
                             <td>{item.createdDate}</td>
                             {(isAdmin || (isAuth && Number(userId) === item.userId)) && onDeleteItem && onEdit ? (
                                     <>
-                                        <td onClick={(e) => handleEdit(e, item.id)}>edit</td>
-                                        <td onClick={(e) => handleDelete(e, item.id)}>delete</td>
+                                        <td onClick={(e) => handleEdit(e, item.id)} className={cls.smallCell}>
+                                            <Icon Svg={EditIcon} type={IconType.FILL} color={IconColor.STANDARD} />
+                                        </td>
+                                        <td onClick={(e) => handleDelete(e, item.id)} className={cls.smallCell}>
+                                            <Icon Svg={DeleteIcon} type={IconType.STROKE} color={IconColor.STANDARD} hover={IconHover.RED} />
+                                        </td>
                                     </>)
                                 : (
                                     <>
@@ -74,13 +81,13 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                         </tr>
                     ))
                     : (<tr>
-                        <td className={cls.fullWidthCell} colSpan={4}>
+                        <td className={cls.fullWidthCell} colSpan={6}>
                             {t('No items found')}
                         </td>
                     </tr>)
                 }
                 </tbody>
             </Table>
-        </>
+        </div>
     );
 });

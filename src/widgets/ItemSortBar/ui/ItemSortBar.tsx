@@ -65,14 +65,18 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
 
     return (
         <div>
-            <Select value={sort} onChange={handleOnChangeSort} options={sortFieldOptions} label={t('Sort by')} />
-            <Select value={order} onChange={handleOnChangeOrder} options={orderOptions} />
-            <div>
-                <span onClick={() => handleFilter('')}>#All </span>
+            <div className={'d-flex gap-2 align-items-center mb-4'}>
+                <p>{t('Sort by')}:</p>
+                <div className={'w-25'}>
+                    <Select value={sort} onChange={handleOnChangeSort} options={sortFieldOptions} />
+                </div>
+                <div className={'w-25'}>
+                    <Select value={order} onChange={handleOnChangeOrder} options={orderOptions} />
+                </div>
+            </div>
+            <div className={'d-flex gap-2 mt-3'}>
+                <span onClick={() => handleFilter('')} className={'tag'}>#All</span>
                 <TagsList tags={tags} handleClick={handleFilter} />
-                {/* {tags && tags.map(tag => { */}
-                {/*     return <span key={tag} onClick={() => handleFilter(tag)}>#{tag} </span>; */}
-                {/* })} */}
             </div>
         </div>
     );

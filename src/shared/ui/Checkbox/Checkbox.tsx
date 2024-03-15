@@ -13,9 +13,9 @@ export const Checkbox = memo(({ checked, setChecked, label }: Props) => {
     };
 
     return (
-        <>
-            {label && <Form.Label>{label}</Form.Label>}
+        <div className={'d-flex gap-2'}>
             <Form.Check type={'checkbox'} checked={checked} onChange={onCheckedHandler} />
-        </>
+            {label && <Form.Label>{label}</Form.Label>}
+        </div>
     );
 });
