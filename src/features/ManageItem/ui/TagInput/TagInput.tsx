@@ -51,7 +51,7 @@ export const TagInput = ({ tags, setTags, tagsInput, setTagsInput }: Props) => {
                 <Input value={tagsInput} setValue={setTagsInput} onClick={() => setIsOpen(true)} />
                 <div className={cls.addBtn} onClick={() => handleSuggestionClick(tagsInput)}>+Add</div>
             </div>
-            <ListGroup>
+            <ListGroup className={cls.selectList}>
                 {tagsInput && isOpen && filterSuggestions().map((suggestion, index) => (
                     <ListGroup.Item key={index} onClick={() => handleSuggestionClick(suggestion)}>
                         {suggestion}

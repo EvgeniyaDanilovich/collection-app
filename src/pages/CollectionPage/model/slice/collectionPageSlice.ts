@@ -24,7 +24,11 @@ export const collectionPageSlice = createSlice({
         },
         cleanTags(state) {
             state.tags = [];
-        }
+        },
+
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchItems.pending, (state) => {
@@ -56,6 +60,12 @@ export const collectionPageSlice = createSlice({
         builder.addCase(createItem.fulfilled, (state, action: PayloadAction<Item>) => {
             state.items = [...state.items, action.payload];
             state.isLoading = false;
+
+            action.payload.tags.forEach(tag => {
+                if (!state.tags.includes(tag)) {
+                    state.tags = [...state.tags, tag];
+                }
+            });
         });
         builder.addCase(createItem.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false;
@@ -68,6 +78,12 @@ export const collectionPageSlice = createSlice({
         builder.addCase(updateItem.fulfilled, (state, action: PayloadAction<Item>) => {
             let index = state.items.findIndex(item => item.id === action.payload.id);
             state.items[index] = action.payload;
+
+            action.payload.tags.forEach(tag => {
+                if (!state.tags.includes(tag)) {
+                    state.tags = [...state.tags, tag];
+                }
+            });
         });
         builder.addCase(updateItem.rejected, (state, action) => {
             state.isLoading = false;

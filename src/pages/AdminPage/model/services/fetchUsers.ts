@@ -10,13 +10,15 @@ export const fetchUsers = createAsyncThunk<User[], void, ThunkConfig<string>>(
             const response = await fetch(   `${baseUrl}users`);
 
             if (!response.ok) {
-                throw new Error();
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Something went wrong';
+                throw new Error(errorMessage);
             } else {
                 const newData = await response.json();
                 return newData;
             }
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Something went wrong');
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.message);
         }
     }
 );

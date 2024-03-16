@@ -21,6 +21,10 @@ export const authSlice = createSlice({
         setIsAdmin: (state, action: PayloadAction<boolean>) => {
             state.isAdmin = action.payload;
         },
+
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.pending, (state) => {

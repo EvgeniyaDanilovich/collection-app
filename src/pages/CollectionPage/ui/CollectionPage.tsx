@@ -8,21 +8,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createItem } from '../model/services/createItem';
 import { Item, ItemsTable, PartialItem } from '../../../entities/Item';
 import { fetchItems } from '../model/services/fetchItems';
-import { selectItems, selectTags } from '../model/selectors/collectionPageSelectors';
+import { selectError, selectItems, selectTags } from '../model/selectors/collectionPageSelectors';
 import { deleteItem } from '../model/services/deleteItem';
 import { updateItem } from '../model/services/updateItem';
 import { AddItemForm, UpdateItemForm } from '../../../features/ManageItem';
 import { ItemSortBar } from '../../../widgets/ItemSortBar';
 import { collectionPageActions } from '../model/slice/collectionPageSlice';
-import { ReactComponent as ArrowIcon } from '../../../shared/assets/icons/arrow.svg';
-import cls from './CollectionPage.module.scss';
-import { Icon, IconType } from '../../../shared/ui/Icon/Icon';
 import { BackButton } from '../../../shared/ui/BackButton/BackButton';
+import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 
 const CollectionPage = () => {
     const dispatch: AppDispatch = useDispatch();
     const items = useSelector(selectItems);
     const tags = useSelector(selectTags);
+    const error = useSelector(selectError);
     const { id } = useParams();
     const { t } = useTranslation();
     const [modal, setModal] = useState<boolean>(false);
@@ -61,12 +60,12 @@ const CollectionPage = () => {
         setCurrentItemId(itemId);
     }, []);
 
+    const handleCloseError = useCallback(() => {
+        dispatch(collectionPageActions.setError(undefined));
+    }, [dispatch]);
+
     return (
         <div>
-            {/* <div className={cls.backBtn} onClick={navigateBack}> */}
-            {/*     <Icon Svg={ArrowIcon} type={IconType.FILL} /> {t('Back')} */}
-            {/* </div> */}
-
             <BackButton />
             <CollectionCard openModal={()=> setModal(true)} />
 
@@ -80,6 +79,8 @@ const CollectionPage = () => {
             <ModalComponent title={t('Update item')} status={updateModal} onClose={() => setUpdateModal(false)}>
                 <UpdateItemForm itemId={currentItemId} onUpdateItem={handleUpdateItem} onCloseModal={() => setUpdateModal(false)} />
             </ModalComponent>
+
+            {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>
     );
 };

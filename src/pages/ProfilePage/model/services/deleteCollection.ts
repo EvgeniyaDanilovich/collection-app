@@ -12,12 +12,14 @@ export const deleteCollection = createAsyncThunk<void, number, ThunkConfig<strin
             });
 
             if (!response.ok) {
-                throw new Error();
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Something went wrong';
+                throw new Error(errorMessage);
             } else {
                 thunkAPI.dispatch(profilePageActions.deleteCollection(collectionId))
             }
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Something went wrong');
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.message);
         }
     }
 );

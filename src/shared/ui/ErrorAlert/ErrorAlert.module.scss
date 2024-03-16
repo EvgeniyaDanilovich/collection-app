@@ -1,0 +1,10 @@
+.alert {
+    position: absolute !important;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: space-between;
+    bottom: 50px;
+    right: 50px;
+    min-width: 300px;
+}

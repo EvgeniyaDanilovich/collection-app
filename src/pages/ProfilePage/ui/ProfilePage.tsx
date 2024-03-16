@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCollection } from '../model/services/addCollection';
 import { Collection, CollectionTable } from '../../../entities/Collection';
 import { fetchCollectionsByUserId } from '../model/services/fetchCollectionsByUserId';
-import { selectCollections } from '../model/selectors/profileSelectors';
+import { selectCollections, selectError } from '../model/selectors/profileSelectors';
 import { ModalComponent } from '../../../shared/ui/Modal/Modal';
 import { Button } from 'react-bootstrap';
 import { deleteCollection } from '../model/services/deleteCollection';
@@ -15,13 +15,16 @@ import { AddCollectionForm, UpdateCollectionForm } from '../../../features/Manag
 import { updateCollection } from '../model/services/updateCollection';
 import { selectIsAdmin, selectIsAuth } from '../../../features/AuthByUserName';
 import { localStorageKeys } from '../../../shared/const/localStorage';
-import {ReactComponent as PlusIcon} from '../../../shared/assets/icons/plus.svg';
+import { ReactComponent as PlusIcon } from '../../../shared/assets/icons/plus.svg';
+import { profilePageActions } from '../model/slice/profilePageSlice';
+import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 
 const ProfilePage = () => {
     const { t } = useTranslation();
     const { id } = useParams();
     const isAdmin = useSelector(selectIsAdmin);
     const isAuth = useSelector(selectIsAuth);
+    const error = useSelector(selectError);
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     const dispatch: AppDispatch = useDispatch();
@@ -53,9 +56,9 @@ const ProfilePage = () => {
         dispatch(updateCollection(collection));
     };
 
-    useEffect(() => {
-        console.log(isAdmin || isAuth && userId === id);
-    }, [isAdmin, isAuth, userId, id]);
+    const handleCloseError = useCallback(() => {
+        dispatch(profilePageActions.setError(undefined));
+    }, [dispatch]);
 
     return (
         <div>
@@ -81,6 +84,8 @@ const ProfilePage = () => {
                 <UpdateCollectionForm collectionId={currentCollectionId} onUpdateCollection={handleUpdateCollection}
                                       onCloseModal={() => setUpdateModal(false)} />
             </ModalComponent>
+
+            {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>
     );
 };

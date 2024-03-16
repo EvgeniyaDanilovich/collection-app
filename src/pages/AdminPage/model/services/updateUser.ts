@@ -20,18 +20,19 @@ export const updateUser = createAsyncThunk<User, Props, ThunkConfig<string>>(
                     'Content-Type': 'application/json'
                 },
                 method: 'PATCH',
-                // body: JSON.stringify({ admin: data.admin }),
                 body: JSON.stringify(data.newData),
             });
 
             if (!response.ok) {
-                throw new Error();
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Something went wrong';
+                throw new Error(errorMessage);
             } else {
                 const newData = await response.json();
                 return newData;
             }
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Something went wrong');
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.message);
         }
     }
 );

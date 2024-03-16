@@ -24,7 +24,10 @@ export const searchPageSlice = createSlice({
         },
         cleanCollections(state) {
             state.searchedCollections = [];
-        }
+        },
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(searchByItems.pending, (state) => {

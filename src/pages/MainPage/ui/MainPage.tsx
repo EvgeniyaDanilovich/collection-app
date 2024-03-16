@@ -8,10 +8,11 @@ import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByTags } from '../../SearchPage';
 import { fetchBiggestCollections } from '../model/services/fetchBiggestCollections';
-import { selectBiggestCollections, selectLastAddedItems } from '../model/selectors/mainPageSelectors';
+import { selectBiggestCollections, selectError, selectLastAddedItems } from '../model/selectors/mainPageSelectors';
 import { CollectionTable } from '../../../entities/Collection';
 import { ItemCardList } from '../../../entities/Item';
-import { LangSwitcher } from '../../../features/LangSwitcher';
+import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
+import { mainPageActions } from '../model/slice/MainPageSlice';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -19,6 +20,7 @@ const MainPage = () => {
     const dispatch: AppDispatch = useDispatch();
     const items = useSelector(selectLastAddedItems);
     const collections = useSelector(selectBiggestCollections);
+    const error = useSelector(selectError);
 
     const onSearch = useCallback((tag: string) => {
         navigate(RoutePath.search);
@@ -29,14 +31,20 @@ const MainPage = () => {
         dispatch(fetchBiggestCollections());
     }, []);
 
+    const handleCloseError = useCallback(() => {
+        dispatch(mainPageActions.setError(undefined));
+    }, [dispatch]);
+
     return (
         <div>
-            <h3 className={'mb-3'}>Last added items</h3>
+            <h3 className={'mb-3'}>{t('Last added items')}</h3>
             <ItemCardList items={items} />
-            <h3>The biggest collections</h3>
+            <h3>{t('The biggest collections')}</h3>
             <CollectionTable collections={collections} />
-            <h3 className={'mb-3'}>Tag collection</h3>
+            <h3 className={'mb-3'}>{t('Tag collection')}</h3>
             <TagsList tags={suggestionsTags} handleClick={onSearch} />
+
+            {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>
     );
 };

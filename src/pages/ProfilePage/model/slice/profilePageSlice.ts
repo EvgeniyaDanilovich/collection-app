@@ -20,7 +20,11 @@ const profilePageSlice = createSlice({
                 const index = state.collections.findIndex((collection) => collection.id === action.payload);
                 state.collections.splice(index, 1);
             }
-        }
+        },
+
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchCollectionsByUserId.pending, (state) => {

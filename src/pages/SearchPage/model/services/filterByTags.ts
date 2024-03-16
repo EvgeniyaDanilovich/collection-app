@@ -11,13 +11,14 @@ export const filterByTags = createAsyncThunk<Item[], string, ThunkConfig<string>
             const response = await fetch(`${baseUrl}items?tags_like=${tag}`);
 
             if (!response.ok) {
-                throw new Error();
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Something went wrong';
+                throw new Error(errorMessage);
             } else {
-                const newData = await response.json();
-                return newData;
+                return await response.json();
             }
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Something went wrong');
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.message);
         }
     }
 );

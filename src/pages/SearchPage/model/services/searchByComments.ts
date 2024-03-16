@@ -16,14 +16,14 @@ export const searchByComments = createAsyncThunk<Comment[], string, ThunkConfig<
             const response = await fetch(`${baseUrl}comments?${queryParams}`);
 
             if (!response.ok) {
-                throw new Error();
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Something went wrong';
+                throw new Error(errorMessage);
             } else {
-                const newData = await response.json();
-                console.log(newData);
-                return newData;
+                return await response.json();
             }
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Something went wrong');
+        } catch (e: any) {
+            return thunkAPI.rejectWithValue(e.message);
         }
     }
 );

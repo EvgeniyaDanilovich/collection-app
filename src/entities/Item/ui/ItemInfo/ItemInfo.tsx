@@ -1,17 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchItemById } from '../../models/services/fetchItemById';
-import { selectItem } from '../../models/selectors/itemSelectors';
+import { selectError, selectItem } from '../../models/selectors/itemSelectors';
 import { TagsList } from '../../../Tag/ui/TagsList';
 import { useTranslation } from 'react-i18next';
+import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
+import { itemActions } from '../../models/slice/ItemSlice';
 
 export const ItemInfo = () => {
     const { id } = useParams();
     const dispatch: AppDispatch = useDispatch();
     const { t } = useTranslation();
     const item = useSelector(selectItem);
+    const error = useSelector(selectError);
 
     useEffect(() => {
         if (id) {
@@ -19,7 +22,9 @@ export const ItemInfo = () => {
         }
     }, []);
 
-
+    const handleCloseError = useCallback(() => {
+        dispatch(itemActions.setError(undefined));
+    }, [dispatch]);
 
     return (
         <>
@@ -48,6 +53,7 @@ export const ItemInfo = () => {
                     {item.tags && <TagsList tags={item.tags} hover={false} />}
                 </div>
             )}
+            {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );
 };

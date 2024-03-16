@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCollection } from '../../model/selectors/collectionSelectors';
+import { selectCollection, selectError } from '../../model/selectors/collectionSelectors';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { fetchCollectionById } from '../../model/services/fetchCollectionById';
 import { useParams } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
-import { Button } from 'react-bootstrap';
+import { Badge, Button } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { selectIsAdmin, selectIsAuth } from '../../../../features/AuthByUserName';
 import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ReactComponent as PlusIcon } from '../../../../shared/assets/icons/plus.svg';
+import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
+import { collectionActions } from '../../model/slice/collectionSlice';
 
 interface Props {
     openModal: () => void;
@@ -22,6 +24,7 @@ export const CollectionCard = ({ openModal }: Props) => {
     const { id } = useParams();
     const isAdmin = useSelector(selectIsAdmin);
     const isAuth = useSelector(selectIsAuth);
+    const error = useSelector(selectError);
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     useEffect(() => {
@@ -30,9 +33,16 @@ export const CollectionCard = ({ openModal }: Props) => {
         }
     }, []);
 
+    const handleCloseError = useCallback(() => {
+        dispatch(collectionActions.setError(undefined));
+    }, [dispatch]);
+
     return (
         <div>
-            <h4>{collection?.name}</h4>
+            <div className={'d-flex align-items-center justify-content-between'}>
+                <h4>{collection?.name}</h4>
+                <Badge bg="info">{collection?.category}</Badge>
+            </div>
             <div className={'mb-4'}>
                 {collection?.description &&
                     <ReactMarkdown>{collection?.description}</ReactMarkdown>
@@ -43,6 +53,8 @@ export const CollectionCard = ({ openModal }: Props) => {
                     <PlusIcon /> {t('New item')}
                 </Button>
             ) : null}
+
+            {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>
     );
 };

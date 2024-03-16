@@ -22,13 +22,9 @@ export const loginUser = createAsyncThunk<User, loginUserProps, ThunkConfig<stri
             });
 
             if (!response.ok) {
-                let message;
-                if (response.status === 403) {
-                    message = 'User not found';
-                } else if (response.status === 401) {
-                    message = 'User blocked';
-                }
-                throw new Error(message);
+                const errorData = await response.json();
+                const errorMessage = errorData.message;
+                throw new Error(errorMessage);
             } else {
                 const newData: User = await response.json();
                 localStorage.setItem(`${localStorageKeys.USER_ID}`, String(newData.id));

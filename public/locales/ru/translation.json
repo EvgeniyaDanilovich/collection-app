@@ -51,5 +51,10 @@
   "Textarea": "Textarea",
   "Checkbox": "Checkbox",
   "Date": "Date",
-  "Number": "Number"
+  "Number": "Number",
+  "The biggest collections": "The biggest collections",
+  "Tag collection": "Tag collection",
+  "Last added items": "Last added items",
+  "ITEMS": "ITEMS",
+  "Items": "Items"
 }

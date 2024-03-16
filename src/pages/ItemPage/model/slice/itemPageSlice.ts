@@ -14,12 +14,9 @@ export const itemPageSlice = createSlice({
     name: 'itemPageSlice',
     initialState,
     reducers: {
-        // deleteItem(state, action) {
-        //     if (action.payload) {
-        //         const index = state.items.findIndex((item) => item.id === action.payload);
-        //         state.items.splice(index, 1);
-        //     }
-        // }
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchComments.pending, (state) => {

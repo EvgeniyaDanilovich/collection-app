@@ -13,7 +13,11 @@ const initialState: MainPageSchema = {
 export const mainPageSlice = createSlice({
     name: 'mainPageSlice',
     initialState,
-    reducers: {},
+    reducers: {
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchBiggestCollections.pending, (state) => {
             state.error = undefined;

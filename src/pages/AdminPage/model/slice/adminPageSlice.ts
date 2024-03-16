@@ -33,7 +33,11 @@ const adminPageSlice = createSlice({
                 const index = state.users.findIndex((user) => user.id === action.payload);
                 state.users.splice(index, 1);
             }
-        }
+        },
+
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
     },
     extraReducers: (builder) => {
         builder.addCase(fetchUsers.pending, (state) => {

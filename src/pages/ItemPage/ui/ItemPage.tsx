@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchComments } from '../model/services/fetchComments';
 import { useParams } from 'react-router-dom';
-import { selectComments, selectIsLoading } from '../model/selectors/itemPageSelectors';
+import { selectComments, selectError, selectIsLoading } from '../model/selectors/itemPageSelectors';
 import { addComment } from '../model/services/addComment';
 import { Comment } from '../../../entities/Comment';
 import { localStorageKeys } from '../../../shared/const/localStorage';
@@ -13,6 +13,8 @@ import { CommentList } from '../../../entities/Comment/ui/CommentList/CommentsLi
 import { BackButton } from '../../../shared/ui/BackButton/BackButton';
 import { AddLike } from '../../../features/AddLike';
 import { selectIsAuth } from '../../../features/AuthByUserName';
+import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
+import { itemPageActions } from '../model/slice/itemPageSlice';
 
 const ItemPage = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -21,6 +23,7 @@ const ItemPage = () => {
     const comments = useSelector(selectComments);
     const isLoading = useSelector(selectIsLoading);
     const isAuth = useSelector(selectIsAuth);
+    const error = useSelector(selectError);
 
     useEffect(() => {
         if (id) {
@@ -39,6 +42,10 @@ const ItemPage = () => {
         }
     }, [dispatch, userId, id]);
 
+    const handleCloseError = useCallback(() => {
+        dispatch(itemPageActions.setError(undefined));
+    }, [dispatch]);
+
     return (
         <div>
             <BackButton />
@@ -47,6 +54,8 @@ const ItemPage = () => {
             <h5>Comments</h5>
             {isAuth && <AddCommentForm onSendComment={handleSendComment} />}
             <CommentList comments={comments} isLoading={isLoading} />
+
+            {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>
     );
 };

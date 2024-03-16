@@ -13,8 +13,8 @@ const itemSlice = createSlice({
     name: 'itemSlice',
     initialState,
     reducers: {
-        setChecked(state, action) {
-
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
         },
     },
     extraReducers: (builder) => {

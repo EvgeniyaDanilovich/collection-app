@@ -9,3 +9,11 @@
     cursor: pointer;
     padding: 2px 10px 2px 10px;
 }
+
+.selectList {
+    position: absolute;
+    width: calc(100% - 32px);
+    max-height: 120px;
+    overflow: auto;
+    border-bottom: 1px solid #dee2e6;
+}

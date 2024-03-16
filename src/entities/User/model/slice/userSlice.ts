@@ -12,8 +12,8 @@ const userSlice = createSlice({
     name: 'userSlice',
     initialState: initialAdminPageState,
     reducers: {
-        setChecked(state, action) {
-
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
         },
     },
     extraReducers: (builder) => {

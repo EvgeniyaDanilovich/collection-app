@@ -12,7 +12,11 @@ const initialState: CollectionsPageSchema = {
 export const collectionsPageSlice = createSlice({
     name: 'collectionsPageSlice',
     initialState,
-    reducers: {    },
+    reducers: {
+        setError: (state, action: PayloadAction<string | undefined>) => {
+            state.error = action.payload;
+        },
+    },
     extraReducers: (builder) => {
         builder.addCase(fetchCollections.pending, (state) => {
             state.error = undefined;

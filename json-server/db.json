@@ -113,7 +113,7 @@
     {
       "userId": 4,
       "name": "Marks",
-      "description": "Marks description",
+      "description": "Marks description. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. These cases are perfectly simple and easy to distinguish. ",
       "category": "Stamps",
       "imgUrl": "",
       "stringFields": [
@@ -184,6 +184,21 @@
       "dateFields": [],
       "numberFields": [],
       "id": 10
+    },
+    {
+      "userId": 4,
+      "name": "New year postcards",
+      "description": "New year postcards description",
+      "category": "Postcards",
+      "imgUrl": "https://templates.visual-paradigm.com/repository/images/97847367-814c-42f7-a3d4-5f8f459d0780/postcards-design/black-fireworks-photo-happy-new-year-postcard.png",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        "Quantity"
+      ],
+      "id": 11
     }
   ],
   "items": [
@@ -218,9 +233,11 @@
         }
       ],
       "like": {
-        "count": 1,
+        "count": 3,
         "usersId": [
-          1
+          1,
+          4,
+          2
         ]
       },
       "createdDate": "06.03.2019 15:19:24",
@@ -314,10 +331,12 @@
         }
       ],
       "like": {
-        "count": 2,
+        "count": 4,
         "usersId": [
           1,
-          5
+          5,
+          4,
+          2
         ]
       },
       "createdDate": "06.08.2021 10:19:24",
@@ -722,8 +741,10 @@
         }
       ],
       "like": {
-        "count": 0,
-        "usersId": []
+        "count": 1,
+        "usersId": [
+          4
+        ]
       },
       "createdDate": "13.03.2024 22:24:46",
       "id": 22
@@ -751,6 +772,93 @@
       },
       "createdDate": "13.03.2024 22:38:28",
       "id": 23
+    },
+    {
+      "name": "New year postcard one",
+      "tags": [
+        "postcards",
+        "holiday_cards"
+      ],
+      "collectionId": 11,
+      "userId": 4,
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "Quantity",
+          "value": "6"
+        }
+      ],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "16.03.2024 22:37:33",
+      "id": 24
+    },
+    {
+      "name": "Berry",
+      "tags": [
+        "stamps",
+        "stamp_collecting"
+      ],
+      "collectionId": 6,
+      "userId": 4,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": "USA"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": true
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 1,
+        "usersId": [
+          2
+        ]
+      },
+      "createdDate": "16.03.2024 22:50:46",
+      "id": 25
+    },
+    {
+      "name": "Tonny",
+      "tags": [
+        "commemorative_stamps",
+        "numismatics"
+      ],
+      "collectionId": 6,
+      "userId": 4,
+      "stringFields": [
+        {
+          "name": "Country",
+          "value": "Germany"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "16.03.2024 22:54:19",
+      "id": 26
     }
   ],
   "comments": [
@@ -783,6 +891,18 @@
       "itemId": 1,
       "userId": 1,
       "id": 5
+    },
+    {
+      "text": "Great book!",
+      "itemId": 22,
+      "userId": 4,
+      "id": 6
+    },
+    {
+      "text": "Berry stamps great!",
+      "itemId": 25,
+      "userId": 2,
+      "id": 7
     }
   ]
 }
