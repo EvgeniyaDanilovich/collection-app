@@ -64,7 +64,7 @@ const ProfilePage = () => {
         <div>
             <UserCard />
 
-            <div className={'d-flex justify-content-between'}>
+            <div className={'d-flex justify-content-between flex-wrap gap-2'}>
                 <h3>{t('My collections')}</h3>
                 {isAdmin || (isAuth && userId === id) ? (
                     <Button onClick={() => setModal(true)} className={'d-flex align-items-center gap-1'}>

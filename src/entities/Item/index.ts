@@ -5,5 +5,5 @@ export { ItemCardList } from './ui/ItemCardList/ItemCardList';
 export { itemReducer } from './models/slice/ItemSlice';
 export { fetchItemById } from './models/services/fetchItemById';
 export { addLike } from './models/services/addLike';
-export {selectLikesCount, selectLikedUserId } from './models/selectors/itemSelectors'
+export {selectLikesCount, selectLikedUserId, selectItem } from './models/selectors/itemSelectors'
 

@@ -25,6 +25,13 @@ export const AddCollectionForm = ({ onAddCollection, onCloseModal }: Props) => {
     const [numberFields, setNumberFields] = useState<string[]>([]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return
+        }
+
         e.preventDefault();
         const data: Omit<Collection, 'id'> = {
             userId: Number(id),

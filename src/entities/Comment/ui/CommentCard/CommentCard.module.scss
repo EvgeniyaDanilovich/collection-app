@@ -2,12 +2,19 @@
     padding: 10px 0;
     margin-bottom: 10px;
     display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.userField {
+    display: inline-flex;
+    justify-content: flex-start;
+    gap: 8px;
     align-items: center;
+    cursor: pointer;
 }
 
 .user {
-    margin-right: 5px;
-    cursor: pointer;
     path {
         fill: var(--color);
     }

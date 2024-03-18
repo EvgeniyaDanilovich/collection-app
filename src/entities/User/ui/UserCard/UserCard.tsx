@@ -26,7 +26,7 @@ export const UserCard = () => {
 
     return (
         <>
-            <Card className={'mb-5 w-50'}>
+            <Card className={'mb-5 w-100'}>
                 <Card.Body>
                     <div className={'d-flex align-items-center justify-content-between mb-3'}>
                         <Card.Title>Profile info</Card.Title>

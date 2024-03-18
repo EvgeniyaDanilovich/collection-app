@@ -60,6 +60,13 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
     }, [collection]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return
+        }
+
         e.preventDefault();
         if (id && userId && onAddItem) {
             const data: Omit<Item, 'id' | 'like' | 'createdDate'> = {

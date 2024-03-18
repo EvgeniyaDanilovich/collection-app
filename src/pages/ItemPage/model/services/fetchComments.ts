@@ -6,8 +6,13 @@ import { Comment } from '../../../../entities/Comment';
 export const fetchComments = createAsyncThunk<Comment[], string, ThunkConfig<string>>(
     'itemPage/fetchComments',
     async (itemId, thunkAPI) => {
+        const queryParams = new URLSearchParams({
+            itemId: itemId,
+            _expand: 'user'
+        }).toString();
+
         try {
-            const response = await fetch(`${baseUrl}comments?itemId=${itemId}`);
+            const response = await fetch(`${baseUrl}comments?${queryParams}`);
 
             if (!response.ok) {
                 const errorData = await response.json();

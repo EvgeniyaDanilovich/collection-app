@@ -302,8 +302,10 @@
       "dateFields": [],
       "numberFields": [],
       "like": {
-        "count": 0,
-        "usersId": []
+        "count": 1,
+        "usersId": [
+          1
+        ]
       },
       "createdDate": "06.03.2024 20:10:12",
       "id": 3
@@ -822,9 +824,10 @@
       "dateFields": [],
       "numberFields": [],
       "like": {
-        "count": 1,
+        "count": 2,
         "usersId": [
-          2
+          2,
+          1
         ]
       },
       "createdDate": "16.03.2024 22:50:46",
@@ -859,6 +862,60 @@
       },
       "createdDate": "16.03.2024 22:54:19",
       "id": 26
+    },
+    {
+      "name": "",
+      "tags": [],
+      "collectionId": 5,
+      "userId": 1,
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [
+        {
+          "name": "year",
+          "value": ""
+        }
+      ],
+      "numberFields": [],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "18.03.2024 16:48:44",
+      "id": 35
+    },
+    {
+      "name": "jhvj",
+      "tags": [],
+      "collectionId": 2,
+      "userId": 1,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": ""
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "New",
+          "value": false
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "Number of pages",
+          "value": ""
+        }
+      ],
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "18.03.2024 17:07:42",
+      "id": 36
     }
   ],
   "comments": [
@@ -903,6 +960,18 @@
       "itemId": 25,
       "userId": 2,
       "id": 7
+    },
+    {
+      "text": "Super!",
+      "itemId": 1,
+      "userId": 2,
+      "id": 8
+    },
+    {
+      "text": "dc",
+      "itemId": 1,
+      "userId": 2,
+      "id": 9
     }
   ]
 }

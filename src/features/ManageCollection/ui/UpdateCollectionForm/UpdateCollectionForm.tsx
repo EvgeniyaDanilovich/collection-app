@@ -49,6 +49,13 @@ export const UpdateCollectionForm = ({ collectionId, onUpdateCollection, onClose
     }, [collection]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return
+        }
+
         e.preventDefault();
         if (collectionId) {
             const data: Collection = {

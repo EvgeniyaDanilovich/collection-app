@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { adminPageActions } from '../../../../pages/AdminPage';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
+import cls from './UsersList.module.scss';
 
 interface Props {
     users: User[];
@@ -34,8 +35,8 @@ export const UsersList = memo(({ users }: Props) => {
                         <td>
                             <Checkbox checked={checked} setChecked={(value) => handleCheckbox(value, user.id)} />
                         </td>
-                        <td onClick={() => redirectToProfile(user.id)}>{user.username}</td>
-                        <td>{user.email}</td>
+                        <td onClick={() => redirectToProfile(user.id)} className={cls.user}>{user.username}</td>
+                        <td className={cls.td}>{user.email}</td>
                         <td>{user.status}</td>
                         {user.admin ? <td>Admin</td> : <td></td>}
                     </tr>);

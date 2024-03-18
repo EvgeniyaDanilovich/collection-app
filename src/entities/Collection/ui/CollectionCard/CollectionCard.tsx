@@ -12,6 +12,7 @@ import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ReactComponent as PlusIcon } from '../../../../shared/assets/icons/plus.svg';
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { collectionActions } from '../../model/slice/collectionSlice';
+import cls from './CollectionCard.module.scss';
 
 interface Props {
     openModal: () => void;
@@ -39,6 +40,7 @@ export const CollectionCard = ({ openModal }: Props) => {
 
     return (
         <div>
+            {collection?.imgUrl  && <img className={cls.image} src={collection?.imgUrl} alt={'collection'} />}
             <div className={'d-flex align-items-center justify-content-between'}>
                 <h4>{collection?.name}</h4>
                 <Badge bg="info">{collection?.category}</Badge>

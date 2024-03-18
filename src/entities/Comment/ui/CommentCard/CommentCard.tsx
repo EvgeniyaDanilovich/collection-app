@@ -41,7 +41,10 @@ export const CommentCard = memo((props: CommentCardProps) => {
 
     return (
         <div className={cls.CommentCard}>
-            <UserIcon className={cls.user} onClick={redirectToUser} />
+            <div className={cls.userField} onClick={redirectToUser}>
+                <UserIcon className={cls.user} />
+                <p>{comment.user?.username}</p>
+            </div>
             <p className={cls.text}>{comment.text}</p>
         </div>
     );

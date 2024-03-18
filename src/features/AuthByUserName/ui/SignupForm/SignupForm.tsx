@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { Input } from '../../../../shared/ui/Input/Input';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { signupUser } from '../../model/services/signupUser';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
@@ -19,6 +19,7 @@ export const SignupForm = () => {
     const [username, setUsername] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [validated, setValidated] = useState(false);
     const error = useSelector(selectError);
 
     const redirectToLogin = () => {
@@ -26,10 +27,18 @@ export const SignupForm = () => {
     }
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        setValidated(true);
+        const form = e.currentTarget;
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+        }
+
         e.preventDefault();
         const data = {
             username, email, password
-        }
+        };
         dispatch(signupUser({ data, redirectToLogin }));
     };
 
@@ -39,12 +48,22 @@ export const SignupForm = () => {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className={cls.form}>
-                <Input value={username} label={t('Name')} setValue={setUsername} />
-                <Input value={email} label={t('Email')} setValue={setEmail} />
-                <Input type={'password'} value={password} label={t('Password')} setValue={setPassword} />
+            <Form noValidate validated={validated} onSubmit={handleSubmit} className={cls.form}>
+                <Form.Group className="mb-3">
+                    <Input value={username} label={t('Name')} setValue={setUsername} required />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Input value={email} label={t('Email')} setValue={setEmail} type={'email'} required />
+                    {email && <Form.Control.Feedback type="invalid">Incorrect format</Form.Control.Feedback>}
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Input type={'password'} value={password} label={t('Password')} setValue={setPassword} required />
+                </Form.Group>
+
                 <Button variant="primary" type={'submit'} className={'mt-3 align-self-end w-50'}>{t('Sign up')}</Button>
-            </form>
+            </Form>
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );

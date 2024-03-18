@@ -1,3 +1,30 @@
+.header {
+    background-color: var(--bg-color);
+    &.btn-close{
+        background-color: #fff !important;
+        color: #fff !important;
+    }
+}
+
+.body {
+    flex-direction: column;
+    background-color: var(--bg-color);
+}
+
+.logout {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+    &:hover{
+        color: var(--hover-color);
+        cursor: pointer;
+
+        path{
+            stroke: var(--hover-color);
+        }
+    }
+}
+
 .link {
     text-transform: uppercase;
     text-decoration: none;
@@ -13,6 +40,11 @@
     text-transform: none;
 }
 
+
+.text {
+    color: var(--color);
+}
+
 .searchInput {
     position: relative;
     max-width: 400px;
@@ -23,4 +55,16 @@
     position: absolute;
     top: 5px;
     right: 10px;
+}
+
+@media (max-width: 767.98px) {
+
+    .logout {
+        margin: 10px auto 0 auto;
+    }
+
+    .searchInput {
+        width: 100%;
+        margin: 20px 0 30px;
+    }
 }

@@ -45,7 +45,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
 
     return (
         <div className={'Table'}>
-            <Table hover>
+            <Table hover responsive>
                 <thead>
                 <tr>
                     <th>Name</th>

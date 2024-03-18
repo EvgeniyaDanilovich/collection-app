@@ -37,7 +37,7 @@ export const itemPageSlice = createSlice({
             state.isLoading = true;
         });
         builder.addCase(addComment.fulfilled, (state, action: PayloadAction<Comment>) => {
-            state.comments = [...state.comments, action.payload];
+            // state.comments = [...state.comments, action.payload];
             state.isLoading = false;
         });
         builder.addCase(addComment.rejected, (state, action: PayloadAction<any>) => {

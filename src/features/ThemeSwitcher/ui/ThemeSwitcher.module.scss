@@ -1,4 +1,6 @@
 .ThemeSwitcher {
+    color: var(--color);
+
     &:hover {
         cursor: pointer;
         color: var(--hover-color);

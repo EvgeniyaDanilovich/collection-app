@@ -45,7 +45,7 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
 
     return (
         <div className={'Table'}>
-            <Table hover>
+            <Table hover responsive>
                 <thead>
                 <tr>
                     <th>Name</th>
@@ -59,7 +59,7 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
                 <tbody>
                 {items.length ? items.map(item => (
                         <tr key={item.id} onClick={() => redirectToItem(item.id)}>
-                            <td>{item.name}</td>
+                            <td className={cls.td}>{item.name}</td>
                             <td>{item.tags.map((tag, i) => (<span key={tag + i}>#{tag} </span>))}</td>
                             <td>{item.like.count}</td>
                             <td>{item.createdDate}</td>

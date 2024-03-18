@@ -72,6 +72,13 @@ export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) =>
     }, [item]);
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const form = e.currentTarget;
+        if (!form.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+            return
+        }
+
         e.preventDefault();
         if (id && userId && itemId && onUpdateItem) {
             const data: Omit<Item, 'like' | 'createdDate'> = {

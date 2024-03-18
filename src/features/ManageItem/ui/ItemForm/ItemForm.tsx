@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Input } from '../../../../shared/ui/Input/Input';
 import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
@@ -36,6 +36,7 @@ export const ItemForm = (props: Props) => {
     } = props;
 
     const { t } = useTranslation();
+    const [validated, setValidated] = useState(false);
 
     const handleStringFields = useCallback((value: string, index: number) => {
         const newFields = [...stringFields];
@@ -67,10 +68,15 @@ export const ItemForm = (props: Props) => {
         setNumberFields(newFields);
     }, [numberFields, setNumberFields]);
 
+    const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+        setValidated(true);
+        handleSubmit(e);
+    }, [handleSubmit, setValidated]);
+
     return (
-        <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-                <Input value={name} label={t('Item name')} setValue={setName} />
+        <Form noValidate validated={validated} onSubmit={(e) => onSubmit(e)}>
+            <Form.Group className="mb-3" controlId="validationCustom01">
+                <Input value={name} label={t('Item name')} setValue={setName} required />
             </Form.Group>
 
             <TagInput tagsInput={tagsInput} setTagsInput={setTagsInput} setTags={setTags} tags={tags} />

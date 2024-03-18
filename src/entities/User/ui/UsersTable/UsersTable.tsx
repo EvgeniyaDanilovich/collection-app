@@ -25,20 +25,20 @@ export const UsersTable = ({ users }: Props) => {
 
     return (
         <div className={'Table'}>
-            <Table hover>
-                <thead>
-                <tr>
-                    <th><Checkbox checked={mainCheckbox} setChecked={setMainCheckbox} /></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Status</th>
-                    <th>Admin</th>
-                </tr>
-                </thead>
-                <tbody>
-                <UsersList users={users} />
-                </tbody>
-            </Table>
+                <Table hover responsive>
+                    <thead>
+                    <tr>
+                        <th><Checkbox checked={mainCheckbox} setChecked={setMainCheckbox} /></th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Admin</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <UsersList users={users} />
+                    </tbody>
+                </Table>
         </div>
     );
 };

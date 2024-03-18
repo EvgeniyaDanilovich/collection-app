@@ -41,7 +41,7 @@ const MainPage = () => {
             <ItemCardList items={items} />
             <h3>{t('The biggest collections')}</h3>
             <CollectionTable collections={collections} />
-            <h3 className={'mb-3'}>{t('Tag collection')}</h3>
+            <h3 className={'mb-3 mt-5'}>{t('Tag collection')}</h3>
             <TagsList tags={suggestionsTags} handleClick={onSearch} />
 
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}

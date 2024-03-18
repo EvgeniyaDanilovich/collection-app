@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { SortOrder } from '../../../shared/types/sort';
 import { ItemSortField } from '../../../entities/Item/models/const/itemConsts';
 import { TagsList } from '../../../entities/Tag/ui/TagsList';
+import cls from './ItemSortBar.module.scss';
 
 interface Props {
     onSort: (sort: string, order: string, tag: string) => void;
@@ -19,12 +20,16 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
     const orderOptions = useMemo<SelectOption<SortOrder>[]>(
         () => [
             {
-                value: 'asc',
-                content: t('increasing'),
+                value: '',
+                content: t('not selected'),
             },
             {
                 value: 'desc',
                 content: t('descending'),
+            },
+            {
+                value: 'asc',
+                content: t('increasing'),
             },
         ], [t]);
 
@@ -33,10 +38,6 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
             {
                 value: ItemSortField.NONE,
                 content: t('not selected'),
-            },
-            {
-                value: ItemSortField.CREATED,
-                content: t('creation date'),
             },
             {
                 value: ItemSortField.TITLE,
@@ -65,12 +66,13 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
 
     return (
         <div>
-            <div className={'d-flex gap-2 align-items-center mb-4'}>
-                <p>{t('Sort by')}:</p>
-                <div className={'w-25'}>
+            <div className={'d-flex gap-2 align-items-center mb-4 flex-wrap'}>
+                <div className={cls.select}>
+                    <p>{t('Sort by')}:</p>
                     <Select value={sort} onChange={handleOnChangeSort} options={sortFieldOptions} />
                 </div>
-                <div className={'w-25'}>
+                <div className={cls.select}>
+                    <p>{t('Order')}:</p>
                     <Select value={order} onChange={handleOnChangeOrder} options={orderOptions} />
                 </div>
             </div>

@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { authActions, selectIsAdmin, selectIsAuth } from '../../../features/AuthByUserName';
-import { Container } from 'react-bootstrap';
+import { Container, Nav, Navbar, Offcanvas } from 'react-bootstrap';
 import { localStorageKeys } from '../../../shared/const/localStorage';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
@@ -43,38 +43,54 @@ export const Header = () => {
     };
 
     return (
-        <header className={'pb-3 pt-3 mb-4'}>
-            <Container>
-                <div className={'d-flex align-items-center gap-4 mb-3'}>
-                    <NavLink to={`${RoutePath.main}`} className={cls.link}>{t('Main page')}</NavLink>
-                    <NavLink to={`${RoutePath.collections}`} className={cls.link}>{t('Collections')}</NavLink>
-                    {isAdmin && <NavLink to={`${RoutePath.admin}`} className={cls.link}>{t('Admin page')}</NavLink>}
-                    {isAuth ?
-                        (<>
-                            {userId && <NavLink to={`${RoutePath.profile}${userId}`} className={cls.link}>{t('My profile')}</NavLink>}
-                            <div onClick={logoutUser} className={'ms-auto'}><Icon Svg={LogOutIcon} type={IconType.STROKE} /></div>
-                        </>)
-                        : (<>
-                                <NavLink className={`ms-auto ${cls.linkSecond}`} to={`${RoutePath.login}`}>{t('Log in')}</NavLink>
-                                <NavLink className={cls.linkSecond} to={`${RoutePath.signup}`}>{t('Sign up')}</NavLink>
-                            </>
-                        )
-                    }
-                </div>
+        <header className={'pb-3 pt-3 mb-0 mb-md-4'}>
+            <Navbar expand="md">
+                <Container>
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Offcanvas
+                        id={'offcanvasNavbar-expand-md'}
+                        aria-labelledby={'offcanvasNavbarLabel-expand-md'}
+                        placement="end"
+                    >
+                        <Offcanvas.Header className={cls.header} closeButton></Offcanvas.Header>
+                        <Offcanvas.Body className={cls.body} >
+                                <Nav className={'align-items-center column-gap-4 row-gap-3 mb-3'}>
+                                    <NavLink to={`${RoutePath.main}`} className={cls.link}>{t('Main page')}</NavLink>
+                                    <NavLink to={`${RoutePath.collections}`} className={cls.link}>{t('Collections')}</NavLink>
+                                    {isAdmin && <NavLink to={`${RoutePath.admin}`} className={cls.link}>{t('Admin page')}</NavLink>}
 
-                <div className={'d-flex align-items-center justify-content-between'}>
-                    <div className={cls.searchInput}>
-                        <Input value={value} setValue={setValue} />
-                        <div onClick={onSearch} className={cls.searchIcon}>
-                            <Icon Svg={SearchIcon} color={IconColor.SECONDARY} type={IconType.STROKE} />
-                        </div>
-                    </div>
-                    <div className={'d-flex gap-4'}>
-                        <ThemeSwitcher />
-                        <LangSwitcher />
-                    </div>
-                </div>
-            </Container>
+                                    {isAuth ?
+                                        (<>
+                                            {userId && <NavLink to={`${RoutePath.profile}${userId}`} className={cls.link}>{t('My profile')}</NavLink>}
+                                            <div onClick={logoutUser} className={`${cls.logout} ${cls.text}`}>
+                                                Log out
+                                                <Icon Svg={LogOutIcon} type={IconType.STROKE} />
+                                            </div>
+                                        </>)
+                                        : (<>
+                                                <NavLink className={`ms-auto ${cls.linkSecond}`} to={`${RoutePath.login}`}>{t('Log in')}</NavLink>
+                                                <NavLink className={cls.linkSecond} to={`${RoutePath.signup}`}>{t('Sign up')}</NavLink>
+                                            </>
+                                        )
+                                    }
+                                </Nav>
+
+                            <div className={'d-flex align-items-center justify-content-between flex-wrap'}>
+                                <div className={cls.searchInput}>
+                                    <Input value={value} setValue={setValue} />
+                                    <div onClick={onSearch} className={cls.searchIcon}>
+                                        <Icon Svg={SearchIcon} color={IconColor.SECONDARY} type={IconType.STROKE} />
+                                    </div>
+                                </div>
+                                <div className={'d-flex gap-4 align-items-center md-m-auto'}>
+                                    <ThemeSwitcher />
+                                    <LangSwitcher />
+                                </div>
+                            </div>
+                        </Offcanvas.Body>
+                    </Navbar.Offcanvas>
+                </Container>
+            </Navbar>
         </header>
     );
 };

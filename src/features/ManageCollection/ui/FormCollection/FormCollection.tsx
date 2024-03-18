@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import { Input } from '../../../../shared/ui/Input/Input';
 import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
 import { Select } from '../../../../shared/ui/Select/Select';
@@ -36,7 +36,9 @@ export const FormCollection = (props: Props) => {
         setDescription, category, setCategory, setNumberFields, numberFields, setCheckboxFields, setStringFields,
         dateFields, setTextareaFields, stringFields, textareaFields, setDateFields, checkboxFields
     } = props;
+
     const { t } = useTranslation();
+    const [validated, setValidated] = useState(false);
 
     const addStringField = () => {
         const newFields = [...stringFields, ''];
@@ -93,10 +95,15 @@ export const FormCollection = (props: Props) => {
         setNumberFields(newFields);
     }, [numberFields, setNumberFields]);
 
+    const onSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+        setValidated(true);
+        handleSubmit(e);
+    }, [handleSubmit, setValidated]);
+
     return (
-        <Form onSubmit={handleSubmit}>
+        <Form noValidate validated={validated} onSubmit={(e)=> onSubmit(e)}>
             <Form.Group className="mb-3">
-                <Input value={name} label={t('Collection name')} setValue={setName} />
+                <Input value={name} label={t('Collection name')} setValue={setName} required />
             </Form.Group>
 
             <Form.Group className="mb-3">

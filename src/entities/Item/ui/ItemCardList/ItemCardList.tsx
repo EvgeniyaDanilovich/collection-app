@@ -17,7 +17,7 @@ export const ItemCardList = memo(({ items }: Props) => {
     };
 
     return (
-        <div className={'d-flex mb-5 flex-wrap gap-2'}>
+        <div className={'d-flex mb-5 flex-wrap gap-2 justify-content-center justify-content-md-start'}>
             {items && items.map(item => {
                 return (
                     <Card className={cls.card} key={item.id} onClick={() => redirectToItem(item.id)}>
