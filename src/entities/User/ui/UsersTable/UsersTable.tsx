@@ -6,6 +6,7 @@ import { UsersList } from '../UsersList/UsersList';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
 import { adminPageActions } from '../../../../pages/AdminPage';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     users: User[];
@@ -14,10 +15,7 @@ interface Props {
 export const UsersTable = ({ users }: Props) => {
     const [mainCheckbox, setMainCheckbox] = useState<boolean>(false);
     const dispatch: AppDispatch = useDispatch();
-
-    const handleMainCheckbox = useCallback(() => {
-        setMainCheckbox(prev => !prev);
-    }, []);
+    const { t } = useTranslation();
 
     useEffect(() => {
         dispatch(adminPageActions.setAllCheckbox(mainCheckbox));
@@ -29,10 +27,10 @@ export const UsersTable = ({ users }: Props) => {
                     <thead>
                     <tr>
                         <th><Checkbox checked={mainCheckbox} setChecked={setMainCheckbox} /></th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Admin</th>
+                        <th>{t('Username')}</th>
+                        <th>{t('Email')}</th>
+                        <th>{t('Status')}</th>
+                        <th>{t('Admin')}</th>
                     </tr>
                     </thead>
                     <tbody>

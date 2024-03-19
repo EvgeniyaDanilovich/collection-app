@@ -48,8 +48,8 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
             <Table hover responsive>
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Category</th>
+                    <th>{t('Name')}</th>
+                    <th>{t('Category')}</th>
                     <th></th>
                     <th></th>
                 </tr>

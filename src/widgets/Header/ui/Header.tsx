@@ -63,7 +63,7 @@ export const Header = () => {
                                         (<>
                                             {userId && <NavLink to={`${RoutePath.profile}${userId}`} className={cls.link}>{t('My profile')}</NavLink>}
                                             <div onClick={logoutUser} className={`${cls.logout} ${cls.text}`}>
-                                                Log out
+                                                {t('Log out')}
                                                 <Icon Svg={LogOutIcon} type={IconType.STROKE} />
                                             </div>
                                         </>)

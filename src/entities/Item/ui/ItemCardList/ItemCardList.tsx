@@ -4,6 +4,7 @@ import { ItemWithDetails } from '../../models/type/item';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
 import cls from './ItemCardList.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     items: ItemWithDetails[];
@@ -11,6 +12,7 @@ interface Props {
 
 export const ItemCardList = memo(({ items }: Props) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const redirectToItem = (itemId: number) => {
         navigate(`${RoutePath.item}${itemId}`);
@@ -24,10 +26,10 @@ export const ItemCardList = memo(({ items }: Props) => {
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>
                             <Card.Text>
-                                Collection: {item.collection.name}
+                                {t('Collection')}: {item.collection.name}
                             </Card.Text>
                             <Card.Text>
-                                Author: {item.user.username}
+                                {t('Author')}: {item.user.username}
                             </Card.Text>
                         </Card.Body>
                     </Card>

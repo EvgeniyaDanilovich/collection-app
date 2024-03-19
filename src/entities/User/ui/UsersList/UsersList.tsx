@@ -7,6 +7,8 @@ import { adminPageActions } from '../../../../pages/AdminPage';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
 import cls from './UsersList.module.scss';
+import { useTranslation } from 'react-i18next';
+import {ReactComponent as OkIcon} from '../../../../shared/assets/icons/ok.svg';
 
 interface Props {
     users: User[];
@@ -15,6 +17,7 @@ interface Props {
 export const UsersList = memo(({ users }: Props) => {
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const handleCheckbox = useCallback((checked: boolean, userId: number) => {
         dispatch(adminPageActions.setChecked({ userId, checked: checked }));
@@ -38,7 +41,7 @@ export const UsersList = memo(({ users }: Props) => {
                         <td onClick={() => redirectToProfile(user.id)} className={cls.user}>{user.username}</td>
                         <td className={cls.td}>{user.email}</td>
                         <td>{user.status}</td>
-                        {user.admin ? <td>Admin</td> : <td></td>}
+                        {user.admin ? <td style={{textAlign: 'center', width: '80px'}}><OkIcon /></td> : <td></td>}
                     </tr>);
             })}
         </>

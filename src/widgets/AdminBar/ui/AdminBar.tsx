@@ -12,6 +12,7 @@ import { ReactComponent as BlockIcon } from '../../../shared/assets/icons/block.
 import { ReactComponent as UnblockIcon } from '../../../shared/assets/icons/unblock.svg';
 import { Icon, IconHover, IconType } from '../../../shared/ui/Icon/Icon';
 import cls from './AdminBar.module.scss'
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     users: User[];
@@ -21,6 +22,7 @@ interface Props {
 
 export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
     const dispatch: AppDispatch = useDispatch();
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const currentUserId = Number(localStorage.getItem(localStorageKeys.USER_ID));
 
@@ -78,8 +80,8 @@ export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
             <div onClick={onDeleteUser} className={cls.delete}>
                 <Icon Svg={DeleteIcon} type={IconType.STROKE} hover={IconHover.RED} />
             </div>
-            <Button onClick={() => handleAdmin(true)}>Appoint as admin</Button>
-            <Button onClick={() => handleAdmin(false)}>Delete from admin</Button>
+            <Button onClick={() => handleAdmin(true)}>{t('Appoint as admin')}</Button>
+            <Button onClick={() => handleAdmin(false)}>{t('Delete from admin')}</Button>
         </div>
     );
 };

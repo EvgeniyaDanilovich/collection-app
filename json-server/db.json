@@ -199,6 +199,58 @@
         "Quantity"
       ],
       "id": 11
+    },
+    {
+      "userId": 1,
+      "name": "Книги ру",
+      "description": "",
+      "category": "Books",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 12
+    },
+    {
+      "userId": 1,
+      "name": "Марки ру",
+      "description": "",
+      "category": "Stamps",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 13
+    },
+    {
+      "userId": 1,
+      "name": "Куклы ру",
+      "description": "",
+      "category": "Dolls",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 14
+    },
+    {
+      "userId": 1,
+      "name": "Монеты руу",
+      "description": "",
+      "category": "Coins",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 15
     }
   ],
   "items": [

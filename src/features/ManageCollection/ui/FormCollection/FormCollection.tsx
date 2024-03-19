@@ -1,11 +1,10 @@
 import React, { useCallback, useState } from 'react';
 import { Input } from '../../../../shared/ui/Input/Input';
 import { Textarea } from '../../../../shared/ui/Textarea/Textarea';
-import { Select } from '../../../../shared/ui/Select/Select';
-import { options } from '../../model/consts/options';
 import { Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import { CollectionCategories } from '../../../../entities/Collection';
+import { SelectCategory } from '../SelectCategory/SelectCategory';
 
 interface Props {
     name: string,
@@ -114,10 +113,7 @@ export const FormCollection = (props: Props) => {
                 <Input value={imgUrl} label={t('Image link')} setValue={setImgUrl} />
             </Form.Group>
 
-            <Form.Group className="mb-3">
-                <Select value={category} onChange={(value: string) => setCategory(value as CollectionCategories)}
-                        label={t('Collection category')} options={options} />
-            </Form.Group>
+            <SelectCategory category={category} setCategory={setCategory} />
 
             <p>Add extra fields for your item:</p>
 

@@ -48,10 +48,10 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
             <Table hover responsive>
                 <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Tags</th>
-                    <th>Likes</th>
-                    <th>Created</th>
+                    <th>{t('Name')}</th>
+                    <th>{t('Tags')}</th>
+                    <th>{t('Likes')}</th>
+                    <th>{t('Created')}</th>
                     <th></th>
                     <th></th>
                 </tr>

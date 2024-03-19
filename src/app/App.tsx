@@ -17,14 +17,9 @@ function App() {
     useEffect(() => {
         const isAuth = localStorage.getItem(`${localStorageKeys.USER_ID}`);
         const isAdmin = localStorage.getItem(`${localStorageKeys.ADMIN}`);
-        const lang = localStorage.getItem(`${localStorageKeys.LANG}`);
 
         isAuth && dispatch(authActions.setIsAuth(true));
         isAdmin && dispatch(authActions.setIsAdmin(isAdmin !== 'false'));
-
-        if (lang) {
-            i18n.changeLanguage(lang);
-        }
     }, []);
 
     useEffect(() => {

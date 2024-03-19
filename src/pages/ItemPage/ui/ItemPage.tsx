@@ -15,9 +15,11 @@ import { AddLike } from '../../../features/AddLike';
 import { selectIsAuth } from '../../../features/AuthByUserName';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 import { itemPageActions } from '../model/slice/itemPageSlice';
+import { useTranslation } from 'react-i18next';
 
 const ItemPage = () => {
     const dispatch: AppDispatch = useDispatch();
+    const { t } = useTranslation();
     const { id } = useParams();
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const comments = useSelector(selectComments);
@@ -51,7 +53,7 @@ const ItemPage = () => {
             <BackButton />
             <ItemInfo />
             <AddLike />
-            <h5>Comments</h5>
+            <h5>{t('Comments')}</h5>
             {isAuth && <AddCommentForm onSendComment={handleSendComment} />}
             <CommentList comments={comments} isLoading={isLoading} />
 
