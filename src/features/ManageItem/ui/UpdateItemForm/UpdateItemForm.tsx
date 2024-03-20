@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchItemById, InputBooleanField, InputField, Item, PartialItem } from '../../../../entities/Item';
+import { fetchItemById, InputBooleanField, InputField, PartialItem, selectItem } from '../../../../entities/Item';
 import { useParams } from 'react-router-dom';
-import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
-import { selectItem } from '../../../../entities/Item/models/selectors/itemSelectors';
 import { ItemForm } from '../ItemForm/ItemForm';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     onUpdateItem: (data: PartialItem) => void;
@@ -15,8 +14,8 @@ interface Props {
 
 export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) => {
     const { id } = useParams();
+    const { t } = useTranslation();
     const dispatch: AppDispatch = useDispatch();
-    const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const item = useSelector(selectItem);
     const [name, setName] = useState<string>('');
     const [tags, setTags] = useState<string[]>([]);
@@ -80,13 +79,12 @@ export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) =>
         }
 
         e.preventDefault();
-        if (id && userId && itemId && onUpdateItem) {
-            const data: Omit<Item, 'like' | 'createdDate'> = {
+        if (id && itemId && onUpdateItem) {
+            const data: PartialItem = {
                 id: itemId,
                 name,
                 tags,
                 collectionId: Number(id),
-                userId: Number(userId),
                 stringFields,
                 textareaFields,
                 checkboxFields,
@@ -104,7 +102,7 @@ export const UpdateItemForm = ({ onCloseModal, itemId, onUpdateItem }: Props) =>
             setStringFields={setStringFields} textareaFields={textareaFields} tagsInput={tagsInput} setTagsInput={setTagsInput}
             setTextareaFields={setTextareaFields} checkboxFields={checkboxFields}
             setCheckboxFields={setCheckboxFields} dateFields={dateFields} setDateFields={setDateFields}
-            numberFields={numberFields} setNumberFields={setNumberFields} action={'Update'}
+            numberFields={numberFields} setNumberFields={setNumberFields} action={t('Update')}
             handleSubmit={handleSubmit}
         />
     );

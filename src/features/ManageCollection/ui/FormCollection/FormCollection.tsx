@@ -126,9 +126,8 @@ export const FormCollection = (props: Props) => {
             </div>
 
             {stringFields.map((field, index) => (
-                <div className={'mb-3'}>
-                    <Input
-                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                <div className={'mb-3'} key={index}>
+                    <Input type="text" value={field} placeholder={t('Enter field name')}
                         setValue={(value) => handleStringFields(value, index)} label={t('String')}
                     />
                 </div>

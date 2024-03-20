@@ -23,9 +23,11 @@ export const TagInput = ({ tags, setTags, tagsInput, setTagsInput }: Props) => {
     };
 
     const handleSuggestionClick = (selectedSuggestion: string) => {
-        setTagsInput('');
-        setTags([...tags, selectedSuggestion]);
-        setIsOpen(prev => !prev);
+        if (selectedSuggestion) {
+            setTagsInput('');
+            setTags([...tags, selectedSuggestion]);
+            setIsOpen(prev => !prev);
+        }
     };
 
     const onDeleteTag = useCallback((tagToRemove: string) => {

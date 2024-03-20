@@ -3,14 +3,17 @@ import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
 import { Item } from '../../../../entities/Item';
 import { getCurrentDate } from '../../../../shared/utils/getCurrentDate';
+import { selectCollectionOwnerId } from '../../../../entities/Collection';
 
-export const createItem = createAsyncThunk<Item, Omit<Item, 'id' | 'like' | 'createdDate'>, ThunkConfig<string>>(
+export const createItem = createAsyncThunk<Item, Partial<Item>, ThunkConfig<string>>(
     'collectionPage/createItem',
     async (item, thunkAPI) => {
         const currentDate = getCurrentDate();
+        const userId = selectCollectionOwnerId(thunkAPI.getState());
 
         const data = {
             ...item,
+            userId,
             like: {
                 count: 0,
                 usersId: [],

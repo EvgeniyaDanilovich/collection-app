@@ -24,6 +24,13 @@ export const Header = () => {
     const navigate = useNavigate();
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const [value, setValue] = useState('');
+    const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+    const onCloseMenu = () => {
+        if (showOffcanvas) {
+            setShowOffcanvas(false);
+        }
+    };
 
     const logoutUser = () => {
         dispatch(authActions.setIsAuth(false));
@@ -31,6 +38,8 @@ export const Header = () => {
         localStorage.removeItem(`${localStorageKeys.USER_ID}`);
         localStorage.removeItem(`${localStorageKeys.ADMIN}`);
         navigate(`${RoutePath.login}`);
+
+        onCloseMenu()
     };
 
     const onSearch = () => {
@@ -39,6 +48,7 @@ export const Header = () => {
                 navigate(`${RoutePath.search}`);
             }
             dispatch(fetchSearchData(value));
+            onCloseMenu()
         }
     };
 
@@ -46,30 +56,44 @@ export const Header = () => {
         <header className={'pb-3 pt-3 mb-0 mb-md-4'}>
             <Navbar expand="md">
                 <Container>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav" className={cls.burgerBtn} onClick={() => setShowOffcanvas(true)} />
                     <Navbar.Offcanvas
+                        show={showOffcanvas}
+                        onHide={onCloseMenu}
                         id={'offcanvasNavbar-expand-md'}
                         aria-labelledby={'offcanvasNavbarLabel-expand-md'}
                         placement="end"
                     >
                         <Offcanvas.Header className={cls.header} closeButton></Offcanvas.Header>
-                        <Offcanvas.Body className={cls.body} >
-                                <Nav className={'align-items-center column-gap-4 row-gap-3 mb-3'}>
-                                    <NavLink to={`${RoutePath.main}`} className={cls.link}>{t('Main page')}</NavLink>
-                                    <NavLink to={`${RoutePath.collections}`} className={cls.link}>{t('Collections')}</NavLink>
-                                    {isAdmin && <NavLink to={`${RoutePath.admin}`} className={cls.link}>{t('Admin page')}</NavLink>}
+                        <Offcanvas.Body className={cls.body}>
+                            <Nav className={'align-items-center column-gap-4 row-gap-3 mb-3'}>
+                                <NavLink to={`${RoutePath.main}`} className={cls.link} onClick={onCloseMenu}>
+                                    {t('Main page')}
+                                </NavLink>
+                                <NavLink to={`${RoutePath.collections}`} className={cls.link} onClick={onCloseMenu}>
+                                    {t('Collections')}
+                                </NavLink>
+                                {isAdmin && <NavLink to={`${RoutePath.admin}`} className={cls.link} onClick={onCloseMenu}>
+                                    {t('Admin page')}
+                                </NavLink>}
 
-                                    {isAuth ?
-                                        (<>
-                                            {userId && <NavLink to={`${RoutePath.profile}${userId}`} className={cls.link}>{t('My profile')}</NavLink>}
-                                            <div onClick={logoutUser} className={`${cls.logout} ${cls.text}`}>
-                                                {t('Log out')}
-                                                <Icon Svg={LogOutIcon} type={IconType.STROKE} />
-                                            </div>
-                                        </>)
+                                {isAuth ?
+                                    (<>
+                                        {userId && <NavLink to={`${RoutePath.profile}${userId}`} className={cls.link} onClick={onCloseMenu}>
+                                            {t('My profile')}
+                                        </NavLink>}
+                                        <div onClick={logoutUser} className={`${cls.logout} ${cls.text}`}>
+                                            {t('Log out')}
+                                            <Icon Svg={LogOutIcon} type={IconType.STROKE} />
+                                        </div>
+                                    </>)
                                         : (<>
-                                                <NavLink className={`ms-auto ${cls.linkSecond}`} to={`${RoutePath.login}`}>{t('Log in')}</NavLink>
-                                                <NavLink className={cls.linkSecond} to={`${RoutePath.signup}`}>{t('Sign up')}</NavLink>
+                                                <NavLink className={`ms-auto ${cls.linkSecond}`} to={`${RoutePath.login}`} onClick={onCloseMenu}>
+                                                    {t('Log in')}
+                                                </NavLink>
+                                                <NavLink className={cls.linkSecond} to={`${RoutePath.signup}`} onClick={onCloseMenu}>
+                                                    {t('Sign up')}
+                                                </NavLink>
                                             </>
                                         )
                                     }

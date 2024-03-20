@@ -251,6 +251,19 @@
       "dateFields": [],
       "numberFields": [],
       "id": 15
+    },
+    {
+      "userId": 2,
+      "name": "eva coll-n I",
+      "description": "",
+      "category": "Coins",
+      "imgUrl": "",
+      "stringFields": [],
+      "textareaFields": [],
+      "checkboxFields": [],
+      "dateFields": [],
+      "numberFields": [],
+      "id": 16
     }
   ],
   "items": [
@@ -968,6 +981,38 @@
       },
       "createdDate": "18.03.2024 17:07:42",
       "id": 36
+    },
+    {
+      "name": "Eva item I",
+      "tags": [],
+      "collectionId": 16,
+      "stringFields": [
+        {
+          "name": "Author",
+          "value": "St. Gee"
+        }
+      ],
+      "textareaFields": [],
+      "checkboxFields": [
+        {
+          "name": "Super old",
+          "value": true
+        }
+      ],
+      "dateFields": [],
+      "numberFields": [
+        {
+          "name": "year",
+          "value": "1951"
+        }
+      ],
+      "userId": 2,
+      "like": {
+        "count": 0,
+        "usersId": []
+      },
+      "createdDate": "20.03.2024 15:51:19",
+      "id": 37
     }
   ],
   "comments": [

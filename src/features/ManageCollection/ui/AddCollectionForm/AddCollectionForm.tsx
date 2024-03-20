@@ -56,7 +56,7 @@ export const AddCollectionForm = ({ onAddCollection, onCloseModal }: Props) => {
                         setStringFields={setStringFields} textareaFields={textareaFields}
                         setTextareaFields={setTextareaFields} checkboxFields={checkboxFields}
                         setCheckboxFields={setCheckboxFields} dateFields={dateFields} setDateFields={setDateFields}
-                        numberFields={numberFields} setNumberFields={setNumberFields} action={'Create'}
+                        numberFields={numberFields} setNumberFields={setNumberFields} action={t('Create')}
                         handleSubmit={handleSubmit} />
     );
 };

@@ -1,8 +1,8 @@
 .header {
     background-color: var(--bg-color);
-    &.btn-close{
-        background-color: #fff !important;
-        color: #fff !important;
+    .btn-close{
+        background-color: #fff;
+        color: #fff;
     }
 }
 
@@ -55,6 +55,10 @@
     position: absolute;
     top: 5px;
     right: 10px;
+}
+
+.burgerBtn {
+    background-color: #fff !important;
 }
 
 @media (max-width: 767.98px) {

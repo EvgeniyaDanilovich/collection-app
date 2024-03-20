@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { FormCollection } from '../FormCollection/FormCollection';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     collectionId: number | null;
@@ -13,6 +14,7 @@ interface Props {
 
 export const UpdateCollectionForm = ({ collectionId, onUpdateCollection, onCloseModal }: Props) => {
     const { id } = useParams();
+    const { t } = useTranslation();
     const dispatch: AppDispatch = useDispatch();
     const collection = useSelector(selectCollection);
 
@@ -83,7 +85,7 @@ export const UpdateCollectionForm = ({ collectionId, onUpdateCollection, onClose
                         setStringFields={setStringFields} textareaFields={textareaFields}
                         setTextareaFields={setTextareaFields} checkboxFields={checkboxFields}
                         setCheckboxFields={setCheckboxFields} dateFields={dateFields} setDateFields={setDateFields}
-                        numberFields={numberFields} setNumberFields={setNumberFields} action={'Update'}
+                        numberFields={numberFields} setNumberFields={setNumberFields} action={t('Update')}
                         handleSubmit={handleSubmit} />
     );
 };

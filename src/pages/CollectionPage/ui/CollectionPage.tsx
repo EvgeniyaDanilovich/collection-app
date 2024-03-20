@@ -43,7 +43,7 @@ const CollectionPage = () => {
         }
     }, [id]);
 
-    const handleCreateItem = useCallback((data: Omit<Item, 'id' | 'like' | 'createdDate'>) => {
+    const handleCreateItem = useCallback((data: Partial<Item>) => {
         dispatch(createItem(data));
     }, [dispatch]);
 

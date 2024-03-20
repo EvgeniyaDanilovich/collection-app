@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCollection } from '../../../../entities/Collection';
-import { InputBooleanField, InputField, Item, PartialItem } from '../../../../entities/Item';
+import { InputBooleanField, InputField, Item } from '../../../../entities/Item';
 import { useParams } from 'react-router-dom';
-import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ItemForm } from '../ItemForm/ItemForm';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
-    onAddItem: (data: Omit<Item, 'id' | 'like' | 'createdDate'>) => void;
+    onAddItem: (data: Partial<Item>) => void;
     onCloseModal: () => void;
 }
 
 export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
     const { id } = useParams();
-    const userId = localStorage.getItem(localStorageKeys.USER_ID);
+    const { t } = useTranslation();
     const collection = useSelector(selectCollection);
     const [name, setName] = useState<string>('');
     const [tags, setTags] = useState<string[]>([]);
@@ -68,12 +68,11 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
         }
 
         e.preventDefault();
-        if (id && userId && onAddItem) {
-            const data: Omit<Item, 'id' | 'like' | 'createdDate'> = {
+        if (id && onAddItem) {
+            const data: Partial<Item> = {
                 name,
                 tags,
                 collectionId: Number(id),
-                userId: Number(userId),
                 stringFields,
                 textareaFields,
                 checkboxFields,
@@ -91,7 +90,7 @@ export const AddItemForm = ({ onAddItem, onCloseModal }: Props) => {
            stringFields={stringFields} setStringFields={setStringFields} textareaFields={textareaFields}
            setTextareaFields={setTextareaFields} checkboxFields={checkboxFields}
            setCheckboxFields={setCheckboxFields} dateFields={dateFields} setDateFields={setDateFields}
-           numberFields={numberFields} setNumberFields={setNumberFields} action={'Create'}
+           numberFields={numberFields} setNumberFields={setNumberFields} action={t('Create')}
            handleSubmit={handleSubmit}
        />
     );
