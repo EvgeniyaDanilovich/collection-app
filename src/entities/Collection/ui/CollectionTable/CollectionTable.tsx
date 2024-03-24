@@ -11,14 +11,16 @@ import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/edit.svg';
 import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/delete.svg';
 import { Icon, IconColor, IconHover, IconType } from '../../../../shared/ui/Icon/Icon';
+import { TableSkeleton } from '../../../../shared/ui/TableSkeleton/TableSkeleton';
 
 interface Props {
     collections: Collection[];
     onDeleteCollection?: (id: number) => void;
     onEdit?: (id: number) => void;
+    isLoading: boolean;
 }
 
-export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }: Props) => {
+export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit, isLoading }: Props) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const isAdmin = useSelector(selectIsAdmin);
@@ -43,6 +45,10 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
         }
     };
 
+    if (isLoading) {
+        return <TableSkeleton titles={[t('Name'), t('Category')]} />
+    }
+
     return (
         <div className={'Table'}>
             <Table hover responsive>
@@ -65,7 +71,7 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
                                             <Icon Svg={EditIcon} type={IconType.FILL} color={IconColor.STANDARD} />
                                         </td>
                                         <td onClick={(e) => handleDelete(e, collection.id)} className={cls.smallCell}>
-                                            <Icon Svg={DeleteIcon} type={IconType.STROKE} color={IconColor.STANDARD} hover={IconHover.RED}/>
+                                            <Icon Svg={DeleteIcon} type={IconType.STROKE} color={IconColor.STANDARD} hover={IconHover.RED} />
                                         </td>
                                     </>
                                 ) :
@@ -74,7 +80,8 @@ export const CollectionTable = memo(({ collections, onDeleteCollection, onEdit }
                                         <td></td>
                                         <td></td>
                                     </>
-                                )}
+                                )
+                            }
                         </tr>
                     ))
                     : (<tr>

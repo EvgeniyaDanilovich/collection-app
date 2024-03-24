@@ -11,14 +11,16 @@ import { localStorageKeys } from '../../../../shared/const/localStorage';
 import { ReactComponent as EditIcon } from '../../../../shared/assets/icons/edit.svg';
 import { ReactComponent as DeleteIcon } from '../../../../shared/assets/icons/delete.svg';
 import { Icon, IconColor, IconHover, IconType } from '../../../../shared/ui/Icon/Icon';
+import { TableSkeleton } from '../../../../shared/ui/TableSkeleton/TableSkeleton';
 
 interface Props {
     items: Item[];
     onDeleteItem?: (id: number) => void;
     onEdit?: (id: number) => void;
+    isLoading: boolean;
 }
 
-export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
+export const ItemsTable = memo(({ items, onDeleteItem, onEdit, isLoading }: Props) => {
     const navigate = useNavigate();
     const { t } = useTranslation();
     const isAdmin = useSelector(selectIsAdmin);
@@ -42,6 +44,11 @@ export const ItemsTable = memo(({ items, onDeleteItem, onEdit }: Props) => {
             onEdit(itemId);
         }
     };
+
+    if(isLoading){
+        const titles = [t('Name'), t('Tags'), t('Likes'), t('Created')]
+        return <TableSkeleton titles={titles} />
+    }
 
     return (
         <div className={'Table'}>

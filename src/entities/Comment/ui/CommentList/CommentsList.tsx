@@ -5,34 +5,28 @@ import { CommentCard } from '../CommentCard/CommentCard';
 
 interface CommentListProps {
     comments?: Comment[];
-    isLoading?: boolean;
+    isLoading: boolean;
 }
 
-export const CommentList = memo((props: CommentListProps) => {
-    const { isLoading, comments } = props;
+export const CommentList = memo(({ isLoading, comments }: CommentListProps) => {
     const { t } = useTranslation();
-
-    if (isLoading) {
-        return (
-            <div>
-                <CommentCard isLoading />
-                <CommentCard isLoading />
-                <CommentCard isLoading />
-            </div>
-        );
-    }
 
     return (
         <div>
-            {comments?.length
-                ? comments.map((comment) => (
-                    <CommentCard
-                        isLoading={isLoading}
-                        comment={comment}
-                        key={comment.id}
-                    />
-                ))
-                : <p>{t('No comments')}</p>}
+            {!!comments?.length &&
+                 comments.map((comment) => (
+                    <CommentCard comment={comment} key={comment.id} />
+                ))}
+
+            {isLoading && (
+                <>
+                    <CommentCard isLoading />
+                    <CommentCard isLoading />
+                    <CommentCard isLoading />
+                </>
+            )}
+
+            {!comments?.length && !isLoading && (<p>{t('No comments')}</p>)}
         </div>
     );
 });

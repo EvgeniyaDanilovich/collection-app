@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCollections, selectError } from '../model/selectors/collectionsPageSelectors';
+import { selectCollections, selectError, selectIsLoading } from '../model/selectors/collectionsPageSelectors';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { fetchCollections } from '../model/services/fetchCollections';
 import { CollectionTable } from '../../../entities/Collection';
@@ -13,6 +13,7 @@ const CollectionsPage = () => {
     const error = useSelector(selectError);
     const dispatch: AppDispatch = useDispatch();
     const { t } = useTranslation();
+    const isLoading = useSelector(selectIsLoading);
 
     useEffect(()=> {
         dispatch(fetchCollections());
@@ -25,7 +26,7 @@ const CollectionsPage = () => {
     return (
         <div>
             <h2>{t('Collections')}</h2>
-            <CollectionTable collections={collections} />
+            <CollectionTable collections={collections} isLoading={isLoading} />
 
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>

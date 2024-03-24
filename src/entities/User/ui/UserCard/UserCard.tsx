@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect } from 'react';
 import { Badge, Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectError, selectUser } from '../../model/selectors/userSelectors';
+import { selectError, selectIsLoading, selectUser } from '../../model/selectors/userSelectors';
 import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
 import { fetchUserById } from '../../model/services/fetchUserById';
 import { useParams } from 'react-router-dom';
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { userActions } from '../../model/slice/userSlice';
 import { useTranslation } from 'react-i18next';
+import { UserCardSkeleton } from '../UserCardSkeleton/UserCardSkeleton';
 
 export const UserCard = () => {
     const user = useSelector(selectUser);
     const error = useSelector(selectError);
+    const isLoading = useSelector(selectIsLoading);
     const dispatch: AppDispatch = useDispatch();
     const { t } = useTranslation();
     const { id } = useParams();
@@ -25,6 +27,10 @@ export const UserCard = () => {
     const handleCloseError = useCallback(() => {
         dispatch(userActions.setError(undefined));
     }, [dispatch]);
+
+    if (isLoading) {
+        return <UserCardSkeleton />;
+    }
 
     return (
         <>

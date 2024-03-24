@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addCollection } from '../model/services/addCollection';
 import { Collection, CollectionTable } from '../../../entities/Collection';
 import { fetchCollectionsByUserId } from '../model/services/fetchCollectionsByUserId';
-import { selectCollections, selectError } from '../model/selectors/profileSelectors';
+import { selectCollections, selectError, selectIsLoading } from '../model/selectors/profileSelectors';
 import { ModalComponent } from '../../../shared/ui/Modal/Modal';
 import { Button } from 'react-bootstrap';
 import { deleteCollection } from '../model/services/deleteCollection';
@@ -25,6 +25,7 @@ const ProfilePage = () => {
     const isAdmin = useSelector(selectIsAdmin);
     const isAuth = useSelector(selectIsAuth);
     const error = useSelector(selectError);
+    const isLoading = useSelector(selectIsLoading);
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
 
     const dispatch: AppDispatch = useDispatch();
@@ -74,7 +75,7 @@ const ProfilePage = () => {
             </div>
 
             <CollectionTable collections={collections} onDeleteCollection={onDeleteCollection}
-                             onEdit={handleEdit} />
+                             onEdit={handleEdit} isLoading={isLoading} />
 
             <ModalComponent title={t('Create new collection')} status={modal} onClose={() => setModal(false)}>
                 <AddCollectionForm onAddCollection={onAddCollection} onCloseModal={() => setModal(false)} />

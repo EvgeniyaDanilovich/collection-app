@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { ItemsTable } from '../../../entities/Item';
-import { selectError, selectSearchedCollections, selectSearchedItems } from '../model/selectors/searchPageSelectors';
+import { selectError, selectIsLoading, selectSearchedCollections, selectSearchedItems } from '../model/selectors/searchPageSelectors';
 import { CollectionTable } from '../../../entities/Collection';
 import { useTranslation } from 'react-i18next';
 import { searchPageActions } from '../model/slice/searchPageSlice';
@@ -14,6 +14,7 @@ const SearchPage = () => {
     const items = useSelector(selectSearchedItems);
     const collections = useSelector(selectSearchedCollections);
     const error = useSelector(selectError);
+    const isLoading = useSelector(selectIsLoading);
 
     useEffect(() => {
         return () => {
@@ -31,13 +32,13 @@ const SearchPage = () => {
             {!!items.length &&
                 <>
                     <p className={'text-uppercase'}>{t('Items')}</p>
-                    <ItemsTable items={items} />
+                    <ItemsTable items={items} isLoading={isLoading} />
                 </>
             }
             {!!collections.length &&
                 <>
                     <p className={'text-uppercase'}>{t('Collections')}</p>
-                    <CollectionTable collections={collections} />
+                    <CollectionTable collections={collections} isLoading={isLoading} />
                 </>
             }
             {!items.length && !collections.length && (

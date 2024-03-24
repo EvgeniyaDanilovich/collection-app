@@ -8,11 +8,12 @@ import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterByTags } from '../../SearchPage';
 import { fetchBiggestCollections } from '../model/services/fetchBiggestCollections';
-import { selectBiggestCollections, selectError, selectLastAddedItems } from '../model/selectors/mainPageSelectors';
+import { selectBiggestCollections, selectError, selectIsLoading, selectLastAddedItems } from '../model/selectors/mainPageSelectors';
 import { CollectionTable } from '../../../entities/Collection';
 import { ItemCardList } from '../../../entities/Item';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 import { mainPageActions } from '../model/slice/MainPageSlice';
+import { Placeholder } from 'react-bootstrap';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -21,11 +22,14 @@ const MainPage = () => {
     const items = useSelector(selectLastAddedItems);
     const collections = useSelector(selectBiggestCollections);
     const error = useSelector(selectError);
+    const isLoading = useSelector(selectIsLoading);
 
     const onSearch = useCallback((tag: string) => {
         navigate(RoutePath.search);
         dispatch(filterByTags(tag));
     }, []);
+
+    console.log(isLoading);
 
     useEffect(() => {
         dispatch(fetchBiggestCollections());
@@ -38,9 +42,9 @@ const MainPage = () => {
     return (
         <div>
             <h3 className={'mb-3'}>{t('Last added items')}</h3>
-            <ItemCardList items={items} />
+            <ItemCardList items={items} isLoading={isLoading} />
             <h3>{t('The biggest collections')}</h3>
-            <CollectionTable collections={collections} />
+            <CollectionTable collections={collections} isLoading={isLoading} />
             <h3 className={'mb-3 mt-5'}>{t('Tag collection')}</h3>
             <TagsList tags={suggestionsTags} handleClick={onSearch} />
 

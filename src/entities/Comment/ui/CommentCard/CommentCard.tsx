@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 import cls from './CommentCard.module.scss';
 import { Comment } from '../../model/types/comment';
 import { Placeholder } from 'react-bootstrap';
@@ -11,41 +11,42 @@ interface CommentCardProps {
     isLoading?: boolean;
 }
 
-export const CommentCard = memo((props: CommentCardProps) => {
-    const { comment, isLoading } = props;
+export const CommentCard = memo(({ comment, isLoading }: CommentCardProps) => {
     const navigate = useNavigate();
 
     if (isLoading) {
         return (
-            <div className={`${cls.CommentCard} ${cls.loading}`}>
-                <div className={cls.header}>
-                    {/* <Skeleton width={30} height={30} border="50%" /> */}
-                    <Placeholder animation={'wave'} border="50%" width={30} height={30} />
-                    <Placeholder animation={'wave'} border="50%" width={100} height={16} className={cls.username} />
-                    {/* <Skeleton height={16} width={100} className={cls.username} /> */}
+            <div className={cls.CommentCard}>
+                <div className={cls.userField}>
+                    <Placeholder as={'p'} animation="glow">
+                        <Placeholder xs={4} style={{ height: '28px', width: '28px', borderRadius: '50%' }} />
+                    </Placeholder>
+                    <Placeholder as={'p'} animation="glow">
+                        <Placeholder xs={6} style={{ height: '18px', width: '150px',}}  />
+                    </Placeholder>
                 </div>
-                {/* <Skeleton className={cls.text} width="100%" height={50} /> */}
-                <Placeholder animation={'wave'} border="50%" width={'100%'} height={50} className={cls.text} />
-
+                <Placeholder as={'p'} animation="glow">
+                    <Placeholder xs={12} style={{ height: '50px' }} />
+                </Placeholder>
             </div>
         );
     }
 
-    if (!comment) {
-        return null;
-    }
-
     const redirectToUser = () => {
-        navigate(`${RoutePath.profile}${comment.userId}`);
-    }
+        navigate(`${RoutePath.profile}${comment?.userId}`);
+    };
 
     return (
-        <div className={cls.CommentCard}>
-            <div className={cls.userField} onClick={redirectToUser}>
-                <UserIcon className={cls.user} />
-                <p>{comment.user?.username}</p>
-            </div>
-            <p className={cls.text}>{comment.text}</p>
-        </div>
+        <>
+            {comment &&
+                <div className={cls.CommentCard}>
+                    <div className={cls.userField} onClick={redirectToUser}>
+                        <UserIcon className={cls.user} />
+                        <p>{comment.user?.username}</p>
+                    </div>
+                    <p className={cls.text}>{comment.text}</p>
+                </div>
+            }
+        </>
     );
 });

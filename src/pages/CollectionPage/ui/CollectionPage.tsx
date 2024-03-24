@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createItem } from '../model/services/createItem';
 import { Item, ItemsTable, PartialItem } from '../../../entities/Item';
 import { fetchItems } from '../model/services/fetchItems';
-import { selectError, selectItems, selectTags } from '../model/selectors/collectionPageSelectors';
+import { selectError, selectIsLoading, selectItems, selectTags } from '../model/selectors/collectionPageSelectors';
 import { deleteItem } from '../model/services/deleteItem';
 import { updateItem } from '../model/services/updateItem';
 import { AddItemForm, UpdateItemForm } from '../../../features/ManageItem';
@@ -22,6 +22,7 @@ const CollectionPage = () => {
     const items = useSelector(selectItems);
     const tags = useSelector(selectTags);
     const error = useSelector(selectError);
+    const isLoading = useSelector(selectIsLoading);
     const { id } = useParams();
     const { t } = useTranslation();
     const [modal, setModal] = useState<boolean>(false);
@@ -70,7 +71,7 @@ const CollectionPage = () => {
             <CollectionCard openModal={()=> setModal(true)} />
 
             <ItemSortBar onSort={handleSort} tags={tags} />
-            <ItemsTable items={items} onDeleteItem={handleDeleteItem} onEdit={handleEdit} />
+            <ItemsTable items={items} onDeleteItem={handleDeleteItem} onEdit={handleEdit} isLoading={isLoading} />
 
             <ModalComponent title={t('Create new item')} status={modal} onClose={() => setModal(false)}>
                 <AddItemForm onAddItem={handleCreateItem} onCloseModal={() => setModal(false)} />
