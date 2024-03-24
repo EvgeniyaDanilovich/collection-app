@@ -4,8 +4,7 @@ import { MainPageSchema } from '../types/mainPageSchema';
 import { ItemWithDetails } from '../../../../entities/Item';
 
 const initialState: MainPageSchema = {
-    lastAddedItems: [],
-    biggestCollections: [],
+    mainPageItems: [],
     isLoading: false,
     error: undefined
 };
@@ -25,34 +24,7 @@ export const mainPageSlice = createSlice({
         });
         builder.addCase(fetchBiggestCollections.fulfilled, (state, action: PayloadAction<ItemWithDetails[]>) => {
             state.isLoading = false;
-            state.lastAddedItems = action.payload.slice(-5);
-
-            action.payload.sort((a, b) => a.collectionId - b.collectionId);
-
-            const collectionCounts: any = {};
-            action.payload.forEach(item => {
-                if (collectionCounts[item.collectionId] === undefined) {
-                    collectionCounts[item.collectionId] = 1;
-                } else {
-                    collectionCounts[item.collectionId]++;
-                }
-            });
-
-            const sortedCollections = Object.keys(collectionCounts)
-                .sort((a, b) => collectionCounts[b] - collectionCounts[a])
-                .slice(0, 5);
-
-            const uniqueCollectionsMap = new Map();
-
-            sortedCollections.forEach(collectionId => {
-                action.payload.forEach(item => {
-                    if (item.collectionId.toString() === collectionId && !uniqueCollectionsMap.has(item.collection.id)) {
-                        uniqueCollectionsMap.set(item.collection.id, item.collection);
-                    }
-                });
-            });
-
-            state.biggestCollections = Array.from(uniqueCollectionsMap.values());
+            state.mainPageItems = action.payload;
         });
         builder.addCase(fetchBiggestCollections.rejected, (state, action: PayloadAction<any>) => {
             state.isLoading = false;
