@@ -8,10 +8,10 @@ import { AppRouter } from './providers/router';
 import { useTranslation } from 'react-i18next';
 import { Container } from 'react-bootstrap';
 import { useTheme } from './providers/ThemeProvider';
+import { Footer } from '../widgets/Footer';
 
 function App() {
     const dispatch: AppDispatch = useDispatch();
-    const { i18n } = useTranslation();
     const { theme } = useTheme();
 
     useEffect(() => {
@@ -29,9 +29,10 @@ function App() {
     return (
         <div className={'app'}>
             <Header />
-            <Container>
+            <Container className={'container'}>
                 <AppRouter />
             </Container>
+            <Footer />
         </div>
     );
 }
