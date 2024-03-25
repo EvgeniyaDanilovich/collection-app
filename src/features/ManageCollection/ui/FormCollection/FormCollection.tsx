@@ -126,7 +126,7 @@ export const FormCollection = (props: Props) => {
             </div>
 
             {stringFields.map((field, index) => (
-                <div className={'mb-3'} key={index}>
+                <div className={'mb-3'} key={field + index}>
                     <Input type="text" value={field} placeholder={t('Enter field name')}
                         setValue={(value) => handleStringFields(value, index)} label={t('String')}
                     />
@@ -134,36 +134,33 @@ export const FormCollection = (props: Props) => {
             ))}
 
             {textareaFields.map((field, index) => (
-                <div className={'mb-3'}>
+                <div className={'mb-3'} key={field + index}>
                     <Input
-                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                        type="text" value={field} placeholder={t('Enter field name')}
                         setValue={(value) => handleTextareaFields(value, index)} label={t('Textarea')}
                     />
                 </div>
             ))}
 
             {checkboxFields.map((field, index) => (
-                <div className={'mb-3'}>
-                    <Input
-                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                <div className={'mb-3'} key={field + index}>
+                    <Input type="text" value={field} placeholder={t('Enter field name')}
                         setValue={(value) => handleCheckboxFields(value, index)} label={t('Checkbox')}
                     />
                 </div>
             ))}
 
             {dateFields.map((field, index) => (
-                <div className={'mb-3'}>
-                    <Input
-                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                <div className={'mb-3'} key={field + index}>
+                    <Input type="text" value={field} placeholder={t('Enter field name')}
                         setValue={(value) => handleDateFields(value, index)} label={t('Date')}
                     />
                 </div>
             ))}
 
             {numberFields.map((field, index) => (
-                <div className={'mb-3'}>
-                    <Input
-                        key={index} type="text" value={field} placeholder={t('Enter field name')}
+                <div className={'mb-3'}  key={field + index}>
+                    <Input type="text" value={field} placeholder={t('Enter field name')}
                         setValue={(value) => handleNumberFields(value, index)} label={t('Number')}
                     />
                 </div>

@@ -13,7 +13,6 @@ import { CollectionTable } from '../../../entities/Collection';
 import { ItemCardList } from '../../../entities/Item';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 import { mainPageActions } from '../model/slice/MainPageSlice';
-import { Placeholder } from 'react-bootstrap';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -28,8 +27,6 @@ const MainPage = () => {
         navigate(RoutePath.search);
         dispatch(filterByTags(tag));
     }, []);
-
-    console.log(isLoading);
 
     useEffect(() => {
         dispatch(fetchBiggestCollections());

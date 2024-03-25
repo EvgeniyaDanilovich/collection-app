@@ -48,13 +48,17 @@ const ItemPage = () => {
         dispatch(itemPageActions.setError(undefined));
     }, [dispatch]);
 
+    const handleFetchComments = useCallback((id: string)=> {
+        dispatch(fetchComments(id));
+    }, []);
+
     return (
         <div>
             <BackButton />
             <ItemInfo />
             <AddLike />
             <h5>{t('Comments')}</h5>
-            {isAuth && <AddCommentForm onSendComment={handleSendComment} />}
+            {isAuth && <AddCommentForm onSendComment={handleSendComment} fetchComments={handleFetchComments} />}
             <CommentList comments={comments} isLoading={isLoading} />
 
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
