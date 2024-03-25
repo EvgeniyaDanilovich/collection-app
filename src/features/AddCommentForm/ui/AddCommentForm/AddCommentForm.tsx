@@ -19,8 +19,8 @@ export const AddCommentForm = memo(({ onSendComment, fetchComments }: Props) => 
     const { id: itemId } = useParams();
 
     useEffect(() => {
-        const socket = new WebSocket('ws://localhost:8000/socket');
-        // const socket = new WebSocket('wss://drawtaskserver-g5jl791w.b4a.run/socket');
+        // const socket = new WebSocket('ws://localhost:8000/socket');
+        const socket = new WebSocket('wss://collectionappserver-qn76hsor.b4a.run/socket');
         socketRef.current = socket;
 
         socket.onopen = () => {
