@@ -923,8 +923,10 @@
       "dateFields": [],
       "numberFields": [],
       "like": {
-        "count": 0,
-        "usersId": []
+        "count": 1,
+        "usersId": [
+          1
+        ]
       },
       "createdDate": "16.03.2024 22:54:19",
       "id": 26

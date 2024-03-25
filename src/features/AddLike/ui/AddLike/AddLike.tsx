@@ -45,7 +45,7 @@ export const AddLike = () => {
 
     return (
         <div className={'d-flex align-self-center gap-1 mb-5 mt-2'}>
-            <div>{likesCount}</div>
+            {likesCount && <div>{likesCount}</div>}
             <div onClick={handleLike}>
                 {likedByUser ? <Icon Svg={FullLickIcon} type={IconType.FILL} color={IconColor.RED} hover={IconHover.RED} />
                     : <Icon Svg={LickIcon} type={IconType.FILL} color={IconColor.RED} hover={IconHover.RED} />}

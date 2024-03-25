@@ -60,8 +60,15 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
     }, [sort, order, setSort]);
 
     const handleFilter = useCallback((tag: string) => {
-        setTag(tag);
-        onSort(sort, order, tag);
+        if (tag === 'All') {
+            setTag('');
+            onSort(sort, order, '');
+        } else {
+            setTag(tag);
+            onSort(sort, order, tag);
+        }
+        // tag === 'All' ? setTag('') : setTag(tag);
+        // tag === 'All' ? onSort(sort, order, '') : onSort(sort, order, tag);
     }, [sort, order, setSort, tag]);
 
     return (
@@ -77,8 +84,8 @@ export const ItemSortBar = ({ onSort, tags }: Props) => {
                 </div>
             </div>
             <div className={'d-flex gap-2 mt-3'}>
-                <span onClick={() => handleFilter('')} className={'tag'}>#All</span>
-                <TagsList tags={tags} handleClick={handleFilter} />
+                {/* <span onClick={() => handleFilter('')} className={'tag'}>#All</span> */}
+                <TagsList tags={[t('All'), ...tags]} handleClick={handleFilter} />
             </div>
         </div>
     );

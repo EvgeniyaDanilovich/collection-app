@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { User } from '../../../entities/User';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
@@ -18,9 +18,10 @@ interface Props {
     users: User[];
     onUpdateUser: (userId: number, newData: { status?: string, admin?: boolean }) => void;
     onDelete: (userId: number) => void;
+    isUpdating: boolean;
 }
 
-export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
+export const AdminBar = ({ users, onUpdateUser, onDelete, isUpdating }: Props) => {
     const dispatch: AppDispatch = useDispatch();
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -68,22 +69,30 @@ export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
                 }
             }
         });
-
     };
 
     return (
         <div className={'d-flex gap-3 align-items-center'}>
-            <div onClick={() => handleStatus('Blocked')} className={cls.btnArea}>
+            <div onClick={() => handleStatus('Blocked')}
+                 className={`${cls.btnArea} ${isUpdating ? cls.disabled : ''}`}>
                 <Icon Svg={BlockIcon} type={IconType.STROKE} />
             </div>
-            <div onClick={() => handleStatus('Active')} className={cls.btnArea}>
+            <div onClick={() => handleStatus('Active')}
+                 className={`${cls.btnArea} ${isUpdating ? cls.disabled : ''}`}>
                 <Icon Svg={UnblockIcon} type={IconType.STROKE} />
             </div>
-            <div onClick={onDeleteUser} className={cls.delete}>
+            <div onClick={onDeleteUser}
+                 className={`${cls.delete} ${isUpdating ? cls.disabled : ''}`}>
                 <Icon Svg={DeleteIcon} type={IconType.STROKE} hover={IconHover.RED} />
             </div>
-            <Button onClick={() => handleAdmin(true)}>{t('Appoint as admin')}</Button>
-            <Button onClick={() => handleAdmin(false)}>{t('Delete from admin')}</Button>
+            <Button onClick={() => handleAdmin(true)} disabled={isUpdating}>
+                {t('Appoint as admin')}
+            </Button>
+            <Button onClick={() => handleAdmin(false)} disabled={isUpdating}>
+                {t('Delete from admin')}
+            </Button>
+
+            {isUpdating && <Spinner animation="border" variant="secondary" />}
         </div>
     );
 };

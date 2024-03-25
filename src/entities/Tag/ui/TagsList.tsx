@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 
 interface Props {
     tags: string[];
@@ -7,9 +7,12 @@ interface Props {
 }
 
 export const TagsList = memo(({tags, handleClick, hover = true}: Props) => {
+    const [activeTag, setActiveTag] = useState<string | null>(null);
+
     const onClick = (tag: string) => {
         if (handleClick) {
             handleClick(tag);
+            setActiveTag(tag);
         }
     };
 
@@ -17,7 +20,10 @@ export const TagsList = memo(({tags, handleClick, hover = true}: Props) => {
         <div className={'d-flex flex-row flex-wrap gap-2'}>
             {!!tags.length && tags.map(tag => {
                 return (
-                    <span key={tag} onClick={() => onClick(tag)} className={`tag ${hover ? '' : 'hover'}`}>#{tag}</span>
+                    <span key={tag} onClick={() => onClick(tag)}
+                          className={`tag ${hover ? '' : 'hover'} ${activeTag === tag ? 'active' : ''}`}>
+                        #{tag}
+                    </span>
                 );
             })}
         </div>

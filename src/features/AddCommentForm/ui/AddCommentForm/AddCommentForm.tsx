@@ -4,8 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
 import cls from './AddCommentForm.module.scss';
 import { useParams } from 'react-router-dom';
-import { AppDispatch } from '../../../../app/providers/StoreProvider/config/store';
-import { useDispatch } from 'react-redux';
 
 interface Props {
     onSendComment: (value: string) => void;

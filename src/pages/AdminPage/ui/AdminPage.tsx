@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectError, selectIsLoading, selectUsers } from '../model/selectors/adminSelectors';
+import { selectError, selectIsLoading, selectIsUpdating, selectUsers } from '../model/selectors/adminSelectors';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { fetchUsers } from '../model/services/fetchUsers';
 import { UsersTable } from '../../../entities/User';
@@ -19,6 +19,7 @@ const AdminPage = () => {
     const isAdmin = useSelector(selectIsAdmin);
     const error = useSelector(selectError);
     const isLoading = useSelector(selectIsLoading);
+    const isUpdating = useSelector(selectIsUpdating);
 
     useEffect(() => {
         dispatch(fetchUsers());
@@ -42,7 +43,7 @@ const AdminPage = () => {
 
     return (
         <div>
-            <AdminBar users={users} onUpdateUser={onUpdateUser} onDelete={onDeleteUser} />
+            <AdminBar users={users} onUpdateUser={onUpdateUser} onDelete={onDeleteUser} isUpdating={isUpdating} />
             <UsersTable users={users} isLoading={isLoading} />
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </div>
