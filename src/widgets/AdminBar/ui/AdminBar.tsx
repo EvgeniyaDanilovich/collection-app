@@ -73,8 +73,10 @@ export const AdminBar = ({ users, onUpdateUser, onDelete }: Props) => {
 
     return (
         <div className={'d-flex gap-3 align-items-center'}>
-            <div onClick={() => handleStatus('Blocked')}><Icon Svg={BlockIcon} type={IconType.STROKE} /></div>
-            <div onClick={() => handleStatus('Active')}>
+            <div onClick={() => handleStatus('Blocked')} className={cls.btnArea}>
+                <Icon Svg={BlockIcon} type={IconType.STROKE} />
+            </div>
+            <div onClick={() => handleStatus('Active')} className={cls.btnArea}>
                 <Icon Svg={UnblockIcon} type={IconType.STROKE} />
             </div>
             <div onClick={onDeleteUser} className={cls.delete}>

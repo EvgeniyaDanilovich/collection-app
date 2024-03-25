@@ -1,6 +1,29 @@
-.delete {
+.btnArea {
+    border: 1px solid var(--color);
+    border-radius: 4px;
+    padding: 3px 10px;
+    cursor: pointer;
     svg{
         width: 28px;
-        height: 30px;
+        height: 26px;
+    }
+
+    &:hover{
+        border: 1px solid var(--hover-color);
+
+        path {
+            stroke: var(--hover-color);
+        }
+    }
+}
+
+.delete {
+   @extend .btnArea;
+    &:hover{
+        border: 1px solid var(--error-color);
+
+        path {
+            stroke: var(--error-color);
+        }
     }
 }
