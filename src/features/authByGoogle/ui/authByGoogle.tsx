@@ -9,11 +9,14 @@ declare global {
 export const AuthByGoogle = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+    const handleCredentialResponse = (response: any) => {
+        console.log(response);
+    }
+
     useEffect(() => {
         const script = document.createElement('script');
         script.src = 'https://accounts.google.com/gsi/client';
         // script.onload = initGoogleSignIn;
-        document.body.appendChild(script);
 
         script.onload = () => {
             window.google.accounts.id.initialize({
@@ -21,11 +24,8 @@ export const AuthByGoogle = () => {
                 callback: handleCredentialResponse
             });
         };
+        document.body.appendChild(script);
     }, []);
-
-    const handleCredentialResponse = (response: any) => {
-        console.log(response);
-    }
 
     return (
         <div>
