@@ -88,7 +88,7 @@ export const Header = () => {
                                         </div>
                                     </>)
                                         : (<>
-                                                <NavLink className={`ms-auto ${cls.linkSecond}`} to={`${RoutePath.login}`} onClick={onCloseMenu}>
+                                                <NavLink className={`${cls.logIn}`} to={`${RoutePath.login}`} onClick={onCloseMenu}>
                                                     {t('Log in')}
                                                 </NavLink>
                                                 <NavLink className={cls.linkSecond} to={`${RoutePath.signup}`} onClick={onCloseMenu}>

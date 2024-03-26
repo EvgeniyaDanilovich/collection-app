@@ -13,6 +13,7 @@ import { CollectionTable } from '../../../entities/Collection';
 import { ItemCardList } from '../../../entities/Item';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 import { mainPageActions } from '../model/slice/MainPageSlice';
+import { AuthByGoogle } from '../../../features/authByGoogle';
 
 const MainPage = () => {
     const { t } = useTranslation();
@@ -38,6 +39,7 @@ const MainPage = () => {
 
     return (
         <div>
+            <AuthByGoogle />
             <h3 className={'mb-3'}>{t('Last added items')}</h3>
             <ItemCardList items={items} isLoading={isLoading} />
             <h3>{t('The biggest collections')}</h3>

@@ -40,6 +40,10 @@
     text-transform: none;
 }
 
+.logIn {
+    @extend .linkSecond;
+    margin-left: auto;
+}
 
 .text {
     color: var(--color);
@@ -70,5 +74,9 @@
     .searchInput {
         width: 100%;
         margin: 20px 0 30px;
+    }
+
+    .logIn {
+        margin-left: 0;
     }
 }
