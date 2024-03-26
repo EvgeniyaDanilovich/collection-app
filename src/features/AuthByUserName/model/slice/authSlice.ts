@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AuthSchema } from '../types/authSchema';
 import { loginUser } from '../services/loginUser';
 import { User } from '../../../../entities/User';
+import { signupUser } from '../services/signupUser';
 
 const initialState: AuthSchema = {
     isAuth: false,
@@ -34,9 +35,23 @@ export const authSlice = createSlice({
         builder.addCase(loginUser.fulfilled, (state, action: PayloadAction<User>) => {
             state.isAuth = true;
             state.isAdmin = action.payload.admin;
+            state.error = undefined;
             state.isLoading = false;
         });
         builder.addCase(loginUser.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload;
+        });
+
+        builder.addCase(signupUser.pending, (state) => {
+            state.error = undefined;
+            state.isLoading = true;
+        });
+        builder.addCase(signupUser.fulfilled, (state, action: PayloadAction<User>) => {
+            state.error = undefined;
+            state.isLoading = false;
+        });
+        builder.addCase(signupUser.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload;
         });

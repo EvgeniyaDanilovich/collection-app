@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
+import { useDispatch } from 'react-redux';
+import { signupUser } from '../../AuthByUserName/model/services/signupUser';
+import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
+import { useNavigate } from 'react-router-dom';
+import { loginUser } from '../../AuthByUserName/model/services/loginUser';
 
-export const AuthByGoogle = () => {
-    const [ userToken, setUserToken ] = useState('');
-    const [ user, setUser ] = useState<any>(null);
+export enum AuthActionType {
+    LOGIN = 'login',
+    SIGNUP = 'signup'
+}
 
-    const responseMessage = (response: any) => {
-        console.log(response);
-        setUserToken(response.credential)
-    };
-    const errorMessage = () => {
-        console.log('error');
-    };
+interface Props {
+    authActionType: AuthActionType;
+}
+
+export const AuthByGoogle = ({ authActionType }: Props) => {
+    const [user, setUser] = useState<any>(null);
+    const dispatch: AppDispatch = useDispatch();
+    const navigate = useNavigate();
 
     const logOut = () => {
         googleLogout();
@@ -22,9 +30,13 @@ export const AuthByGoogle = () => {
         onError: (error) => console.log('Login Failed:', error)
     });
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log(user);
-    }, [user])
+    }, [user]);
+
+    const redirectToMainPage = () => {
+        navigate(RoutePath.main);
+    };
 
     useEffect(() => {
         if (user) {
@@ -42,7 +54,20 @@ export const AuthByGoogle = () => {
                 })
                 .then(data => {
                     console.log(data);
-                    // setProfile(data);
+                    if (authActionType === AuthActionType.SIGNUP) {
+                        const submitData = {
+                            data: {
+                                username: data.name,
+                                email: data.email,
+                                password: 'none',
+                            },
+                            redirectToLogin: redirectToMainPage
+                        };
+                        dispatch(signupUser(submitData));
+                        dispatch(loginUser({username: data.name, password: 'none'}));
+                    } else if (authActionType === AuthActionType.LOGIN) {
+                        dispatch(loginUser({username: data.name, password: 'none'}));
+                    }
                 })
                 .catch(error => {
                     console.error('Ошибка при получении профиля пользователя:', error);
@@ -52,8 +77,7 @@ export const AuthByGoogle = () => {
 
     return (
         <>
-            {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
-            <button onClick={() => login()}>Sign in with Google 🚀 </button>
+            <button onClick={() => login()}>Sign in with Google 🚀</button>
             <button onClick={logOut}>Log out</button>
         </>
     );

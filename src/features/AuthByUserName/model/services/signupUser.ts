@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../../../shared/const/api';
 import { ThunkConfig } from '../../../../app/providers/StoreProvider/config/stateSchema';
+import { User } from '../../../../entities/User';
 
 interface signupUserProps {
     data: {
@@ -11,27 +12,29 @@ interface signupUserProps {
     redirectToLogin: () => void,
 }
 
-export const signupUser = createAsyncThunk<any, signupUserProps, ThunkConfig<string>>(
+export const signupUser = createAsyncThunk<User, signupUserProps, ThunkConfig<string>>(
     'auth/signUp',
     async (data, thunkAPI) => {
         try {
-            const response = await fetch(`${baseUrl}users`, {
+            const response = await fetch(`${baseUrl}signup`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify({ ...data.data, status: 'Active', admin: false }),
+                body: JSON.stringify({ ...data.data }),
             });
 
             if (!response.ok) {
-                throw new Error();
+                const errorData = await response.json();
+                const errorMessage = errorData.message || 'Something went wrong';
+                throw new Error(errorMessage);
             } else {
                 const newData = await response.json();
                 data.redirectToLogin();
                 return newData;
             }
-        } catch (e) {
-            return thunkAPI.rejectWithValue('Something went wrong');
+        } catch (e: any) {
+            return  thunkAPI.rejectWithValue(e.message);
         }
     }
 );

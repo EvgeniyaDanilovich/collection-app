@@ -12,6 +12,7 @@ import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { selectError, selectIsLoading } from '../../model/selectors/authSelectors';
 import { authActions } from '../../model/slice/authSlice';
 import { AuthByGoogle } from '../../../authByGoogle';
+import { AuthActionType } from '../../../authByGoogle/ui/AuthByGoogle';
 
 export const SignupForm = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -73,7 +74,7 @@ export const SignupForm = () => {
                     <Button variant="primary" type={'submit'} className={'mt-3'}>{t('Sign up')}</Button>
                 }
             </Form>
-            <AuthByGoogle />
+            <AuthByGoogle authActionType={AuthActionType.SIGNUP} />
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );

@@ -6,15 +6,6 @@ const WebSocket = require('ws');
 const server = jsonServer.create();
 const wss = new WebSocket.Server({ server });
 
-server.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    // res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-    res.setHeader('Cross-Origin-Embedder-Policy', 'require-corp');
-    next();
-});
-
 const clients = [];
 
 wss.on('connection', (ws) => {
@@ -69,7 +60,35 @@ server.use('/socket', (req, res, next) => {
     });
 });
 
-// Эндпоинт для логина
+server.post('/signup', (req, res) => {
+    try {
+        const { username, password, email } = req.body;
+        const db = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8'));
+        const { users = [] } = db;
+
+        const existingUser = users.find((user) => user.username === username);
+        if (existingUser) {
+            return res.status(400).json({ message: 'User with this name already exists' });
+        }
+
+        const existingEmail = users.find((user) => user.email === email);
+        if (existingEmail) {
+            return res.status(400).json({ message: 'User with this email already exists' });
+        }
+
+        const maxUserId = users.reduce((maxId, user) => Math.max(maxId, user.id), 0);
+        const userId = maxUserId + 1;
+
+        const newUser = { id: userId, username, email, password, status: 'Active', admin: false };
+        users.push(newUser);
+        fs.writeFileSync(path.resolve(__dirname, 'db.json'), JSON.stringify({ ...db, users }));
+
+        return res.status(201).json(newUser);
+    } catch (error) {
+        return res.status(500).json({ message: 'Что-то пошло не так' });
+    }
+});
+
 server.post('/login', (req, res) => {
     try {
         const { username, password } = req.body;

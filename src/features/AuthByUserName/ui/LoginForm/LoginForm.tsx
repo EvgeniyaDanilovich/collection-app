@@ -10,6 +10,7 @@ import { selectError, selectIsLoading } from '../../model/selectors/authSelector
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { authActions } from '../../model/slice/authSlice';
 import { AuthByGoogle } from '../../../authByGoogle';
+import { AuthActionType } from '../../../authByGoogle/ui/AuthByGoogle';
 
 export const LoginForm = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -58,7 +59,7 @@ export const LoginForm = () => {
                     </Button>)
                 }
             </Form>
-            <AuthByGoogle />
+            <AuthByGoogle authActionType={AuthActionType.LOGIN} />
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );
