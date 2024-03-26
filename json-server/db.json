@@ -63,6 +63,22 @@
       "status": "Active",
       "admin": false,
       "id": 8
+    },
+    {
+      "username": "user-6",
+      "email": "user-6@gmail.com",
+      "password": "123",
+      "status": "Active",
+      "admin": false,
+      "id": 9
+    },
+    {
+      "username": "Evgeniya Danilovich",
+      "email": "evgeniyadanilovich@gmail.com",
+      "password": "none",
+      "status": "Active",
+      "admin": false,
+      "id": 10
     }
   ],
   "collections": [
