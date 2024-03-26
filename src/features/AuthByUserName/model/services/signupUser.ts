@@ -9,19 +9,21 @@ interface signupUserProps {
         email: string,
         password: string,
     }
-    redirectToLogin: () => void,
+    redirectToLogin?: () => void,
 }
 
 export const signupUser = createAsyncThunk<User, signupUserProps, ThunkConfig<string>>(
     'auth/signUp',
     async (data, thunkAPI) => {
         try {
-            const response = await fetch(`${baseUrl}signup`, {
+            // const response = await fetch(`${baseUrl}signup`, {
+            const response = await fetch(`${baseUrl}users`, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 method: 'POST',
-                body: JSON.stringify({ ...data.data }),
+                // body: JSON.stringify({ ...data.data }),
+                body: JSON.stringify({ ...data.data, status: 'Active', admin: false }),
             });
 
             if (!response.ok) {
@@ -30,7 +32,9 @@ export const signupUser = createAsyncThunk<User, signupUserProps, ThunkConfig<st
                 throw new Error(errorMessage);
             } else {
                 const newData = await response.json();
-                data.redirectToLogin();
+                if (data.redirectToLogin) {
+                    data.redirectToLogin();
+                }
                 return newData;
             }
         } catch (e: any) {

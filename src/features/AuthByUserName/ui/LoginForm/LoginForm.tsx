@@ -10,7 +10,6 @@ import { selectError, selectIsLoading } from '../../model/selectors/authSelector
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { authActions } from '../../model/slice/authSlice';
 import { AuthByGoogle } from '../../../authByGoogle';
-import { AuthActionType } from '../../../authByGoogle/ui/AuthByGoogle';
 
 export const LoginForm = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -32,6 +31,14 @@ export const LoginForm = () => {
 
         e.preventDefault();
         dispatch(loginUser({ username, password }));
+
+        // const isExist = dispatch(loginUser({username, password }));
+        // isExist.then((result) => {
+        //     console.log(result);
+        //
+        // }).catch((e: any) => {
+        //     console.log(e);
+        // });
     };
 
     const handleCloseError = useCallback(() => {
@@ -59,7 +66,7 @@ export const LoginForm = () => {
                     </Button>)
                 }
             </Form>
-            <AuthByGoogle authActionType={AuthActionType.LOGIN} />
+            <AuthByGoogle />
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );

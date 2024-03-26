@@ -6,17 +6,9 @@ import { signupUser } from '../../AuthByUserName/model/services/signupUser';
 import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../AuthByUserName/model/services/loginUser';
+import { authActions } from '../../AuthByUserName';
 
-export enum AuthActionType {
-    LOGIN = 'login',
-    SIGNUP = 'signup'
-}
-
-interface Props {
-    authActionType: AuthActionType;
-}
-
-export const AuthByGoogle = ({ authActionType }: Props) => {
+export const AuthByGoogle = () => {
     const [user, setUser] = useState<any>(null);
     const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
@@ -54,25 +46,28 @@ export const AuthByGoogle = ({ authActionType }: Props) => {
                 })
                 .then(data => {
                     console.log(data);
-                    if (authActionType === AuthActionType.SIGNUP) {
-                        const submitData = {
-                            data: {
-                                username: data.name,
-                                email: data.email,
-                                password: 'none',
-                            },
-                            redirectToLogin: redirectToMainPage
-                        };
-                        // dispatch(signupUser(submitData));
-                        // dispatch(loginUser({username: data.name, password: 'none'}));
+                    const isExist = dispatch(loginUser({ username: data.name, password: 'none' }));
 
-                        const firstAction = dispatch(signupUser(submitData));
-                        firstAction.then((result) => {
-                            dispatch(loginUser({ username: data.name, password: 'none' }));
-                        })
-                    } else if (authActionType === AuthActionType.LOGIN) {
-                        dispatch(loginUser({username: data.name, password: 'none'}));
-                    }
+                    isExist.then((result) => {
+                        console.log(result);
+                        if (result.payload === 'User not found') {
+                            const submitData = {
+                                data: {
+                                    username: data.name,
+                                    email: data.email,
+                                    password: 'none',
+                                },
+                                // redirectToLogin: redirectToMainPage
+                            };
+                            dispatch(authActions.setError(''));
+                            const firstAction = dispatch(signupUser(submitData));
+                            firstAction.then(() => {
+                                dispatch(loginUser({ username: data.name, password: 'none' }));
+                            });
+                        }
+                    }).catch((e: any) => {
+                        console.log(e);
+                    });
                 })
                 .catch(error => {
                     console.error('Ошибка при получении профиля пользователя:', error);
