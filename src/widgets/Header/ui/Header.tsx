@@ -15,6 +15,7 @@ import { ReactComponent as LogOutIcon } from '../../../shared/assets/icons/log_o
 import { ReactComponent as SearchIcon } from '../../../shared/assets/icons/search.svg';
 import cls from './Header.module.scss';
 import { Icon, IconColor, IconType } from '../../../shared/ui/Icon/Icon';
+import { googleLogout } from '@react-oauth/google';
 
 export const Header = () => {
     const { t } = useTranslation();
@@ -39,6 +40,7 @@ export const Header = () => {
         localStorage.removeItem(`${localStorageKeys.ADMIN}`);
         navigate(`${RoutePath.login}`);
 
+        googleLogout();
         onCloseMenu()
     };
 

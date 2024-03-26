@@ -13,6 +13,7 @@ import { ReactComponent as UnblockIcon } from '../../../shared/assets/icons/unbl
 import { Icon, IconHover, IconType } from '../../../shared/ui/Icon/Icon';
 import cls from './AdminBar.module.scss'
 import { useTranslation } from 'react-i18next';
+import { googleLogout } from '@react-oauth/google';
 
 interface Props {
     users: User[];
@@ -33,6 +34,7 @@ export const AdminBar = ({ users, onUpdateUser, onDelete, isUpdating }: Props) =
         localStorage.removeItem(`${localStorageKeys.USER_ID}`);
         localStorage.removeItem(`${localStorageKeys.ADMIN}`);
         navigate(`${RoutePath.login}`);
+        googleLogout();
     };
 
     const onDeleteUser = () => {

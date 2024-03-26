@@ -38,21 +38,8 @@ const MainPage = () => {
         dispatch(mainPageActions.setError(undefined));
     }, [dispatch]);
 
-    const responseMessage = (response: any) => {
-        console.log(response);
-    };
-    const errorMessage = () => {
-        console.log('error');
-    };
-
-    const logOut = () => {
-        googleLogout();
-    };
-
     return (
         <div>
-            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-            <button onClick={logOut}>Log out</button>
             <h3 className={'mb-3'}>{t('Last added items')}</h3>
             <ItemCardList items={items} isLoading={isLoading} />
             <h3>{t('The biggest collections')}</h3>
