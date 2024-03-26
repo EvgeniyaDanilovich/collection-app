@@ -48,7 +48,7 @@ export const AuthByGoogle = () => {
                     console.error('Ошибка при получении профиля пользователя:', error);
                 });
         }
-    }, [userToken]);
+    }, [user]);
 
     return (
         <>
