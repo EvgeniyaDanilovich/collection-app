@@ -9,6 +9,7 @@ import cls from './LoginForm.module.scss';
 import { selectError, selectIsLoading } from '../../model/selectors/authSelectors';
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { authActions } from '../../model/slice/authSlice';
+import { GoogleLogin } from '@react-oauth/google';
 
 export const LoginForm = () => {
     const dispatch: AppDispatch = useDispatch();
@@ -36,6 +37,13 @@ export const LoginForm = () => {
         dispatch(authActions.setError(undefined));
     }, []);
 
+    const responseMessage = (response: any) => {
+        console.log(response);
+    };
+    const errorMessage = () => {
+        console.log(error);
+    };
+
     return (
         <>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className={cls.form}>
@@ -57,6 +65,7 @@ export const LoginForm = () => {
                     </Button>)
                 }
             </Form>
+            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );

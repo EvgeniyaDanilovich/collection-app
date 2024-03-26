@@ -10,6 +10,7 @@ export const AuthByGoogle = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleCredentialResponse = (response: any) => {
+        console.log(5);
         console.log(response);
     }
 

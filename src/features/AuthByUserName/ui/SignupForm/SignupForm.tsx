@@ -73,7 +73,7 @@ export const SignupForm = () => {
                     <Button variant="primary" type={'submit'} className={'mt-3'}>{t('Sign up')}</Button>
                 }
             </Form>
-            <AuthByGoogle />
+            {/* <AuthByGoogle /> */}
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );
