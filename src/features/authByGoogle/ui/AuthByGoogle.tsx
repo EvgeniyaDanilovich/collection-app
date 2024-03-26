@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { GoogleLogin, googleLogout } from '@react-oauth/google';
+import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 export const AuthByGoogle = () => {
     const [ userToken, setUserToken ] = useState('');
+    const [ user, setUser ] = useState<any>([]);
 
     const responseMessage = (response: any) => {
         console.log(response);
@@ -15,6 +16,15 @@ export const AuthByGoogle = () => {
     const logOut = () => {
         googleLogout();
     };
+
+    const login = useGoogleLogin({
+        onSuccess: (codeResponse) => setUser(codeResponse),
+        onError: (error) => console.log('Login Failed:', error)
+    });
+
+    useEffect(()=>{
+        console.log(user);
+    }, [user])
 
     useEffect(() => {
         if (userToken) {
@@ -42,7 +52,8 @@ export const AuthByGoogle = () => {
 
     return (
         <>
-            <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+            {/* <GoogleLogin onSuccess={responseMessage} onError={errorMessage} /> */}
+            <button onClick={() => login()}>Sign in with Google 🚀 </button>
             <button onClick={logOut}>Log out</button>
         </>
     );
