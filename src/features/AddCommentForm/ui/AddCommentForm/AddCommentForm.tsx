@@ -4,15 +4,18 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
 import cls from './AddCommentForm.module.scss';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectIsAuth } from '../../../AuthByUserName';
 
 interface Props {
     onSendComment: (value: string) => void;
-    fetchComments: (id: string) => void
+    fetchComments: (id: string) => void;
 }
 
 export const AddCommentForm = memo(({ onSendComment, fetchComments }: Props) => {
     const { t } = useTranslation();
     const [text, setText] = useState<string>('');
+    const isAuth = useSelector(selectIsAuth);
     const socketRef = useRef<WebSocket | null>(null);
     const { id: itemId } = useParams();
 
@@ -64,6 +67,10 @@ export const AddCommentForm = memo(({ onSendComment, fetchComments }: Props) => 
             }));
         }
     }, [text]);
+
+    if (!isAuth) {
+        return <p className={'mb-3'}>{t('Register to leave a comment')}</p>;
+    }
 
     return (
         <div className={cls.form}>

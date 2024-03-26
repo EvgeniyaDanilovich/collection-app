@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const TagsList = memo(({tags, handleClick, hover = true}: Props) => {
-    const [activeTag, setActiveTag] = useState<string | null>(null);
+    const [activeTag, setActiveTag] = useState<string | null>('All');
 
     const onClick = (tag: string) => {
         if (handleClick) {

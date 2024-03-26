@@ -12,7 +12,6 @@ import { localStorageKeys } from '../../../shared/const/localStorage';
 import { CommentList } from '../../../entities/Comment/ui/CommentList/CommentsList';
 import { BackButton } from '../../../shared/ui/BackButton/BackButton';
 import { AddLike } from '../../../features/AddLike';
-import { selectIsAuth } from '../../../features/AuthByUserName';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 import { itemPageActions } from '../model/slice/itemPageSlice';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +23,6 @@ const ItemPage = () => {
     const userId = localStorage.getItem(localStorageKeys.USER_ID);
     const comments = useSelector(selectComments);
     const isLoading = useSelector(selectIsLoading);
-    const isAuth = useSelector(selectIsAuth);
     const error = useSelector(selectError);
 
     useEffect(() => {
@@ -58,7 +56,7 @@ const ItemPage = () => {
             <ItemInfo />
             <AddLike />
             <h5>{t('Comments')}</h5>
-            {isAuth && <AddCommentForm onSendComment={handleSendComment} fetchComments={handleFetchComments} />}
+            <AddCommentForm onSendComment={handleSendComment} fetchComments={handleFetchComments} />
             <CommentList comments={comments} isLoading={isLoading} />
 
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
