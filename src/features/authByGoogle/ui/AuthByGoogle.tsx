@@ -63,8 +63,13 @@ export const AuthByGoogle = ({ authActionType }: Props) => {
                             },
                             redirectToLogin: redirectToMainPage
                         };
-                        dispatch(signupUser(submitData));
-                        dispatch(loginUser({username: data.name, password: 'none'}));
+                        // dispatch(signupUser(submitData));
+                        // dispatch(loginUser({username: data.name, password: 'none'}));
+
+                        const firstAction = dispatch(signupUser(submitData));
+                        firstAction.then((result) => {
+                            dispatch(loginUser({ username: data.name, password: 'none' }));
+                        })
                     } else if (authActionType === AuthActionType.LOGIN) {
                         dispatch(loginUser({username: data.name, password: 'none'}));
                     }
