@@ -3,7 +3,7 @@ import { GoogleLogin, googleLogout, useGoogleLogin } from '@react-oauth/google';
 
 export const AuthByGoogle = () => {
     const [ userToken, setUserToken ] = useState('');
-    const [ user, setUser ] = useState<any>([]);
+    const [ user, setUser ] = useState<any>(null);
 
     const responseMessage = (response: any) => {
         console.log(response);
@@ -27,10 +27,10 @@ export const AuthByGoogle = () => {
     }, [user])
 
     useEffect(() => {
-        if (userToken) {
-            fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${userToken}`, {
+        if (user) {
+            fetch(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`, {
                 headers: {
-                    Authorization: `Bearer ${userToken}`,
+                    Authorization: `Bearer ${user.access_token}`,
                     Accept: 'application/json'
                 }
             })
