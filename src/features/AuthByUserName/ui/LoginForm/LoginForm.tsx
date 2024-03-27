@@ -31,14 +31,6 @@ export const LoginForm = () => {
 
         e.preventDefault();
         dispatch(loginUser({ username, password }));
-
-        // const isExist = dispatch(loginUser({username, password }));
-        // isExist.then((result) => {
-        //     console.log(result);
-        //
-        // }).catch((e: any) => {
-        //     console.log(e);
-        // });
     };
 
     const handleCloseError = useCallback(() => {
@@ -65,8 +57,8 @@ export const LoginForm = () => {
                         {t('Log in')}
                     </Button>)
                 }
+                <AuthByGoogle />
             </Form>
-            <AuthByGoogle />
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );

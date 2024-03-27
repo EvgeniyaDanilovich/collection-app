@@ -1,34 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { googleLogout, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import { AppDispatch } from '../../../app/providers/StoreProvider/config/store';
 import { useDispatch } from 'react-redux';
 import { signupUser } from '../../AuthByUserName/model/services/signupUser';
-import { RoutePath } from '../../../shared/config/routeConfig/routeConfig';
-import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../AuthByUserName/model/services/loginUser';
 import { authActions } from '../../AuthByUserName';
+import cls from './AuthByGoogle.module.scss';
+import { ReactComponent as GoogleIcon } from '../../../shared/assets/icons/google.svg';
 
 export const AuthByGoogle = () => {
     const [user, setUser] = useState<any>(null);
     const dispatch: AppDispatch = useDispatch();
-    const navigate = useNavigate();
-
-    const logOut = () => {
-        googleLogout();
-    };
 
     const login = useGoogleLogin({
         onSuccess: (codeResponse) => setUser(codeResponse),
         onError: (error) => console.log('Login Failed:', error)
     });
-
-    useEffect(() => {
-        console.log(user);
-    }, [user]);
-
-    const redirectToMainPage = () => {
-        navigate(RoutePath.main);
-    };
 
     useEffect(() => {
         if (user) {
@@ -45,19 +32,16 @@ export const AuthByGoogle = () => {
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
                     const isExist = dispatch(loginUser({ username: data.name, password: 'none' }));
 
                     isExist.then((result) => {
-                        console.log(result);
                         if (result.payload === 'User not found') {
                             const submitData = {
                                 data: {
                                     username: data.name,
                                     email: data.email,
                                     password: 'none',
-                                },
-                                // redirectToLogin: redirectToMainPage
+                                }
                             };
                             dispatch(authActions.setError(''));
                             const firstAction = dispatch(signupUser(submitData));
@@ -76,9 +60,8 @@ export const AuthByGoogle = () => {
     }, [user]);
 
     return (
-        <>
-            <button onClick={() => login()}>Sign in with Google 🚀</button>
-            <button onClick={logOut}>Log out</button>
-        </>
+        <button onClick={() => login()} className={cls.googleBtn}>
+            Sign in with Google <GoogleIcon />
+        </button>
     );
 };

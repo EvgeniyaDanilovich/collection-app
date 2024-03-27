@@ -7,6 +7,7 @@ import { CollectionTable } from '../../../entities/Collection';
 import { useTranslation } from 'react-i18next';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
 import { collectionsPageActions } from '../model/slice/collectionsPageSlice';
+import { ExportToCSV } from '../../../features/ExportToCSV';
 
 const CollectionsPage = () => {
     const collections = useSelector(selectCollections);
@@ -26,6 +27,7 @@ const CollectionsPage = () => {
     return (
         <div>
             <h2>{t('Collections')}</h2>
+            <ExportToCSV collections={collections} />
             <CollectionTable collections={collections} isLoading={isLoading} />
 
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}

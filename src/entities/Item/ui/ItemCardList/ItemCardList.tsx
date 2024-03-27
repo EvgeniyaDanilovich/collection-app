@@ -19,10 +19,37 @@ export const ItemCardList = memo(({ items, isLoading }: Props) => {
         navigate(`${RoutePath.item}${itemId}`);
     };
 
+    if (isLoading) {
+        return (
+            <div className={'d-flex mb-5 flex-wrap gap-2 justify-content-center justify-content-md-start'}>
+                {new Array(5)
+                    .fill(0)
+                    .map((item, i) => {
+                        return (
+                            <Card className={cls.card} key={i}>
+                                <Card.Body>
+                                    <Placeholder as={Card.Title} animation="glow">
+                                        <Placeholder xs={6} />
+                                    </Placeholder>
+                                    <Placeholder as={Card.Text} animation="glow">
+                                        <Placeholder xs={4} />{' '}
+                                        <Placeholder xs={6} />
+                                        <Placeholder xs={4} />{' '}
+                                        <Placeholder xs={6} />
+                                    </Placeholder>
+                                </Card.Body>
+                            </Card>
+                        );
+                    })
+                }
+            </div>
+        );
+    }
+
     return (
         <div className={'d-flex mb-5 flex-wrap gap-2 justify-content-center justify-content-md-start'}>
             {items && items.map(item => {
-                const card = () => (
+                return (
                     <Card className={cls.card} key={item.id} onClick={() => redirectToItem(item.id)}>
                         <Card.Body>
                             <Card.Title>{item.name}</Card.Title>
@@ -35,24 +62,6 @@ export const ItemCardList = memo(({ items, isLoading }: Props) => {
                         </Card.Body>
                     </Card>
                 );
-
-                const skeleton = () => (
-                    <Card className={cls.card} key={item.id} onClick={() => redirectToItem(item.id)}>
-                        <Card.Body>
-                            <Placeholder as={Card.Title} animation="glow">
-                                <Placeholder xs={6} />
-                            </Placeholder>
-                            <Placeholder as={Card.Text} animation="glow">
-                                <Placeholder xs={4} />{' '}
-                                <Placeholder xs={6} />
-                                <Placeholder xs={4} />{' '}
-                                <Placeholder xs={6} />
-                            </Placeholder>
-                        </Card.Body>
-                    </Card>
-                );
-
-                return isLoading ? skeleton() : card();
             })}
         </div>
     );

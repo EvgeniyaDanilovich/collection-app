@@ -18,6 +18,7 @@ import { localStorageKeys } from '../../../shared/const/localStorage';
 import { ReactComponent as PlusIcon } from '../../../shared/assets/icons/plus.svg';
 import { profilePageActions } from '../model/slice/profilePageSlice';
 import { ErrorAlert } from '../../../shared/ui/ErrorAlert/ErrorAlert';
+import { ExportToCSV } from '../../../features/ExportToCSV';
 
 const ProfilePage = () => {
     const { t } = useTranslation();
@@ -64,7 +65,6 @@ const ProfilePage = () => {
     return (
         <div>
             <UserCard />
-
             <div className={'d-flex justify-content-between flex-wrap gap-2'}>
                 <h3>{t('My collections')}</h3>
                 {isAdmin || (isAuth && userId === id) ? (
@@ -73,6 +73,8 @@ const ProfilePage = () => {
                     </Button>
                 ) : null}
             </div>
+
+            <ExportToCSV collections={collections} />
 
             <CollectionTable collections={collections} onDeleteCollection={onDeleteCollection}
                              onEdit={handleEdit} isLoading={isLoading} />
