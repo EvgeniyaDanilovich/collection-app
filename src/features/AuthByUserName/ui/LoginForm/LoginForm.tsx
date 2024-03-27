@@ -5,7 +5,7 @@ import { AppDispatch } from '../../../../app/providers/StoreProvider/config/stor
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { loginUser } from '../../model/services/loginUser';
-import cls from './LoginForm.module.scss';
+import cls from '../Form.module.scss';
 import { selectError, selectIsLoading } from '../../model/selectors/authSelectors';
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { authActions } from '../../model/slice/authSlice';
@@ -40,10 +40,10 @@ export const LoginForm = () => {
     return (
         <>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className={cls.form}>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-2">
                     <Input value={username} label={t('Name')} setValue={setUsername} required />
                 </Form.Group>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-2">
                     <Input type={'password'} value={password} label={t('Password')} setValue={setPassword} required />
                 </Form.Group>
 
@@ -57,8 +57,10 @@ export const LoginForm = () => {
                         {t('Log in')}
                     </Button>)
                 }
-                <AuthByGoogle />
             </Form>
+            <div className={cls.googleAuth}>
+                <AuthByGoogle />
+            </div>
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );

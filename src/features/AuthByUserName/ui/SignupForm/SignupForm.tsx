@@ -7,7 +7,7 @@ import { Button, Form, Spinner } from 'react-bootstrap';
 import { signupUser } from '../../model/services/signupUser';
 import { useNavigate } from 'react-router-dom';
 import { RoutePath } from '../../../../shared/config/routeConfig/routeConfig';
-import cls from './SignupForm.module.scss';
+import cls from '../Form.module.scss';
 import { ErrorAlert } from '../../../../shared/ui/ErrorAlert/ErrorAlert';
 import { selectError, selectIsLoading } from '../../model/selectors/authSelectors';
 import { authActions } from '../../model/slice/authSlice';
@@ -51,16 +51,16 @@ export const SignupForm = () => {
     return (
         <>
             <Form noValidate validated={validated} onSubmit={handleSubmit} className={cls.form}>
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-2">
                     <Input value={username} label={t('Name')} setValue={setUsername} required />
                 </Form.Group>
 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-2">
                     <Input value={email} label={t('Email')} setValue={setEmail} type={'email'} required />
                     {email && <Form.Control.Feedback type="invalid">Incorrect format</Form.Control.Feedback>}
                 </Form.Group>
 
-                <Form.Group className="mb-3">
+                <Form.Group className="mb-2">
                     <Input type={'password'} value={password} label={t('Password')} setValue={setPassword} required />
                 </Form.Group>
 
@@ -72,8 +72,11 @@ export const SignupForm = () => {
                     ) :
                     <Button variant="primary" type={'submit'} className={'mt-3'}>{t('Sign up')}</Button>
                 }
-                <AuthByGoogle />
             </Form>
+
+            <div className={cls.googleAuth}>
+                <AuthByGoogle />
+            </div>
             {error && <ErrorAlert error={error} onClose={handleCloseError} />}
         </>
     );
